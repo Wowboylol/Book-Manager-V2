@@ -1,1 +1,38 @@
-<p>sidebar works!</p>
+<nav [ngClass]="{'sidebar px-3 pt-3': true, 'close': close}">
+    <header>
+        <div class="logo fs-3">
+            <i class='bx bxs-bookmarks me-3'></i>
+            <marquee class="logo-name" behavior="scroll" direction="left" scrollamount="5">Book Manager</marquee>
+        </div>
+        <i class="bx bx-menu fs-3" id="toggle" (click)="toggleSidebar()"></i>
+    </header>
+
+    <div class="menu mt-3">
+        <ul class="menu-list">
+            <li class="menu-item mt-4">
+                <a href="#" class="rounded">
+                    <i class='bx bx-search fs-4 item-icon'></i>
+                    <span class="fs-5 item-text">Search</span>
+                </a>
+            </li>
+            <li class="menu-item mt-4">
+                <a href="#" class="rounded">
+                    <i class='bx bxs-book fs-4 item-icon'></i>
+                    <span class="fs-5 item-text">Books</span>
+                </a>
+            </li>
+            <li class="menu-item mt-4">
+                <a href="#" class="rounded">
+                    <i class='bx bxs-purchase-tag fs-4 item-icon'></i>
+                    <span class="fs-5 item-text">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item mt-4">
+                <a href="#" class="rounded">
+                    <i class='bx bx-stats fs-4 item-icon'></i>
+                    <span class="fs-5 item-text">Statistics</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

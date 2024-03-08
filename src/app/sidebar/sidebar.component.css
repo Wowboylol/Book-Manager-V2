@@ -1,0 +1,111 @@
+/* ===== Sidebar general ===== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: var(--sidebar-color);
+    width: 250px;
+    z-index: 600;
+    transition: var(--tran-05);
+}
+
+.sidebar.close {
+    width: 88px;
+}
+
+.sidebar.close .logo,
+.sidebar.close .item-text,
+.sidebar.close input {
+    opacity: 0;
+}
+
+.sidebar.close #toggle {
+    left: 50%;
+}
+
+/* ===== Sidebar header ===== */
+.sidebar header .logo {
+    color: var(--text-color);
+    display: flex;
+    height: 3rem;
+    width: 82%;
+    align-items: center;
+    transition: var(--tran-02);
+    white-space: nowrap;
+}
+
+header .logo .logo-name {
+    font-weight: 500;
+}
+
+header #toggle {
+    position: absolute;
+    color: var(--text-color);
+    left: 89%;
+    top: 1.05rem;
+    height: 3rem;
+    width: 3rem;
+    text-align: center;
+    line-height: 3rem;
+    cursor: pointer;
+    transform: translateX(-50%);
+    transition: var(--tran-05);
+}
+
+header #toggle:hover {
+    color: white;
+    transition: var(--tran-04);
+}
+
+/* ===== Sidebar menu ===== */
+.menu {
+    height: 90%;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    height: 3rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.menu li .item-text {
+    font-weight: 500;
+    color: var(--text-color);
+    transition: var(--tran-02);
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.menu li .item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 3.5rem;
+    color: var(--text-color);
+}
+
+.menu li a {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: var(--tran-04);
+}
+
+.menu li a:hover {
+    background: var(--primary-color-light);
+}
+
+/* @media (max-width: 768px) {
+    .sidebar {
+        margin-left: -240px;
+    }
+} */
