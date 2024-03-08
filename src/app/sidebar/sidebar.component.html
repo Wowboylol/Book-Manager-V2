@@ -1,4 +1,4 @@
-<nav [ngClass]="{'sidebar px-3 pt-3': true, 'close': close}">
+<nav [ngClass]="{'sidebar px-3 pt-3': true, 'close': close, 'dark-mode': darkMode}">
     <header>
         <div class="logo fs-3">
             <i class='bx bxs-bookmarks me-3'></i>
@@ -34,5 +34,30 @@
                 </a>
             </li>
         </ul>
+
+        <div class="menu-bottom">
+            <li class="menu-item mt-4">
+                <a href="#" class="rounded">
+                    <i class='bx bxs-data fs-4 item-icon'></i>
+                    <span class="fs-5 item-text">Data</span>
+                </a>
+            </li>
+            <li class="menu-item mt-4">
+                <a href="#" class="rounded">
+                    <i class='bx bx-log-out fs-4 item-icon'></i>
+                    <span class="fs-5 item-text">Logout</span>
+                </a>
+            </li>
+            <li class="menu-item mode mt-4 rounded">
+                <div class="moon-sun">
+                    <i *ngIf="!darkMode" class='bx bx-moon fs-4 item-icon moon'></i>
+                    <i *ngIf="darkMode" class='bx bx-sun fs-4 item-icon sun'></i>
+                </div>
+                <span class="fs-6 item-text">{{modeText}}</span>
+                <div class="toggle-switch" (click)="toggleMode()">
+                    <span class="switch"></span>
+                </div>
+            </li>
+        </div>
     </div>
 </nav>

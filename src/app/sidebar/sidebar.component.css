@@ -54,13 +54,16 @@ header #toggle {
 }
 
 header #toggle:hover {
-    color: white;
+    color: var(--primary-color-light);
     transition: var(--tran-04);
 }
 
 /* ===== Sidebar menu ===== */
 .menu {
     height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .menu ul {
@@ -102,6 +105,60 @@ header #toggle:hover {
 
 .menu li a:hover {
     background: var(--primary-color-light);
+}
+
+/* ===== Mode switch ===== */
+.mode {
+    position: relative;
+    background: var(--primary-color-light);
+}
+
+.mode .moon-sun {
+    min-width: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.mode i {
+    position: absolute;
+    transition: var(--tran-03);
+}
+
+.mode .toggle-switch {
+    position: absolute;
+    right: 0rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-width: 3.5rem;
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+.toggle-switch .switch {
+    position: relative;
+    height: 1.4rem;
+    width: 2.8rem;
+    border-radius: 1.5rem;
+    background: var(--toggle-color);
+}
+
+.switch::before {
+    content: '';
+    position: absolute;
+    height: 1.1rem;
+    width: 1.1rem;
+    border-radius: 50%;
+    top: 50%;
+    left: 0.15rem;
+    transform: translateY(-50%);
+    background: var(--primary-color-light);
+    transition: var(--tran-03);
+}
+
+nav.dark-mode .switch::before {
+    left: 1.55rem;
 }
 
 /* @media (max-width: 768px) {
