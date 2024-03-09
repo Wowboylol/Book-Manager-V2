@@ -19,7 +19,13 @@ export class SidebarComponent implements OnInit
 
 	constructor(private themeService: ThemeService) { }
 
-	ngOnInit(): void { }
+	ngOnInit(): void 
+	{ 
+		this.themeService.themeChanged.subscribe((darkMode: boolean) => {
+			this.darkMode = darkMode;
+			this.modeText = this.darkMode ? 'Light Mode' : 'Dark Mode';
+		});
+	}
 
 	toggleSidebar() { this.close = !this.close; }
 
