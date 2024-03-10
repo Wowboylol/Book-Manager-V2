@@ -112,8 +112,38 @@ header #toggle:hover {
     transition: var(--tran-04);
 }
 
-.menu li a:hover {
+.menu .menu-item a:hover {
     background: var(--primary-color-light);
+}
+
+/* ===== Sidebar sub-menu ===== */
+.menu .sub-menu {
+    transition: var(--tran-04);
+    user-select: none;
+}
+
+.menu .sub-menu:hover {
+    background: var(--primary-color-light);
+}
+
+.menu .sub-menu:hover .dropdown-icon {
+    transform: rotate(-180deg);
+    transition: var(--tran-04);
+}
+
+.menu .sub-menu:hover .sub-menu-item {
+    display: block;
+}
+
+.sub-menu .sub-menu-item {
+    padding-left: 3.5rem;
+    transition: var(--tran-04);
+    cursor: pointer;
+    display: none;
+}
+
+.sub-menu .sub-menu-item:hover a {
+    color: var(--secondary-color);
 }
 
 /* ===== Mode switch ===== */
