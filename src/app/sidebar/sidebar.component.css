@@ -15,8 +15,7 @@
 }
 
 .sidebar.close .logo,
-.sidebar.close .item-text,
-.sidebar.close input {
+.sidebar.close .item-text {
     opacity: 0;
 }
 
@@ -86,7 +85,8 @@ header #toggle:hover {
     overflow: hidden;
 }
 
-.menu-list a.active .item-text {
+.menu-list a.active .item-text,
+.menu-list a.active .item-icon {
     color: var(--secondary-color);
 }
 
@@ -97,10 +97,6 @@ header #toggle:hover {
     min-width: 3.5rem;
     color: var(--text-color);
     transition: var(--tran-02);
-}
-
-.menu-list a.active .item-icon {
-    color: var(--secondary-color);
 }
 
 .menu li a {
@@ -131,15 +127,15 @@ header #toggle:hover {
     transition: var(--tran-04);
 }
 
-.menu .sub-menu:hover .sub-menu-item {
-    display: block;
-}
-
 .sub-menu .sub-menu-item {
     padding-left: 3.5rem;
     transition: var(--tran-04);
     cursor: pointer;
     display: none;
+}
+
+.menu .sub-menu:hover .sub-menu-item {
+    display: block;
 }
 
 .sub-menu .sub-menu-item:hover a {
