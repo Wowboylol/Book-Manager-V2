@@ -16,6 +16,7 @@ export class SidebarComponent implements OnInit
 	close: boolean = true;
 	darkMode: boolean = false;
 	modeText: string = 'Dark Mode';
+	currentActiveTab: string = 'Books';
 
 	constructor(private themeService: ThemeService) { }
 
@@ -27,11 +28,17 @@ export class SidebarComponent implements OnInit
 		});
 	}
 
-	toggleSidebar() { this.close = !this.close; }
+	toggleSidebar() { 
+		this.close = !this.close; 
+	}
 
 	toggleMode() { 
 		this.darkMode = !this.darkMode;
 		this.modeText = this.darkMode ? 'Light Mode' : 'Dark Mode';
 		this.themeService.setDarkMode(this.darkMode); 
+	}
+
+	changeActiveTab(tab: string) { 
+		this.currentActiveTab = tab; 
 	}
 }

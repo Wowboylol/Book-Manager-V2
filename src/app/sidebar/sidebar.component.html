@@ -10,25 +10,25 @@
     <div class="menu mt-3">
         <ul class="menu-list">
             <li class="menu-item mt-4">
-                <a href="#" class="rounded">
-                    <i class='bx bx-search fs-4 item-icon'></i>
-                    <span class="fs-5 item-text">Search</span>
-                </a>
-            </li>
-            <li class="menu-item mt-4">
-                <a href="#" class="rounded">
+                <a href="#" [ngClass]="{'rounded': true, 'active': currentActiveTab == 'Books'}" (click)="changeActiveTab('Books')">
                     <i class='bx bxs-book fs-4 item-icon'></i>
                     <span class="fs-5 item-text">Books</span>
                 </a>
             </li>
             <li class="menu-item mt-4">
-                <a href="#" class="rounded">
+                <a href="#" [ngClass]="{'rounded': true, 'active': currentActiveTab == 'Collections'}" (click)="changeActiveTab('Collections')">
+                    <i class='bx bx-library fs-4 item-icon'></i>
+                    <span class="fs-5 item-text">Collections</span>
+                </a>
+            </li>
+            <li class="menu-item mt-4">
+                <a href="#" [ngClass]="{'rounded': true, 'active': currentActiveTab == 'Tags'}" (click)="changeActiveTab('Tags')">
                     <i class='bx bxs-purchase-tag fs-4 item-icon'></i>
                     <span class="fs-5 item-text">Tags</span>
                 </a>
             </li>
             <li class="menu-item mt-4">
-                <a href="#" class="rounded">
+                <a href="#" [ngClass]="{'rounded': true, 'active': currentActiveTab == 'Statistics'}" (click)="changeActiveTab('Statistics')">
                     <i class='bx bx-stats fs-4 item-icon'></i>
                     <span class="fs-5 item-text">Statistics</span>
                 </a>

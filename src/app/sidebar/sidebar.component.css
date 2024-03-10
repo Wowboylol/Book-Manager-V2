@@ -86,12 +86,21 @@ header #toggle:hover {
     overflow: hidden;
 }
 
+.menu-list a.active .item-text {
+    color: var(--secondary-color);
+}
+
 .menu li .item-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 3.5rem;
     color: var(--text-color);
+    transition: var(--tran-02);
+}
+
+.menu-list a.active .item-icon {
+    color: var(--secondary-color);
 }
 
 .menu li a {
