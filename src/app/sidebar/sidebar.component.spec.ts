@@ -33,6 +33,10 @@ describe('SidebarComponent', () => {
 		expect(component.modeText).toBe('Dark Mode');
 	});
 
+	it('should have current active tab set to "Books" by default', () => {
+		expect(component.currentActiveTab).toBe('Books');
+	});
+
 	it('should open sidebar when hamburger menu is clicked', () => {
 		component.toggleSidebar();
 		expect(component.close).toBeFalse();
@@ -58,5 +62,10 @@ describe('SidebarComponent', () => {
 		component.darkMode = true;
 		component.toggleMode();
 		expect(component.modeText).toBe('Dark Mode');
+	});
+
+	it('should change active tab when a tab is clicked', () => {
+		component.changeActiveTab('Collections');
+		expect(component.currentActiveTab).toBe('Collections');
 	});
 });
