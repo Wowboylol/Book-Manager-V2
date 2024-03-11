@@ -14,11 +14,14 @@ import { ThemeService } from '../shared/theme.service';
 export class SidebarComponent implements OnInit 
 {
 	close: boolean = true;
-	darkMode: boolean = false;
-	modeText: string = 'Dark Mode';
+	darkMode: boolean;
+	modeText: string;
 	currentActiveTab: string = 'Books';
 
-	constructor(private themeService: ThemeService) { }
+	constructor(private themeService: ThemeService) { 
+		this.darkMode = themeService.isDarkMode();
+		this.modeText = this.darkMode ? 'Light Mode' : 'Dark Mode';
+	}
 
 	ngOnInit(): void 
 	{ 
