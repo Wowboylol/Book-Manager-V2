@@ -128,7 +128,6 @@ header #toggle:hover {
 }
 
 .sub-menu .sub-menu-item {
-    padding-left: 3.5rem;
     transition: var(--tran-04);
     cursor: pointer;
     display: none;
@@ -138,7 +137,8 @@ header #toggle:hover {
     display: block;
 }
 
-.sub-menu .sub-menu-item:hover a {
+.sub-menu .sub-menu-item:hover .item-text,
+.sub-menu .sub-menu-item:hover .item-icon {
     color: var(--secondary-color);
 }
 
