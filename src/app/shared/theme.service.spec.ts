@@ -14,10 +14,6 @@ describe('ThemeService', () => {
 		expect(service).toBeTruthy();
 	});
 
-	it('should have dark mode off by default', () => {
-		expect(service.isDarkMode()).toBeFalse();
-	});
-
 	it('setDarkMode(true) should turn dark mode on', () => {
 		service.setDarkMode(true);
 		expect(service.isDarkMode()).toBeTrue();
@@ -48,5 +44,33 @@ describe('ThemeService', () => {
 		let spy = spyOn(service.themeChanged, 'next');
 		service.setDarkMode(false);
 		expect(spy).toHaveBeenCalledWith(false);
+	});
+
+	it('setDarkMode(true) should save dark mode preference to local storage', () => {
+		service.setDarkMode(true);
+		expect(localStorage.getItem('dark-mode')).toBe('true');
+	});
+
+	it('setDarkMode(false) should save light mode preference to local storage', () => {
+		service.setDarkMode(false);
+		expect(localStorage.getItem('dark-mode')).toBe('false');
+	});
+
+	it('should load dark mode preference from local storage', () => {
+		localStorage.setItem('dark-mode', 'true');
+		service = new ThemeService();
+		expect(service.isDarkMode()).toBeTrue();
+	});
+
+	it('should load light mode preference from local storage', () => {
+		localStorage.setItem('dark-mode', 'false');
+		service = new ThemeService();
+		expect(service.isDarkMode()).toBeFalse();
+	});
+
+	it('should load light mode preference from local storage if no preference is set', () => {
+		localStorage.removeItem('dark-mode');
+		service = new ThemeService();
+		expect(service.isDarkMode()).toBeFalse();
 	});
 });

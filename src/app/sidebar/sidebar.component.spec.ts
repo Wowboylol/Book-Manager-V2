@@ -25,14 +25,6 @@ describe('SidebarComponent', () => {
 		expect(component.close).toBeTrue();
 	});
 
-	it('should have dark mode off by default', () => {
-		expect(component.darkMode).toBeFalse();
-	});
-
-	it('should have mode text set to "Dark Mode" by default', () => {
-		expect(component.modeText).toBe('Dark Mode');
-	});
-
 	it('should have current active tab set to "Books" by default', () => {
 		expect(component.currentActiveTab).toBe('Books');
 	});
@@ -42,23 +34,25 @@ describe('SidebarComponent', () => {
 		expect(component.close).toBeFalse();
 	});
 
-	it('should set mode to dark mode when switch is toggled', () => {
+	it('should set mode to dark mode from light mode when switch is toggled', () => {
+		component.darkMode = false;
 		component.toggleMode();
 		expect(component.darkMode).toBeTrue();
 	});
 
-	it('should set mode to light mode when switch is toggled', () => {
+	it('should set mode to light mode from dark mode when switch is toggled', () => {
 		component.darkMode = true;
 		component.toggleMode();
 		expect(component.darkMode).toBeFalse();
 	});
 
-	it('should set mode text to "Light Mode" when switch is toggled', () => {
+	it('should set mode text to "Light Mode" from "Dark Mode" when switch is toggled', () => {
+		component.darkMode = false;
 		component.toggleMode();
 		expect(component.modeText).toBe('Light Mode');
 	});
 
-	it('should set mode text to "Dark Mode" when switch is toggled', () => {
+	it('should set mode text to "Dark Mode" from "Light Mode" when switch is toggled', () => {
 		component.darkMode = true;
 		component.toggleMode();
 		expect(component.modeText).toBe('Dark Mode');
