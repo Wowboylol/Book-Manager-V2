@@ -6,6 +6,7 @@
     --secondary-color: #6e5dc6;
     --text-color: #4d5669;
     --toggle-color: #4d5669;
+    --hr-color: #babfc6;
 
     --tran-02: all 0.2s ease;
     --tran-03: all 0.3s ease;
@@ -21,6 +22,7 @@
     --secondary-color: #9f8fef;
     --text-color: #ffffff;
     --toggle-color: #ffffff;
+    --hr-color: #414147;
 }
 
 body {

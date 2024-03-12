@@ -23,6 +23,11 @@
     left: 50%;
 }
 
+.sidebar hr {
+    color: var(--hr-color);
+    transition: var(--tran-02);
+}
+
 /* ===== Sidebar header ===== */
 .sidebar header .logo {
     color: var(--text-color);
@@ -59,7 +64,7 @@ header #toggle:hover {
 
 /* ===== Sidebar menu ===== */
 .menu {
-    height: 90%;
+    height: 88%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

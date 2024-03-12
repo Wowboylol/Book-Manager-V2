@@ -7,9 +7,11 @@
         <i class="bx bx-menu fs-3" id="toggle" (click)="toggleSidebar()"></i>
     </header>
 
-    <div class="menu mt-3">
+    <hr>
+
+    <div class="menu">
         <ul class="menu-list">
-            <li class="menu-item mt-3">
+            <li class="menu-item">
                 <a href="#" [ngClass]="{'rounded': true, 'active': currentActiveTab == 'Books'}" (click)="changeActiveTab('Books')">
                     <i class='bx bxs-book fs-4 item-icon'></i>
                     <span class="fs-5 item-text">Books</span>
@@ -57,6 +59,8 @@
         </ul>
 
         <div class="menu-bottom">
+            <hr>
+            
             <li class="menu-item mt-3">
                 <a href="#" class="rounded">
                     <i class='bx bx-log-out fs-4 item-icon'></i>
