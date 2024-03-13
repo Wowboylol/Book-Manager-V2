@@ -3,6 +3,7 @@
     --sidebar-color: #e7ebf1;
     --primary-color: #dee3ea;
     --primary-color-light: #f0f2f4;
+    --primary-color-lighter: #f1f3f6;
     --secondary-color: #6e5dc6;
     --text-color: #4d5669;
     --toggle-color: #4d5669;
@@ -19,6 +20,7 @@
     --sidebar-color: #141417;
     --primary-color: #232425;
     --primary-color-light: #262629;
+    --primary-color-lighter: #2f2f33;
     --secondary-color: #9f8fef;
     --text-color: #ffffff;
     --toggle-color: #ffffff;
@@ -45,4 +47,14 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary-color-light);
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 0.8em;
+    width: 0.8em;
+    margin: 0 0.3em 0 0.4em;
+    background: url(https://upload.wikimedia.org/wikipedia/commons/4/4c/Grey_close_x.svg) no-repeat;
+    background-size: contain;
+    cursor: pointer;
 }
