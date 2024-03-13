@@ -1,0 +1,13 @@
+form {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+form .search-bar input {
+    outline: none;
+    border: none;
+    background: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
