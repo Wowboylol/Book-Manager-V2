@@ -3,6 +3,7 @@ form {
     padding-bottom: 1rem;
 }
 
+/* ===== Search bar ===== */
 form .search-bar {
     height: 3rem;
     background: var(--primary-color-lighter);
@@ -25,4 +26,20 @@ form .search-bar input {
 
 form .search-bar .search-icon {
     cursor: pointer;
+}
+
+/* ===== Search select ===== */
+form .search-select {
+    height: 3rem;
+    outline: none;
+    border: none;
+    background: var(--primary-color-lighter);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: var(--tran-05);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem top 50%;
+    background-size: 0.8rem auto;
 }

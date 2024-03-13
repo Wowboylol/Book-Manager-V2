@@ -1,6 +1,29 @@
 <form class="row g-3" autocomplete="off">
     <fieldset class="col-sm-6 search-bar rounded">
-        <i class='bx bx-search fs-4 item-icon search-icon pt-1 px-1'></i>
-        <input type="search" class="rounded" placeholder="Search books...">
+        <i class='bx bx-search fs-5 search-icon pt-1 px-1'></i>
+        <input class="rounded" placeholder="Search">
+    </fieldset>
+
+    <fieldset class="col-sm-2">
+        <select class="form-select search-select">
+            <option selected value="0">Book</option>
+            <option value="1">Tag</option>
+            <option value="2">Collection</option>
+        </select>
+    </fieldset>
+
+    <fieldset class="col-sm-2">
+        <select class="form-select search-select">
+            <option selected value="0">Date Added</option>
+            <option value="1">Alphabetical</option>
+            <option value="2">Rating</option>
+        </select>
+    </fieldset>
+
+    <fieldset class="col-sm-2">
+        <select class="form-select search-select">
+            <option selected value="0">Ascending</option>
+            <option value="1">Descending</option>
+        </select>
     </fieldset>
 </form>
