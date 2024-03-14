@@ -3,3 +3,24 @@ header {
     background: var(--primary-color);
     transition: var(--tran-05);
 }
+
+#button-section {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 99;
+}
+
+#button-section .overlay-button {
+    padding-top: 0.4rem;
+    border: none;
+    background: var(--sidebar-color);
+    color: var(--text-color);
+    transition: var(--tran-04);
+}
+
+#button-section .overlay-button:hover {
+    background: var(--primary-color-light);
+}
