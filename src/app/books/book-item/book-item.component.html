@@ -1,1 +1,10 @@
-<p>book-item works!</p>
+<div>
+    <span class="book-image">
+        <img class="rounded-top" [src]="book.imagePath" alt="illustration of {{book.name}}">
+    </span>
+
+    <section class="rounded-bottom book-details">
+        <p>{{book.name}}</p>
+        <!-- <span class="fa fa-star" *ngFor="let star of stars" [ngClass]="{'checked':book.rating > star}"></span> -->
+    </section>
+</div>

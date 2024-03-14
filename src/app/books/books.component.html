@@ -10,8 +10,11 @@
 
 <section class="container mt-4">
     <article class="row">
-        <div class="col-md-12">
-            <h1 class="text-center">Book Component works!</h1>
+        <div class="col-md-12 book-list">
+            <app-book-item
+                *ngFor="let book of books;"
+                [book]="book">
+            </app-book-item>
         </div>
     </article>
 </section>

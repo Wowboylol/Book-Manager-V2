@@ -1,0 +1,25 @@
+div {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+div .book-image img {
+    width: 100%;
+    object-fit: cover;
+}
+
+div .book-details {
+    padding: 1rem;
+    color: var(--text-color);
+    background: var(--primary-color);
+    transition: var(--tran-04);
+}
+
+div .book-details p {
+    font-weight: 500;
+    transition: var(--tran-02);
+}
+
+div:hover .book-details p {
+    color: var(--secondary-color);
+}

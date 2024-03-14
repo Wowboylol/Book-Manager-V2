@@ -4,6 +4,7 @@ header {
     transition: var(--tran-05);
 }
 
+/* ===== Button overlay ===== */
 #button-section {
     position: fixed;
     display: flex;
@@ -23,4 +24,36 @@ header {
 
 #button-section .overlay-button:hover {
     background: var(--primary-color-light);
+}
+
+/* ===== Book list ===== */
+section .book-list {
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: space-between;
+}
+
+@media (max-width: 1199px) {
+    section .book-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 991px) {
+    section .book-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    section .book-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 575px) {
+    section .book-list {
+        grid-template-columns: 1fr;
+    }
 }
