@@ -3,9 +3,13 @@ div {
     text-decoration: none;
 }
 
+div .book-image {
+    overflow: hidden;
+    aspect-ratio: 128/181;
+}
+
 div .book-image img {
     width: 100%;
-    object-fit: cover;
 }
 
 div .book-details {
