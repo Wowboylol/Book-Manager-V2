@@ -38,15 +38,15 @@ body {
 }
     
 ::-webkit-scrollbar-track {
-    background: var(--body-color); 
+    background: var(--body-color);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
+    background: var(--sidebar-color);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-color-light);
+    background: var(--primary-color);
 }
 
 input[type="search"]::-webkit-search-cancel-button {
