@@ -5,6 +5,6 @@
 
     <section class="rounded-bottom book-details">
         <p>{{book.name}}</p>
-        <!-- <span class="fa fa-star" *ngFor="let star of stars" [ngClass]="{'checked':book.rating > star}"></span> -->
+        <i class='bx bxs-star' *ngFor="let star of stars" [ngClass]="{'checked':book.rating >= star}"></i>
     </section>
 </div>

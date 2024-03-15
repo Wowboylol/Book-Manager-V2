@@ -14,6 +14,7 @@ import { Book } from '../../shared/models/book.model';
 export class BookItemComponent implements OnInit 
 {
 	@Input() book:Book;
+	stars:number[] = [1, 2, 3, 4, 5];
 
 	constructor() { }
 	ngOnInit(): void { }
