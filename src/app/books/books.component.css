@@ -26,6 +26,10 @@ header {
     background: var(--primary-color-light);
 }
 
+#button-section #scroll-button {
+    display: none;
+}
+
 /* ===== Book list ===== */
 section .book-list {
     display: grid;
@@ -49,6 +53,10 @@ section .book-list {
 @media (max-width: 767px) {
     section .book-list {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    #button-section #scroll-button {
+        display: block;
     }
 }
 
