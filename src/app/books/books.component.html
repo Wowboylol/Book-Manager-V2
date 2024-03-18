@@ -19,6 +19,14 @@
     </article>
 </section>
 
+<section *ngIf="isBooksOverLimit" class="container mt-2">
+    <article class="row justify-content-center">
+        <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10 col-xs-12">
+            <button class="load-button rounded" (click)="loadMoreBooks()">Load More</button>
+        </div>
+    </article>
+</section>
+
 <footer id="button-section">
     <button class="overlay-button rounded mb-2" id="scroll-button">
         <i class='bx bx-down-arrow-alt fs-3'></i>

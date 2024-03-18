@@ -38,6 +38,21 @@ section .book-list {
     justify-content: space-between;
 }
 
+section .load-button {
+    width: 100%;
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+    border: none;
+    font-weight: 500;
+    background: var(--sidebar-color);
+    color: var(--text-color);
+    transition: var(--tran-04);
+}
+
+section .load-button:hover {
+    background: var(--primary-color-light);
+}
+
 @media (max-width: 1199px) {
     section .book-list {
         grid-template-columns: repeat(4, 1fr);
