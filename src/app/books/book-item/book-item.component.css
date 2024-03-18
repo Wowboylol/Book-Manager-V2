@@ -1,6 +1,9 @@
-div {
+.book-container {
     cursor: pointer;
     text-decoration: none;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 div .book-image {
@@ -17,6 +20,7 @@ div .book-details {
     color: var(--text-color);
     background: var(--primary-color);
     transition: var(--tran-04);
+    flex-grow: 1;
 }
 
 div .book-details p {
