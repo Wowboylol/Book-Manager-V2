@@ -28,4 +28,25 @@ describe('BooksComponent', () => {
 	it('should have same amount of book items as stored books', () => {
 		expect(bookItems.length).toBe(component.books.length);
 	});
+
+	it('should display load more button if books are over limit', () => {
+		component.bookDisplayLimit = component["_books"].length - 1;
+		fixture.detectChanges();
+		let loadMoreButton = fixture.nativeElement.querySelector(".load-button");
+		expect(loadMoreButton).toBeTruthy();
+	});
+
+	it('should not display load more button if books are not over limit', () => {
+		component.bookDisplayLimit = component["_books"].length;
+		fixture.detectChanges();
+		let loadMoreButton = fixture.nativeElement.querySelector(".load-button");
+		expect(loadMoreButton).toBeNull();
+	});
+
+	it('should increase book display limit when load more button is clicked', () => {
+		let initialLimit = component.bookDisplayLimit;
+		let loadMoreButton = fixture.nativeElement.querySelector(".load-button");
+		loadMoreButton.click();
+		expect(component.bookDisplayLimit).toBeGreaterThan(initialLimit);
+	});
 });
