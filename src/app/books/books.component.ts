@@ -16,23 +16,27 @@ export class BooksComponent implements OnInit
 {
 	private _books:Book[] = [];
 	bookDisplayLimit:number = 10;
-	isBooksOverLimit:boolean;
 
 	constructor() { 
 		let json = require('../shared/test-data.json');
 		this._books = json.books;
-		this.isBooksOverLimit = this._books.length > this.bookDisplayLimit;
 		console.log(this._books);
 	}
 
 	ngOnInit(): void { }
 
+	// Returns a subset of books based on the current display limit using getter wrapper
 	public get books():Book[] { 
 		return this._books.filter((item, index) => index < this.bookDisplayLimit);
 	}
 
+	// Returns the length of the full list of books
+	getFullBookListLength():number {
+		return this._books.length;
+	}
+
+	// Increases the display limit to show more books
 	loadMoreBooks():void {
 		this.bookDisplayLimit += 20;
-		this.isBooksOverLimit = this._books.length > this.bookDisplayLimit;
 	}
 }
