@@ -6,7 +6,7 @@
     left: 0;
     background: var(--sidebar-color);
     width: 250px;
-    z-index: 600;
+    z-index: 20;
     transition: var(--tran-05);
 }
 
