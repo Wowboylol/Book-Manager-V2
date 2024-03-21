@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 })
 export class BookDetailComponent implements OnInit 
 {
+	overlayTitle = 'View Book';
+	
 	constructor() { }
 	ngOnInit(): void { }
 }

@@ -11,5 +11,11 @@ import { RouterModule } from '@angular/router';
 })
 export class OverlayComponent
 {
+	overlayTitle = 'Overlay Title';
+
 	constructor() { }
+
+	updateOverlayTitle(displayedComponent): void {
+		this.overlayTitle = displayedComponent.overlayTitle;
+	}
 }
