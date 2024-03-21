@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { OverlayComponent } from './overlay.component';
+import { routes } from 'src/app/app-routing';
 
 describe('OverlayComponent', () => {
   let component: OverlayComponent;
@@ -8,7 +10,7 @@ describe('OverlayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ OverlayComponent ]
+      imports: [ OverlayComponent, RouterTestingModule.withRoutes(routes) ]
     })
     .compileComponents();
 
@@ -17,7 +19,7 @@ describe('OverlayComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create overlay component', () => {
     expect(component).toBeTruthy();
   });
 });

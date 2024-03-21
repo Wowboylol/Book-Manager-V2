@@ -17,7 +17,7 @@ describe('BookSearchComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create book search component', () => {
     expect(component).toBeTruthy();
   });
 });

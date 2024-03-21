@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { BookItemComponent } from './book-item.component';
+import { routes } from 'src/app/app-routing';
 
 describe('BookItemComponent', () => {
 	let component: BookItemComponent;
@@ -11,7 +13,7 @@ describe('BookItemComponent', () => {
 
   	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ BookItemComponent ]
+			imports: [ BookItemComponent, RouterTestingModule.withRoutes(routes) ]
 		})
     	.compileComponents();
 
@@ -20,6 +22,7 @@ describe('BookItemComponent', () => {
 
 		// Create mock book supplied by parent component
 		component.book = {
+			id: 0,
 			name: "Test Book",
             description: "Test book description",
             link: "https://www.google.com/",
