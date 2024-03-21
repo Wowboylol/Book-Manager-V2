@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { BookSearchComponent } from './book-search/book-search.component';
 import { BookItemComponent } from './book-item/book-item.component';
@@ -8,7 +9,7 @@ import { Book } from '../shared/models/book.model';
 @Component({
 	selector: 'app-books',
 	standalone: true,
-	imports: [CommonModule, BookSearchComponent, BookItemComponent],
+	imports: [CommonModule, BookSearchComponent, BookItemComponent, RouterModule],
 	templateUrl: './books.component.html',
 	styleUrls: ['./books.component.css']
 })

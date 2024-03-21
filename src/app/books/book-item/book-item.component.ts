@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { Book } from '../../shared/models/book.model';
 
 @Component({
 	selector: 'app-book-item',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, RouterModule],
 	templateUrl: './book-item.component.html',
 	styleUrls: ['./book-item.component.css']
 })
