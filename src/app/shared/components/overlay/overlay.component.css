@@ -6,6 +6,8 @@
     height: 100vh;
     background-color: var(--body-color);
     z-index: 30;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 header .overlay-header {

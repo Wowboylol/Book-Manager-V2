@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -9,11 +9,22 @@ import { RouterModule } from '@angular/router';
 	templateUrl: './overlay.component.html',
 	styleUrls: ['./overlay.component.css']
 })
-export class OverlayComponent
+export class OverlayComponent implements OnInit, OnDestroy
 {
 	overlayTitle = 'Overlay Title';
 
-	constructor() { }
+	constructor(
+		@Inject(DOCUMENT) private document: Document, 
+		private renderer: Renderer2
+	) { }
+
+	ngOnInit(): void { 
+		this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
+	}
+
+	ngOnDestroy(): void {
+		this.renderer.removeStyle(this.document.body, 'overflow');
+	}
 
 	updateOverlayTitle(displayedComponent): void {
 		this.overlayTitle = displayedComponent.overlayTitle;
