@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { BookItemComponent } from './book-item/book-item.component';
 import { Book } from '../shared/models/book.model';
+import { BookService } from '../shared/services/book.service';
 
 @Component({
 	selector: 'app-books',
@@ -18,13 +19,11 @@ export class BooksComponent implements OnInit
 	private _books:Book[] = [];
 	bookDisplayLimit:number = 10;
 
-	constructor() { 
-		let json = require('../shared/test-data.json');
-		this._books = json.books;
-		console.log(this._books);
-	}
+	constructor(private bookService: BookService) { }
 
-	ngOnInit(): void { }
+	ngOnInit(): void { 
+		this._books = this.bookService.getAllBooks();
+	}
 
 	// Returns a subset of books based on the current display limit using getter wrapper
 	public get books():Book[] { 
