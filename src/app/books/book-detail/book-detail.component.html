@@ -1,6 +1,9 @@
 <div class="row g-3">
     <section class="col-sm-4 col-lg-3 col-xxl-2 image-container">
-        <img src="https://cdn.imgchest.com/files/pyvdco3ed9y.png" alt="Placeholder image"/>
+        <img 
+            [src]="book.imagePath ? book.imagePath : 'assets/images/book-placeholder.png'" 
+            alt="illustration of {{ book.name }}"
+        />
         <div class="button-container">
             <button class="btn btn-secondary mt-3" id="edit-button">Edit</button>
             <button class="btn btn-danger mt-3" id="delete-button">Delete</button>
@@ -12,7 +15,7 @@
             <div class="col-12">
                 <div class="data-box rounded px-3">
                     <label class="pt-2">Name</label>
-                    <p class="pb-2">Placeholder Name</p>
+                    <p class="pb-2">{{ book.name }}</p>
                 </div>
             </div>
         </div>
@@ -20,7 +23,7 @@
             <div class="col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Link</label>
-                    <p class="pb-2">Placeholder Link</p>
+                    <p class="pb-2">{{ book.link }}</p>
                 </div>
             </div>
         </div>
@@ -28,7 +31,7 @@
             <div class="col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Description</label>
-                    <p class="pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p class="pb-2">{{ book.description }}</p>
                 </div>
             </div>
         </div>
@@ -36,13 +39,15 @@
             <div class="col-lg-6 col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Rating</label>
-                    <p class="pb-2">Placeholder (Format later)</p>
+                    <div>
+                        <i class='bx bxs-star pb-2 mb-1' *ngFor="let star of stars" [ngClass]="{'checked': book.rating >= star}"></i>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6 col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Collection</label>
-                    <p class="pb-2">Placeholder Collection</p>
+                    <p class="pb-2">{{ book.collection ? book.collection : 'None' }}</p>
                 </div>
             </div>
         </div>

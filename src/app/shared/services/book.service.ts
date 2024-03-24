@@ -13,10 +13,12 @@ export class BookService
 		console.log(this.books);
 	}
 
+	// Return a copy of the array of books
 	getAllBooks():Book[] {
 		return this.books.slice();
 	}
 
+	// Return the book with the given ID, or undefined if not found
 	getBookById(id:number):Book {
 		return this.books.find(book => book.id === id); 
 	}
