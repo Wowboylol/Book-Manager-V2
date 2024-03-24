@@ -63,13 +63,13 @@
             <div class="col-sm-6 col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Creation Date</label>
-                    <p class="pb-2">2022-02-22</p>
+                    <p class="pb-2">{{ book.dateCreated | date }}</p>
                 </div>
             </div>
             <div class="col-sm-6 col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Last Updated</label>
-                    <p class="pb-2">2023-03-23</p>
+                    <p class="pb-2">{{ book.dateUpdated | date }}</p>
                 </div>
             </div>
         </div>
