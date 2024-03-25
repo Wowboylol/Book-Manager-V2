@@ -1,6 +1,7 @@
 <div class="row g-3">
     <section class="col-sm-4 col-lg-3 col-xxl-2 image-container">
         <img 
+            id="image"
             [src]="book.imagePath ? book.imagePath : 'assets/images/book-placeholder.png'" 
             alt="illustration of {{ book.name }}"
         />
@@ -15,7 +16,7 @@
             <div class="col-12">
                 <div class="data-box rounded px-3">
                     <label class="pt-2">Name</label>
-                    <p class="pb-2">{{ book.name }}</p>
+                    <p class="pb-2" id="name">{{ book.name }}</p>
                 </div>
             </div>
         </div>
@@ -23,7 +24,7 @@
             <div class="col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Link</label>
-                    <p class="pb-2">{{ book.link }}</p>
+                    <p class="pb-2" id="link">{{ book.link }}</p>
                 </div>
             </div>
         </div>
@@ -31,7 +32,7 @@
             <div class="col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Description</label>
-                    <p class="pb-2">{{ book.description }}</p>
+                    <p class="pb-2" id="description">{{ book.description }}</p>
                 </div>
             </div>
         </div>
@@ -39,7 +40,7 @@
             <div class="col-lg-6 col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Rating</label>
-                    <div>
+                    <div id="rating">
                         <i class='bx bxs-star pb-2 mb-1' *ngFor="let star of stars" [ngClass]="{'checked': book.rating >= star}"></i>
                     </div>
                 </div>
@@ -47,7 +48,7 @@
             <div class="col-lg-6 col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Collection</label>
-                    <p class="pb-2">{{ book.collection ? book.collection : 'None' }}</p>
+                    <p class="pb-2" id="collection">{{ book.collection ? book.collection : 'None' }}</p>
                 </div>
             </div>
         </div>
@@ -55,7 +56,7 @@
             <div class="col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Tags</label>
-                    <p class="pb-2">Placeholder (Format later)</p>
+                    <p class="pb-2" id="tags">Placeholder (Format later)</p>
                 </div>
             </div>
         </div>
@@ -63,13 +64,13 @@
             <div class="col-sm-6 col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Creation Date</label>
-                    <p class="pb-2">{{ book.dateCreated ? (book.dateCreated | date) : 'N/A' }}</p>
+                    <p class="pb-2" id="dateCreated">{{ book.dateCreated ? (book.dateCreated | date) : 'N/A' }}</p>
                 </div>
             </div>
             <div class="col-sm-6 col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Last Updated</label>
-                    <p class="pb-2">{{ book.dateUpdated ? (book.dateUpdated | date) : 'N/A' }}</p>
+                    <p class="pb-2" id="dateUpdated">{{ book.dateUpdated ? (book.dateUpdated | date) : 'N/A' }}</p>
                 </div>
             </div>
         </div>

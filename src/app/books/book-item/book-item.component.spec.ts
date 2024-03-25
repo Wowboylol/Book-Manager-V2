@@ -28,8 +28,8 @@ describe('BookItemComponent', () => {
             link: "https://www.google.com/",
             imagePath: "https://i.imgur.com/4DQmEtU.jpeg",
             rating: 3,
-            dateCreated: new Date("2024-03-15"),
-            dateUpdated: new Date("2024-03-12"),
+            dateCreated: new Date("Mar 10, 2024"),
+			dateUpdated: new Date("Mar 12, 2024"),
             tags: ["tag0", "tag1", "tag2", "tag3"],
             "collection": "myBookCollection"
 		}
