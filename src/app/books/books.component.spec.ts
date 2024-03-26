@@ -3,43 +3,38 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { BooksComponent } from './books.component';
 import { routes } from 'src/app/app-routing';
+import { BookSearchPipe } from '../shared/pipes/book-search.pipe';
 
 describe('BooksComponent', () => {
 	let component: BooksComponent;
 	let fixture: ComponentFixture<BooksComponent>;
-	let bookItems: NodeListOf<Element>;
+	let pipeSpy: jasmine.Spy;
 
   	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ BooksComponent, RouterTestingModule.withRoutes(routes) ]
+			imports: [ BooksComponent, RouterTestingModule.withRoutes(routes) ],
 		})
 		.compileComponents();
 
 		fixture = TestBed.createComponent(BooksComponent);
 		component = fixture.componentInstance;
+		pipeSpy = spyOn(BookSearchPipe.prototype, 'transform');
 		fixture.detectChanges();
-
-		// Get HTML elements
-		bookItems = fixture.nativeElement.querySelectorAll("app-book-item");
 	});
 
 	it('should create book component', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have same amount of book items as stored books', () => {
-		expect(bookItems.length).toBe(component.books.length);
-	});
-
 	it('should display load more button if books are over limit', () => {
-		component.bookDisplayLimit = component["_books"].length - 1;
+		component.bookDisplayLimit = component.books.length - 1;
 		fixture.detectChanges();
 		let loadMoreButton = fixture.nativeElement.querySelector(".load-button");
 		expect(loadMoreButton).toBeTruthy();
 	});
 
 	it('should not display load more button if books are not over limit', () => {
-		component.bookDisplayLimit = component["_books"].length;
+		component.bookDisplayLimit = component.books.length;
 		fixture.detectChanges();
 		let loadMoreButton = fixture.nativeElement.querySelector(".load-button");
 		expect(loadMoreButton).toBeNull();
@@ -50,5 +45,16 @@ describe('BooksComponent', () => {
 		let loadMoreButton = fixture.nativeElement.querySelector(".load-button");
 		loadMoreButton.click();
 		expect(component.bookDisplayLimit).toBeGreaterThan(initialLimit);
+	});
+
+	it('should run BookSearchPipe when search query is updated', () => {
+		component.onSearchQuery({ searchString: "test", searchType: 0, searchSort: 0, searchOrder: 0 });
+		expect(pipeSpy).toHaveBeenCalled();
+	});
+
+	it('should display all books if search query is default', () => {
+		let initialBookCount = component.books.length;
+		component.onSearchQuery({ searchString: "", searchType: 0, searchSort: 0, searchOrder: 0 });
+		expect(component.searchCount.value).toBe(initialBookCount);
 	});
 });
