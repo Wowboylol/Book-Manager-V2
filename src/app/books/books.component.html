@@ -2,7 +2,7 @@
     <section class="container">
         <article class="row search-bar">
             <div class="col-md-12">
-                <app-book-search></app-book-search>
+                <app-book-search (searchQuery)="searchQuery = $event"></app-book-search>
             </div>
         </article>
     </section>
@@ -12,7 +12,7 @@
     <article class="row">
         <div class="col-md-12 book-list">
             <app-book-item
-                *ngFor="let book of books;"
+                *ngFor="let book of books | bookSearch:searchQuery"
                 [book]="book"
                 style="display: flex;">
             </app-book-item>

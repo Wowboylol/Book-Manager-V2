@@ -6,11 +6,13 @@ import { BookSearchComponent } from './book-search/book-search.component';
 import { BookItemComponent } from './book-item/book-item.component';
 import { Book } from '../shared/models/book.model';
 import { BookService } from '../shared/services/book.service';
+import { BookSearchQuery } from '../shared/models/book-search-query.model';
+import { BookSearchPipe } from '../shared/pipes/book-search.pipe';
 
 @Component({
 	selector: 'app-books',
 	standalone: true,
-	imports: [CommonModule, BookSearchComponent, BookItemComponent, RouterModule],
+	imports: [CommonModule, BookSearchComponent, BookItemComponent, RouterModule, BookSearchPipe],
 	templateUrl: './books.component.html',
 	styleUrls: ['./books.component.css']
 })
@@ -18,6 +20,7 @@ export class BooksComponent implements OnInit
 {
 	private _books:Book[] = [];
 	bookDisplayLimit:number = 10;
+	searchQuery:BookSearchQuery;
 
 	constructor(private bookService: BookService) { }
 

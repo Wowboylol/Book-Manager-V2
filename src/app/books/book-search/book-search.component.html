@@ -1,13 +1,13 @@
-<form class="row g-3" autocomplete="off">
+<form class="row g-3" autocomplete="off" onsubmit="event.preventDefault();">
     <fieldset class="col-md-6">
         <div class="search-bar rounded">
-            <i class='bx bx-search fs-5 search-icon pt-1 ps-2 pe-1'></i>
-            <input type="search" class="rounded" placeholder="Search">
+            <i class='bx bx-search fs-5 search-icon pt-1 ps-2 pe-1' (click)="onSubmitSearch()"></i>
+            <input class="rounded" placeholder="Search" (keydown.enter)="onSubmitSearch()" #searchString>
         </div>
     </fieldset>
 
     <fieldset class="col-md-2">
-        <select class="form-select search-select">
+        <select class="form-select search-select" #searchType>
             <option selected value="0">Name</option>
             <option value="1">Tag</option>
             <option value="2">Collection</option>
@@ -15,7 +15,7 @@
     </fieldset>
 
     <fieldset class="col-md-2">
-        <select class="form-select search-select">
+        <select class="form-select search-select" #searchSort>
             <option selected value="0">Date Added</option>
             <option value="1">Date Updated</option>
             <option value="2">Alphabetical</option>
@@ -24,9 +24,9 @@
     </fieldset>
 
     <fieldset class="col-md-2">
-        <select class="form-select search-select">
-            <option selected value="0">Ascending</option>
-            <option value="1">Descending</option>
+        <select class="form-select search-select" #searchOrder>
+            <option selected value="0">Descending</option>
+            <option value="1">Ascending</option>
         </select>
     </fieldset>
 </form>
