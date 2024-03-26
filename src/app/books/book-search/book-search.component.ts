@@ -8,11 +8,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './book-search.component.html',
   styleUrls: ['./book-search.component.css']
 })
-export class BookSearchComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class BookSearchComponent implements OnInit 
+{
+	constructor() { }
+	ngOnInit(): void { }
 }

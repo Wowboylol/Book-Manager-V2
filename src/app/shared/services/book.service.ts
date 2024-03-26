@@ -9,7 +9,7 @@ export class BookService
 
 	constructor() { 
 		let json = require('../test-data.json');
-		this.books = json.books;
+		this.books = json.books.reverse();
 		console.log(this.books);
 	}
 
