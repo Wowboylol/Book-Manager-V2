@@ -18,28 +18,32 @@ import { BookSearchPipe } from '../shared/pipes/book-search.pipe';
 })
 export class BooksComponent implements OnInit 
 {
-	private _books:Book[] = [];
-	bookDisplayLimit:number = 10;
+	books:Book[] = [];
+	bookDisplayLimit:number;
 	searchQuery:BookSearchQuery;
+	searchCount = { value: 0 };
 
 	constructor(private bookService: BookService) { }
 
 	ngOnInit(): void { 
-		this._books = this.bookService.getAllBooks();
+		this.resetBookDisplayLimit();
+		this.books = this.bookService.getAllBooks();
+		this.searchCount.value = this.books.length;
 	}
 
-	// Returns a subset of books based on the current display limit using getter wrapper
-	public get books():Book[] { 
-		return this._books.filter((item, index) => index < this.bookDisplayLimit);
-	}
-
-	// Returns the length of the full list of books
-	getFullBookListLength():number {
-		return this._books.length;
+	// Resets book display limit to default
+	resetBookDisplayLimit(): void {
+		this.bookDisplayLimit = 10;
 	}
 
 	// Increases the display limit to show more books
-	loadMoreBooks():void {
+	loadMoreBooks(): void {
 		this.bookDisplayLimit += 20;
+	}
+
+	// Updates the search query
+	onSearchQuery(searchQuery:BookSearchQuery): void {
+		this.searchQuery = searchQuery;
+		this.resetBookDisplayLimit();
 	}
 }

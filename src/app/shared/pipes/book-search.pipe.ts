@@ -13,11 +13,15 @@ enum SearchOrder { Descending, Ascending }
 })
 export class BookSearchPipe implements PipeTransform 
 {
-	transform(value: Book[], searchQuery: BookSearchQuery): Book[] 
+	transform(value: Book[], searchQuery: BookSearchQuery, searchCount): Book[] 
 	{
-		console.log(searchQuery);
+		// Filter and sort the search result based on the search query
 		var searchResult: Book[] = this.filterSearch(value, searchQuery.searchString, searchQuery.searchType);
-		return this.sortSearch(searchResult, searchQuery.searchSort, searchQuery.searchOrder);
+		searchResult = this.sortSearch(searchResult, searchQuery.searchSort, searchQuery.searchOrder);
+
+		// Update pointer to search count with the number of search results
+		searchCount.value = searchResult.length;
+		return searchResult;
 	}
 
 	// Filter the search result based on the search type and search string
