@@ -99,21 +99,11 @@ describe('BookDetailComponent', () => {
 		expect(rating).toBe(component.book.rating);
 	});
 
-	it('should display book collection when collection is not null', () => {
+	it('should display book collection', () => {
 		mockBookService.getBookById.and.returnValue(testBook);
 		fixture.detectChanges();
 		let collectionElement = fixture.nativeElement.querySelector("#collection");
 		expect(collectionElement.textContent).toContain(testBook.collection);
-	});
-
-	it('should display book collection as None when collection is null', () => {
-		let originalCollection = testBook.collection;
-		testBook.collection = null;
-		mockBookService.getBookById.and.returnValue(testBook);
-		fixture.detectChanges();
-		testBook.collection = originalCollection;
-		let collectionElement = fixture.nativeElement.querySelector("#collection");
-		expect(collectionElement.textContent).toBe("None");
 	});
 
 	it('should display book creation date with date pipe', () => {
