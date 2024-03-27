@@ -88,8 +88,14 @@ export class BookSearchPipe implements PipeTransform
 				}
 				case SearchSort.Rating: {
 					return searchOrder == SearchOrder.Ascending ?
-						value.sort((book1, book2) => book1.rating - book2.rating) :
-						value.sort((book1, book2) => book2.rating - book1.rating);
+						value.sort((book1, book2) => { 
+							if(book1.rating == book2.rating) { return book2.id - book1.id; }
+							return book1.rating - book2.rating;
+						}) :
+						value.sort((book1, book2) => {
+							if(book1.rating == book2.rating) { return book2.id - book1.id; }
+							return book2.rating - book1.rating;
+						});
 				}
 				default: {
 					throw new Error("Invalid search sort");

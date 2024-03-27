@@ -1,8 +1,92 @@
+import { Book } from '../models/book.model';
 import { BookSearchPipe } from './book-search.pipe';
+import { testData } from '../../../../src/test-data/test-data';
 
 describe('BookSearchPipe', () => {
-	it('create an instance', () => {
-		const pipe = new BookSearchPipe();
-		expect(pipe).toBeTruthy();
+	let bookSearchPipe: BookSearchPipe;
+	let testBooks: Book[];
+	let testSearchCount;
+
+	beforeEach(() => {
+		bookSearchPipe = new BookSearchPipe();
+		testBooks = testData.books.slice();
+		testSearchCount = { value: 0 };
+	});
+
+	it('returns all books reversed when default search query (name, dateAdded, descending) is used', () => {
+		const searchQuery = { searchString: '', searchType: 0, searchSort: 0, searchOrder: 0 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual(testBooks.reverse());
+		expect(testSearchCount.value).toBe(testBooks.length);
+	});
+
+	it('filters books by name', () => {
+		const searchQuery = { searchString: 'Test', searchType: 0, searchSort: 0, searchOrder: 0 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual([testBooks[2], testBooks[0]]);
+		expect(testSearchCount.value).toBe(2);
+	});
+
+	it('filters books by tag', () => {
+		const searchQuery = { searchString: 'test', searchType: 1, searchSort: 0, searchOrder: 0 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual([testBooks[2], testBooks[0]]);
+		expect(testSearchCount.value).toBe(2);
+	});
+
+	it('filters books by collection', () => {
+		const searchQuery = { searchString: 'None', searchType: 2, searchSort: 0, searchOrder: 0 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual([testBooks[5], testBooks[4], testBooks[1]]);
+		expect(testSearchCount.value).toBe(3);
+	});
+
+	it('sorts books by dateAdded ascending', () => {
+		const searchQuery = { searchString: '', searchType: 0, searchSort: 0, searchOrder: 1 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual(testBooks);
+		expect(testSearchCount.value).toBe(testBooks.length);
+	});
+
+	it('sorts books by dateUpdated descending', () => {
+		const searchQuery = { searchString: '', searchType: 0, searchSort: 1, searchOrder: 0 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual([testBooks[5], testBooks[1], testBooks[4], testBooks[3], testBooks[2], testBooks[0]]);
+		expect(testSearchCount.value).toBe(testBooks.length);
+	});
+
+	it('sorts books by dateUpdated ascending', () => {
+		const searchQuery = { searchString: '', searchType: 0, searchSort: 1, searchOrder: 1 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual([testBooks[0], testBooks[2], testBooks[3], testBooks[4], testBooks[1], testBooks[5]]);
+		expect(testSearchCount.value).toBe(testBooks.length);
+	});
+
+	it('sorts books by alphabetical descending', () => {
+		const searchQuery = { searchString: '', searchType: 0, searchSort: 2, searchOrder: 0 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual([testBooks[3], testBooks[2], testBooks[0], testBooks[5], testBooks[4], testBooks[1]]);
+		expect(testSearchCount.value).toBe(testBooks.length);
+	});
+
+	it('sorts books by alphabetical ascending', () => {
+		const searchQuery = { searchString: '', searchType: 0, searchSort: 2, searchOrder: 1 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual([testBooks[1], testBooks[4], testBooks[5], testBooks[0], testBooks[2], testBooks[3]]);
+		expect(testSearchCount.value).toBe(testBooks.length);
+	});
+
+	it('sorts books by rating descending', () => {
+		const searchQuery = { searchString: '', searchType: 0, searchSort: 3, searchOrder: 0 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual([testBooks[3], testBooks[5], testBooks[1], testBooks[4], testBooks[0], testBooks[2]]);
+		expect(testSearchCount.value).toBe(testBooks.length);
+	});
+
+	it('sorts books by rating ascending', () => {
+		const searchQuery = { searchString: '', searchType: 0, searchSort: 3, searchOrder: 1 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual([testBooks[2], testBooks[4], testBooks[0], testBooks[5], testBooks[1], testBooks[3]]);
+		expect(testSearchCount.value).toBe(testBooks.length);
 	});
 });
