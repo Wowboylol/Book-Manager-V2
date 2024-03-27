@@ -40,8 +40,7 @@ export class BookSearchPipe implements PipeTransform
 					return value.filter(book => book.name.toLowerCase().includes(searchString.toLowerCase()));
 				}
 				case SearchType.Tag: {
-					// FIXME: This is a placeholder implementation
-					return value.filter(book => book.tags.includes(searchString));
+					return this.filterByTag(value, searchString);
 				}
 				case SearchType.Collection: {
 					return value.filter(book => book.collection.toLowerCase().includes(searchString.toLowerCase()));
@@ -106,5 +105,20 @@ export class BookSearchPipe implements PipeTransform
 			console.error(e);
 			return value;
 		}
+	}
+
+	private filterByTag(value: Book[], searchString: string): Book[]
+	{
+		const tags: string[] = searchString.split(",").map(tag => tag.trim().toLowerCase());
+
+		tags.map(tag => {
+			if(tag.startsWith("-")) { 
+				value = value.filter(book => !book.tags.includes(tag.substring(1)));
+			}
+			else {
+				value = value.filter(book => book.tags.includes(tag));
+			}
+		});
+		return value;
 	}
 }
