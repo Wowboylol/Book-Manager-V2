@@ -17,6 +17,10 @@
                 style="display: flex;">
             </app-book-item>
         </div>
+        <aside class="col-md-12" *ngIf="searchCount.value == 0">
+            <p style="font-weight: 500;">There are no books to display</p>
+            <p>Try again using other keywords or filters. You can also fetch saved data through the sidebar or add new books using the "+" button below.</p>
+        </aside>
     </article>
 </section>
 
