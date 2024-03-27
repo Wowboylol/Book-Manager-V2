@@ -89,4 +89,18 @@ describe('BookSearchPipe', () => {
 		expect(result).toEqual([testBooks[2], testBooks[4], testBooks[0], testBooks[5], testBooks[1], testBooks[3]]);
 		expect(testSearchCount.value).toBe(testBooks.length);
 	});
+
+	it('filters books by excluding tags', () => {
+		const searchQuery = { searchString: '-test, -textbook', searchType: 1, searchSort: 0, searchOrder: 0 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual([testBooks[4], testBooks[3], testBooks[1]]);
+		expect(testSearchCount.value).toBe(3);
+	});
+
+	it('filters books by including and excluding tags', () => {
+		const searchQuery = { searchString: 'book, test, -zero', searchType: 1, searchSort: 0, searchOrder: 0 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual([testBooks[2]]);
+		expect(testSearchCount.value).toBe(1);
+	});
 });
