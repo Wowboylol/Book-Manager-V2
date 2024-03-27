@@ -16,7 +16,9 @@ export class BookSearchPipe implements PipeTransform
 	transform(value: Book[], searchQuery: BookSearchQuery, searchCount): Book[] 
 	{
 		// Filter and sort the search result based on the search query
-		var searchResult: Book[] = this.filterSearch(value, searchQuery.searchString, searchQuery.searchType);
+		// We copy the array to avoid modifying the original array and its values
+		var copy = value.slice();
+		var searchResult: Book[] = this.filterSearch(copy, searchQuery.searchString, searchQuery.searchType);
 		searchResult = this.sortSearch(searchResult, searchQuery.searchSort, searchQuery.searchOrder);
 
 		// Update pointer to search count with the number of search results
@@ -66,7 +68,7 @@ export class BookSearchPipe implements PipeTransform
 			switch(searchSort)
 			{
 				case SearchSort.DateAdded: {
-					return searchOrder == SearchOrder.Ascending ? value.reverse() : value;
+					return searchOrder == SearchOrder.Ascending ? value : value.reverse();
 				}
 				case SearchSort.DateUpdated: {
 					return searchOrder == SearchOrder.Ascending ? 

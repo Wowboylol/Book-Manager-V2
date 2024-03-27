@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # Other files
-src/app/shared/test-data.json
+src/test-data/book-snippet.json

@@ -8,9 +8,8 @@ export class BookService
 	private books:Book[] = [];
 
 	constructor() { 
-		let json = require('../test-data.json');
-		this.books = json.books.reverse();
-		console.log(this.books);
+		let json = require('../../../test-data/book-snippet.json');
+		this.books = json.books;
 	}
 
 	// Return a copy of the array of books
