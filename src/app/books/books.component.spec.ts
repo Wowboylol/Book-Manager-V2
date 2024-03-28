@@ -57,4 +57,9 @@ describe('BooksComponent', () => {
 		component.onSearchQuery({ searchString: "", searchType: 0, searchSort: 0, searchOrder: 0 });
 		expect(component.searchCount.value).toBe(initialBookCount);
 	});
+
+	it('should display alert when search query is updated', () => {
+		component.onSearchQuery({ searchString: "test", searchType: 0, searchSort: 0, searchOrder: 0 });
+		expect(component.alertToggle).toBe('show');
+	});
 });
