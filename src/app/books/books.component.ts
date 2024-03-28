@@ -8,11 +8,12 @@ import { Book } from '../shared/models/book.model';
 import { BookService } from '../shared/services/book.service';
 import { BookSearchQuery } from '../shared/models/book-search-query.model';
 import { BookSearchPipe } from '../shared/pipes/book-search.pipe';
+import { AlertComponent } from '../shared/components/alert/alert.component';
 
 @Component({
 	selector: 'app-books',
 	standalone: true,
-	imports: [CommonModule, BookSearchComponent, BookItemComponent, RouterModule, BookSearchPipe],
+	imports: [CommonModule, BookSearchComponent, BookItemComponent, RouterModule, BookSearchPipe, AlertComponent],
 	templateUrl: './books.component.html',
 	styleUrls: ['./books.component.css']
 })
@@ -22,6 +23,7 @@ export class BooksComponent implements OnInit
 	bookDisplayLimit:number;
 	searchQuery:BookSearchQuery;
 	searchCount = { value: 0 };
+	alertToggle:string = 'hidden';
 
 	constructor(private bookService: BookService) { }
 
@@ -45,5 +47,14 @@ export class BooksComponent implements OnInit
 	onSearchQuery(searchQuery:BookSearchQuery): void {
 		this.searchQuery = searchQuery;
 		this.resetBookDisplayLimit();
+		this.runAlert();
+	}
+
+	// Runs the alert component animation
+	runAlert(): void {
+		this.alertToggle = 'show';
+		setTimeout(() => {
+			this.alertToggle = 'hidden';
+		}, 3000);
 	}
 }

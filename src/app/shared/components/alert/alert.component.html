@@ -1,0 +1,9 @@
+<div 
+    class="alert alert-success" 
+    [ngClass]="{'start-progress-bar': toggle == 'show'}"
+    id="alert-box" 
+    [attr.data-bs-theme]="darkMode ? 'dark' : 'light'" 
+    [@alertDisplay]="toggle"
+    >
+    <div class="mx-3" id="alert-text">{{ message }}</div>
+</div>

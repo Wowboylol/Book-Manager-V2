@@ -9,8 +9,7 @@ import { Subscription } from 'rxjs';
 	standalone: true,
 	imports: [CommonModule],
 	templateUrl: './sidebar.component.html',
-	styleUrls: ['./sidebar.component.css'],
-	providers: [ThemeService]
+	styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit, OnDestroy 
 {
