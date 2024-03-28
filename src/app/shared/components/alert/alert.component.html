@@ -1,6 +1,6 @@
 <div 
-    class="alert alert-success" 
-    [ngClass]="{'start-progress-bar': toggle == 'show'}"
+    [class]="'alert-' + type" 
+    [ngClass]="{'alert': true, 'start-progress-bar': toggle == 'show'}"
     id="alert-box" 
     [attr.data-bs-theme]="darkMode ? 'dark' : 'light'" 
     [@alertDisplay]="toggle"

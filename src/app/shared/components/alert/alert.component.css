@@ -29,3 +29,36 @@
 #alert-text {
     font-weight: 500;
 }
+
+/* ===== Progress bar dynamic background color classes ===== */
+#alert-box.alert-primary::before {
+    background-color: var(--bs-primary-border-subtle);
+}
+
+#alert-box.alert-secondary::before {
+    background-color: var(--bs-secondary-border-subtle);
+}
+
+#alert-box.alert-success::before {
+    background-color: var(--bs-success-border-subtle);
+}
+
+#alert-box.alert-danger::before {
+    background-color: var(--bs-danger-border-subtle);
+}
+
+#alert-box.alert-warning::before {
+    background-color: var(--bs-warning-border-subtle);
+}
+
+#alert-box.alert-info::before {
+    background-color: var(--bs-info-border-subtle);
+}
+
+#alert-box.alert-light::before {
+    background-color: var(--bs-light-border-subtle);
+}
+
+#alert-box.alert-dark::before {
+    background-color: var(--bs-dark-border-subtle);
+}

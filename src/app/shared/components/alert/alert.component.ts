@@ -28,6 +28,7 @@ export class AlertComponent implements OnInit, OnDestroy
 {
 	@Input() message: string;
 	@Input() toggle: string = 'hidden';
+	@Input() type: string = 'warning';
 	private themeChangedSubscription: Subscription;
 	darkMode: boolean;
 
