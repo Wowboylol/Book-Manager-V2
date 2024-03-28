@@ -17,7 +17,7 @@ describe('AlertComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should create alert component', () => {
 		expect(component).toBeTruthy();
 	});
 });
