@@ -62,4 +62,8 @@ describe('SidebarComponent', () => {
 		component.changeActiveTab('Collections');
 		expect(component.currentActiveTab).toBe('Collections');
 	});
+
+	afterEach(() => {
+		fixture.destroy();
+	});
 });

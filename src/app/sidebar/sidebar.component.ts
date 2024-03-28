@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ThemeService } from '../shared/services/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-sidebar',
@@ -11,8 +12,9 @@ import { ThemeService } from '../shared/services/theme.service';
 	styleUrls: ['./sidebar.component.css'],
 	providers: [ThemeService]
 })
-export class SidebarComponent implements OnInit 
+export class SidebarComponent implements OnInit, OnDestroy 
 {
+	private themeChangedSubscription: Subscription;
 	close: boolean = true;
 	darkMode: boolean;
 	modeText: string;
@@ -25,10 +27,16 @@ export class SidebarComponent implements OnInit
 
 	ngOnInit(): void 
 	{ 
-		this.themeService.themeChanged.subscribe((darkMode: boolean) => {
-			this.darkMode = darkMode;
-			this.modeText = this.darkMode ? 'Light Mode' : 'Dark Mode';
-		});
+		this.themeChangedSubscription = this.themeService.themeChanged
+			.subscribe((darkMode: boolean) => {
+				this.darkMode = darkMode;
+				this.modeText = this.darkMode ? 'Light Mode' : 'Dark Mode';
+			}
+		);
+	}
+
+	ngOnDestroy(): void { 
+		this.themeChangedSubscription.unsubscribe(); 
 	}
 
 	toggleSidebar() { 
