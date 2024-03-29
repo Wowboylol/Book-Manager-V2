@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { SidebarComponent } from './sidebar.component';
+import { routes } from '../app-routing';
 
 describe('SidebarComponent', () => {
 	let component: SidebarComponent;
@@ -8,7 +10,7 @@ describe('SidebarComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [SidebarComponent],
+			imports: [SidebarComponent, RouterTestingModule.withRoutes(routes)],
 		})
 		.compileComponents();
 
@@ -23,10 +25,6 @@ describe('SidebarComponent', () => {
 
 	it('should be closed by default', () => {
 		expect(component.close).toBeTrue();
-	});
-
-	it('should have current active tab set to "Books" by default', () => {
-		expect(component.currentActiveTab).toBe('Books');
 	});
 
 	it('should open sidebar when hamburger menu is clicked', () => {
@@ -56,11 +54,6 @@ describe('SidebarComponent', () => {
 		component.darkMode = true;
 		component.toggleMode();
 		expect(component.modeText).toBe('Dark Mode');
-	});
-
-	it('should change active tab when a tab is clicked', () => {
-		component.changeActiveTab('Collections');
-		expect(component.currentActiveTab).toBe('Collections');
 	});
 
 	afterEach(() => {
