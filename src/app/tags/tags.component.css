@@ -1,0 +1,5 @@
+header {
+    width: 100%;
+    background: var(--primary-color);
+    transition: var(--tran-05);
+}
