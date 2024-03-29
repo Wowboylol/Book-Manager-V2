@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Book } from 'src/app/shared/models/book.model';
-import { BookService } from 'src/app/shared/services/book.service';
+import { BookService } from '../../shared/services/book.service';
 
 @Component({
 	selector: 'app-book-detail',
