@@ -10,8 +10,28 @@
 
 <section class="container mt-4">
     <article class="row">
-        <div class="col-md-12">
-            <p>tags works!</p>
+        <div class="col-md-6">
+            <div class="edit-box rounded px-3">
+                <label class="pt-2">Name</label>
+                <input class="pb-2" placeholder="Select a tag...">
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="button-box">
+                <button class="btn btn-warning">Update</button>
+                <button class="btn btn-danger">Delete</button>
+                <button class="btn" id="clear-button">Clear</button>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="tag-box rounded mt-3 pt-2 pe-2">
+                <button type="button" class="btn btn-secondary ms-2 mb-2">
+                    Tag1
+                    <span class="badge bg-light text-muted">12</span>
+                </button>
+            </div>
         </div>
     </article>
 </section>

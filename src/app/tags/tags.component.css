@@ -3,3 +3,69 @@ header {
     background: var(--primary-color);
     transition: var(--tran-05);
 }
+
+/* ===== Tag edit section ===== */
+section .edit-box {
+    background-color: var(--primary-color);
+    transition: var(--tran-05);
+}
+
+section .edit-box label {
+    color: var(--text-color);
+    opacity: 0.5;
+    font-size: 0.875rem;
+    user-select: none;
+    transition: var(--tran-02);
+}
+
+section .edit-box input {
+    width: 100%;
+    outline: none;
+    border: none;
+    padding-left: 0;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    transition: var(--tran-05);
+}
+
+/* ===== Tag button section ===== */
+section .button-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+section .button-box button {
+    font-weight: 500;
+    border-style: none;
+    height: 2.5rem;
+    width: 31%;
+    margin-top: 0.70rem;
+}
+
+section .button-box #clear-button {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+section .button-box #clear-button:hover {
+    background-color: var(--primary-color-light);
+}
+
+@media (max-width: 767px) {
+    section .button-box button {
+        margin-top: 1rem;
+    }
+}
+
+/* ===== Tag display ===== */
+section .tag-box {
+    background-color: var(--primary-color);
+    transition: var(--tran-05);
+    height: 79vh;
+}
+
+@media (max-width: 767px) {
+    section .tag-box {
+        height: 59.5vh;
+    }
+}
