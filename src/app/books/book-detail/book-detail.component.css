@@ -21,6 +21,7 @@
 
 .button-container #edit-button {
     background-color: var(--primary-color);
+    color: var(--text-color);
 }
 
 .button-container #edit-button:hover {
@@ -40,7 +41,7 @@
 }
 
 .detail-container .data-box p {
-    color: var(--text-color);
+    color: var(--text-color-muted);
     margin-bottom: 0;
 }
 
