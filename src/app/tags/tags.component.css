@@ -39,7 +39,7 @@ section .button-box button {
     border-style: none;
     height: 2.5rem;
     width: 31%;
-    margin-top: 0.70rem;
+    margin-top: 1rem;
 }
 
 section .button-box #clear-button {
@@ -51,17 +51,11 @@ section .button-box #clear-button:hover {
     background-color: var(--primary-color-light);
 }
 
-@media (max-width: 767px) {
-    section .button-box button {
-        margin-top: 1rem;
-    }
-}
-
 /* ===== Tag display ===== */
 section .tag-box {
     background-color: var(--primary-color);
     transition: var(--tran-05);
-    min-height: 79vh;
+    min-height: 73vh;
 }
 
 @media (max-width: 767px) {
