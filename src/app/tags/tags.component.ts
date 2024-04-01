@@ -53,4 +53,9 @@ export class TagsComponent implements OnInit, OnDestroy
 		this.tagForm.reset();
 		this.selectedTagName = null;
 	}
+
+	isValidTagName(): boolean {
+		if(!this.tagForm?.value?.name) return false;
+		return !this.tagService.tagExists(this.tagForm.value.name);
+	}
 }

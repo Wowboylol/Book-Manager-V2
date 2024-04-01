@@ -41,6 +41,7 @@ export class TagService
 
 	// Increments amount of tag if it exists, otherwise adds a new tag
 	// Updates the lastUsed date of the tag
+	// Precondition: tag name must be unique
 	addTag(name: string): void {
 		let tag = this.tags.find(tag => tag.name.toLowerCase() === name.toLowerCase());
 		if(tag) {
