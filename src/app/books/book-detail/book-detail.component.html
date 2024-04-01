@@ -57,7 +57,7 @@
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Tags</label>
                     <div class="pb-2 mt-1" id="tags">
-                        <button type="button" class="btn btn-secondary ms-2 mb-2" *ngFor="let tag of book.tags">
+                        <button type="button" class="btn btn-secondary ms-2 mb-2 book-tag" *ngFor="let tag of book.tags">
                             {{ tag }} <span class="badge bg-light text-muted">{{ getTagAmount(tag) }}</span>
                         </button>
                     </div>

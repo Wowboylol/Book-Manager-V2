@@ -3,12 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 
 import { BookDetailComponent } from './book-detail.component';
 import { BookService } from 'src/app/shared/services/book.service';
+import { TagService } from 'src/app/shared/services/tag.service';
 import { Book } from 'src/app/shared/models/book.model';
 
 describe('BookDetailComponent', () => {
 	let fixture: ComponentFixture<BookDetailComponent>;
 	let component: BookDetailComponent;
 	let mockBookService: jasmine.SpyObj<BookService>;
+	let mockTagService: jasmine.SpyObj<TagService>;
 	let testBook: Book = {
 		id: 0,
 		name: "Test Book",
@@ -31,12 +33,18 @@ describe('BookDetailComponent', () => {
 			}
 		}
 		mockBookService = jasmine.createSpyObj('BookService', ['getBookById']);
+		mockTagService = jasmine.createSpyObj(
+			'TagService', { 
+				'getTagByName': { name: "test", amount: 1, lastUsed: new Date() }
+			}
+		);
 		
 		TestBed.configureTestingModule({
 			imports: [ BookDetailComponent ],
 			providers: [
 				{ provide: BookService, useValue: mockBookService },
 				{ provide: ActivatedRoute, useValue: mockActivatedRoute },
+				{ provide: TagService, useValue: mockTagService }
 			]
 		})
 
@@ -104,6 +112,13 @@ describe('BookDetailComponent', () => {
 		fixture.detectChanges();
 		let collectionElement = fixture.nativeElement.querySelector("#collection");
 		expect(collectionElement.textContent).toContain(testBook.collection);
+	});
+
+	it('should display correct amount of tags', () => {
+		mockBookService.getBookById.and.returnValue(testBook);
+		fixture.detectChanges();
+		let tagElements = fixture.nativeElement.querySelectorAll(".book-tag");
+		expect(tagElements.length).toBe(testBook.tags.length);
 	});
 
 	it('should display book creation date with date pipe', () => {
