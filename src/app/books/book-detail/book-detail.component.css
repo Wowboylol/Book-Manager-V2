@@ -48,3 +48,7 @@
 i.checked {
     color: orange;
 }
+
+.detail-container #tags {
+    margin-left: -0.5rem;
+}

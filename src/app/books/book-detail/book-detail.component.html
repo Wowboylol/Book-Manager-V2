@@ -56,7 +56,11 @@
             <div class="col-12">
                 <div class="data-box rounded mt-3 px-3">
                     <label class="pt-2">Tags</label>
-                    <p class="pb-2" id="tags">Placeholder (Format later)</p>
+                    <div class="pb-2 mt-1" id="tags">
+                        <button type="button" class="btn btn-secondary ms-2 mb-2" *ngFor="let tag of book.tags">
+                            {{ tag }} <span class="badge bg-light text-muted">{{ getTagAmount(tag) }}</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

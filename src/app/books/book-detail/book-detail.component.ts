@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { Book } from 'src/app/shared/models/book.model';
 import { BookService } from '../../shared/services/book.service';
+import { TagService } from '../../shared/services/tag.service';
 
 @Component({
 	selector: 'app-book-detail',
@@ -18,7 +19,7 @@ export class BookDetailComponent implements OnInit
 	stars: number[] = [1, 2, 3, 4, 5];
 	book: Book;
 	
-	constructor(private route: ActivatedRoute, private bookService: BookService) { }
+	constructor(private route: ActivatedRoute, private bookService: BookService, private tagService: TagService) { }
 
 	ngOnInit(): void 
 	{ 
@@ -28,5 +29,9 @@ export class BookDetailComponent implements OnInit
 				this.book = this.bookService.getBookById(bookId);
 			}
 		);
+	}
+
+	getTagAmount(name: string): number {
+		return this.tagService.getTagByName(name).amount;
 	}
 }
