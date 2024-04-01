@@ -61,11 +61,11 @@ section .button-box #clear-button:hover {
 section .tag-box {
     background-color: var(--primary-color);
     transition: var(--tran-05);
-    height: 79vh;
+    min-height: 79vh;
 }
 
 @media (max-width: 767px) {
     section .tag-box {
-        height: 59.5vh;
+        min-height: 59.5vh;
     }
 }

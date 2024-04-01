@@ -10,26 +10,33 @@
 
 <section class="container mt-4">
     <article class="row">
-        <div class="col-md-6">
-            <div class="edit-box rounded px-3">
-                <label class="pt-2">Name</label>
-                <input class="pb-2" placeholder="Select a tag...">
+        <form autocomplete="off" (ngSubmit)="onUpdate()" #tagForm="ngForm">
+            <div class="col-md-6">
+                <div class="edit-box rounded px-3">
+                    <label class="pt-2">Name</label>
+                    <input 
+                        class="pb-2" 
+                        placeholder="Select a tag below" 
+                        name="name" 
+                        [disabled]="!selectedTagName"
+                        ngModel required>
+                </div>
             </div>
-        </div>
 
-        <div class="col-lg-4 col-md-6">
-            <div class="button-box">
-                <button class="btn btn-warning">Update</button>
-                <button class="btn btn-danger">Delete</button>
-                <button class="btn" id="clear-button">Clear</button>
+            <div class="col-lg-4 col-md-6">
+                <div class="button-box">
+                    <button class="btn btn-warning" type="submit" [disabled]="!tagForm.valid">Update</button>
+                    <button class="btn btn-danger" type="button" [disabled]="!tagForm.valid">Delete</button>
+                    <button class="btn" id="clear-button" type="button" (click)="onClear()">Clear</button>
+                </div>
             </div>
-        </div>
+        </form>
 
         <div class="col-12 mb-1">
             <div class="tag-box rounded mt-3 pt-2 pe-2">
-                <button type="button" class="btn btn-secondary ms-2 mb-2">
-                    Tag1
-                    <span class="badge bg-light text-muted">12</span>
+                <button type="button" class="btn btn-secondary ms-2 mb-2" *ngFor="let tag of tags" (click)="onSelectTag(tag)">
+                    {{ tag.name }}
+                    <span class="badge bg-light text-muted">{{ tag.amount }}</span>
                 </button>
             </div>
         </div>

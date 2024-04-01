@@ -1,17 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 
+import { Subscription } from 'rxjs';
 import { TagSearchComponent } from './tag-search/tag-search.component';
+import { Tag } from '../shared/models/tag.model';
+import { TagService } from '../shared/services/tag.service';
+import { BookService } from '../shared/services/book.service';
 
 @Component({
 	selector: 'app-tags',
 	standalone: true,
-	imports: [CommonModule, TagSearchComponent],
+	imports: [CommonModule, FormsModule, TagSearchComponent],
 	templateUrl: './tags.component.html',
 	styleUrls: ['./tags.component.css']
 })
-export class TagsComponent implements OnInit 
+export class TagsComponent implements OnInit, OnDestroy 
 {
-	constructor() { }
-	ngOnInit(): void { }
+	@ViewChild('tagForm') tagForm: NgForm;
+	private tagsChangedSubscription: Subscription;
+	tags: Tag[] = [];
+	selectedTagName: string;
+
+	constructor(private tagService: TagService, private bookService: BookService) { }
+
+	ngOnInit(): void { 
+		this.tags = this.tagService.getAllTags();
+		this.tagsChangedSubscription = this.tagService.tagsChanged
+			.subscribe((tags: Tag[]) => {
+				this.tags = tags;
+			}
+		);
+	}
+
+	ngOnDestroy(): void {
+		this.tagsChangedSubscription.unsubscribe();
+	}
+
+	onSelectTag(tag: Tag): void {
+		this.selectedTagName = tag.name;
+		this.tagForm.setValue({ name: tag.name });
+	}
+
+	onUpdate(): void {
+		const newTagName = this.tagForm.value.name;
+		this.tagService.updateTagName(this.selectedTagName, newTagName);
+		this.bookService.updateTagInBooks(this.selectedTagName, newTagName);
+		this.onClear();
+	}
+
+	onClear(): void {
+		this.tagForm.reset();
+		this.selectedTagName = null;
+	}
 }

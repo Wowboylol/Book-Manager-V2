@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 
 import { Tag } from '../models/tag.model';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TagService 
 {
 	private tags: Tag[] = [];
+	tagsChanged = new Subject<Tag[]>();
 
 	constructor() { 
 		let json = require('../../../test-data/book-snippet.json');
@@ -48,11 +50,14 @@ export class TagService
 		else {
 			this.tags.push(new Tag(name, 1, new Date()));
 		}
+		this.tagsChanged.next(this.tags.slice());
 	}
 
 	// Deletes the tag with the given name regardless of its amount (case-insensitive)
+	// Postcondition: The deleted tag should also be removed from all books
 	deleteTag(name: string): void {
 		this.tags = this.tags.filter(tag => tag.name.toLowerCase() !== name.toLowerCase());
+		this.tagsChanged.next(this.tags.slice());
 	}
 
 	// Decrements amount of tag if it exists and has an amount greater than 1
@@ -62,10 +67,25 @@ export class TagService
 		if(tag) {
 			if(tag.amount > 1) {
 				tag.amount--;
+				this.tagsChanged.next(this.tags.slice());
 			} 
 			else {
 				this.deleteTag(name);
 			}
 		}
+	}
+
+	// Updates the name of the tag with the given name (case-insensitive)
+	// Postcondition: The updated tag should be updated in all books
+	updateTagName(oldName: string, newName: string): void {
+		let tag = this.tags.find(tag => tag.name.toLowerCase() === oldName.toLowerCase());
+		try {
+			if(tag) { tag.name = newName; }
+			else { throw new Error('Tag not found'); }
+		}
+		catch(e) {
+			console.error(e);
+		}
+		this.tagsChanged.next(this.tags.slice());
 	}
 }

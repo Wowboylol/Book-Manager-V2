@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { Subscription } from 'rxjs';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { BookItemComponent } from './book-item/book-item.component';
 import { Book } from '../shared/models/book.model';
@@ -19,6 +20,7 @@ import { AlertComponent } from '../shared/components/alert/alert.component';
 })
 export class BooksComponent implements OnInit 
 {
+	private booksChangedSubscription: Subscription;
 	books:Book[] = [];
 	bookDisplayLimit:number;
 	searchQuery:BookSearchQuery;
@@ -27,10 +29,20 @@ export class BooksComponent implements OnInit
 
 	constructor(private bookService: BookService) { }
 
-	ngOnInit(): void { 
+	ngOnInit(): void 
+	{ 
+		// Set default data
 		this.resetBookDisplayLimit();
 		this.books = this.bookService.getAllBooks();
 		this.searchCount.value = this.books.length;
+
+		// Subscribe to book changes
+		this.booksChangedSubscription = this.bookService.booksChanged
+			.subscribe((books: Book[]) => {
+				this.books = books;
+				this.searchCount.value = this.books.length;
+			}
+		);
 	}
 
 	// Resets book display limit to default
