@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { BookItemComponent } from './book-item.component';
 import { routes } from 'src/app/app-routing';
+import { TagService } from 'src/app/shared/services/tag.service';
 
 describe('BookItemComponent', () => {
 	let component: BookItemComponent;
@@ -10,10 +11,20 @@ describe('BookItemComponent', () => {
 	let titleElement: HTMLElement;
 	let imageElement: HTMLMediaElement;
 	let ratingElements: NodeListOf<Element>;
+	let mockTagService: jasmine.SpyObj<TagService>;
 
   	beforeEach(async () => {
+		mockTagService = jasmine.createSpyObj(
+			'TagService', { 
+				'getTagByName': { name: "test", amount: 1, lastUsed: new Date() }
+			}
+		);
+
 		await TestBed.configureTestingModule({
-			imports: [ BookItemComponent, RouterTestingModule.withRoutes(routes) ]
+			imports: [ BookItemComponent, RouterTestingModule.withRoutes(routes) ],
+			providers: [
+				{ provide: TagService, useValue: mockTagService }
+			]
 		})
     	.compileComponents();
 
@@ -62,5 +73,12 @@ describe('BookItemComponent', () => {
 			}
 		}
 		expect(rating).toBe(component.book.rating);
+	});
+
+	it('should display correct amount of tags when displayStyle is list', () => {
+		component.displayStyle = 1;
+		fixture.detectChanges();
+		let tags = fixture.nativeElement.querySelectorAll(".book-tag");
+		expect(tags.length).toBe(component.book.tags.length);
 	});
 });

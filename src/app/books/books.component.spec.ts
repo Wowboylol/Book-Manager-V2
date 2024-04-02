@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { BooksComponent } from './books.component';
@@ -62,4 +62,14 @@ describe('BooksComponent', () => {
 		component.onSearchQuery({ searchString: "test", searchType: 0, searchSort: 0, searchOrder: 0 });
 		expect(component.alertToggle).toBe('show');
 	});
+
+	it('should change display type when style button is clicked', 
+		fakeAsync(() => {
+			spyOn<BooksComponent, any>(component, 'changeDisplayType');
+			let styleButton = fixture.nativeElement.querySelector(".change-type-button");
+			styleButton.click();
+			tick();
+			expect(component.changeDisplayType).toHaveBeenCalled();
+		}
+	));
 });
