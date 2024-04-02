@@ -18,6 +18,13 @@
             'grid-style': displayStyle === displayEnum.Grid,
             'list-style': displayStyle === displayEnum.List }">
         <p>{{book.name}}</p>
+
         <i class='bx bxs-star' *ngFor="let star of stars" [ngClass]="{'checked':book.rating >= star}"></i>
+
+        <div class="mt-3" *ngIf="displayStyle === displayEnum.List">
+            <button type="button" class="btn btn-secondary me-2 mb-2 book-tag" *ngFor="let tag of book.tags">
+                {{ tag }} <span class="badge bg-light text-muted">{{ getTagAmount(tag) }}</span>
+            </button>
+        </div>
     </section>
 </div>

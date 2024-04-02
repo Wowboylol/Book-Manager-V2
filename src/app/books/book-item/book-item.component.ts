@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { Book } from '../../shared/models/book.model';
 import { BookDisplayType } from '../bookDisplayType.model';
+import { TagService } from 'src/app/shared/services/tag.service';
 
 @Component({
 	selector: 'app-book-item',
@@ -20,6 +21,11 @@ export class BookItemComponent implements OnInit
 	readonly displayEnum = BookDisplayType;
 	stars: number[] = [1, 2, 3, 4, 5];
 
-	constructor() { }
+	constructor(private tagService: TagService) { }
+
 	ngOnInit(): void { }
+
+	getTagAmount(name: string): number {
+		return this.tagService.getTagByName(name).amount;
+	}
 }
