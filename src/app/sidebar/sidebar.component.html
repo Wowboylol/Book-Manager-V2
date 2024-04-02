@@ -118,12 +118,16 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle">
+                    <a class="nav-link dropdown-toggle" appDropdown>
                         <i class='bx bxs-data me-1'></i> Data
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item">Save Data</a></li>
-                        <li><a class="dropdown-item">Fetch Data</a></li>
+                        <li><a class="dropdown-item bg-transparent">
+                            <i class='bx bxs-save me-1'></i> Save Data
+                        </a></li>
+                        <li><a class="dropdown-item bg-transparent">
+                            <i class='bx bxs-download me-1'></i> Fetch Data
+                        </a></li>
                     </ul>
                 </li>
                 <li class="nav-item mb-1">
@@ -133,8 +137,8 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link rounded mobile-mode" (click)="toggleMode()">
-                        <i *ngIf="!darkMode" class='bx bx-moon ms-2 me-1'></i>
-                        <i *ngIf="darkMode" class='bx bx-sun ms-2 me-1'></i> 
+                        <i *ngIf="!darkMode" class='bx bx-moon me-1'></i>
+                        <i *ngIf="darkMode" class='bx bx-sun me-1'></i> 
                         {{modeText}}
                     </a>
                 </li>

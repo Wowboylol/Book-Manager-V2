@@ -250,7 +250,29 @@ nav.dark-mode .switch::before {
     color: var(--secondary-color);
 }
 
+.navbar-nav .dropdown-toggle.show + .dropdown-menu {
+    display: block;
+}
+
+.navbar-nav .dropdown-menu {
+    background: var(--primary-color-light);
+    border: none;
+    transition: var(--tran-05);
+}
+
+.navbar-nav .dropdown-menu .dropdown-item {
+    color: var(--text-color);
+    font-weight: 500;
+    transition: var(--tran-02);
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+    color: var(--secondary-color);
+}
+
 .navbar-nav .mobile-mode {
+    padding-left: 1rem;
+    padding-right: 1rem;
     background-color: var(--primary-color-light);
     transition: var(--tran-05);
 }

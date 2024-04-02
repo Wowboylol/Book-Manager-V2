@@ -2,13 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { ThemeService } from '../shared/services/theme.service';
 import { Subscription } from 'rxjs';
+import { ThemeService } from '../shared/services/theme.service';
+import { DropdownDirective } from '../shared/directives/dropdown.directive';
 
 @Component({
 	selector: 'app-sidebar',
 	standalone: true,
-	imports: [CommonModule, RouterModule],
+	imports: [CommonModule, RouterModule, DropdownDirective],
 	templateUrl: './sidebar.component.html',
 	styleUrls: ['./sidebar.component.css']
 })
