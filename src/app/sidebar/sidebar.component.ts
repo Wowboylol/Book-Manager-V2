@@ -16,12 +16,14 @@ export class SidebarComponent implements OnInit, OnDestroy
 {
 	private themeChangedSubscription: Subscription;
 	close: boolean = true;
+	isMobile: boolean;
 	darkMode: boolean;
 	modeText: string;
 
 	constructor(private themeService: ThemeService) { 
 		this.darkMode = themeService.isDarkMode();
 		this.modeText = this.darkMode ? 'Light Mode' : 'Dark Mode';
+		this.isMobile = window.innerWidth < 768 ? true : false;
 	}
 
 	ngOnInit(): void 
@@ -38,13 +40,13 @@ export class SidebarComponent implements OnInit, OnDestroy
 		this.themeChangedSubscription.unsubscribe(); 
 	}
 
-	toggleSidebar() { 
-		this.close = !this.close; 
-	}
-
 	toggleMode() { 
 		this.darkMode = !this.darkMode;
 		this.modeText = this.darkMode ? 'Light Mode' : 'Dark Mode';
 		this.themeService.setDarkMode(this.darkMode); 
+	}
+
+	onScreenResize(event) {
+		event.target.innerWidth < 768 ? this.isMobile = true : this.isMobile = false;
 	}
 }

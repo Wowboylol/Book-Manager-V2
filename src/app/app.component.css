@@ -1,3 +1,9 @@
 main {
     padding-left: 88px;
 }
+
+@media (max-width: 767px) {
+    main {
+        padding-left: 0;
+    }
+}
