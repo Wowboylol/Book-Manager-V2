@@ -66,6 +66,13 @@ section .book-grid {
     }
 }
 
+/* ===== Book list ===== */
+section .book-list {
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: 1fr;
+}
+
 /* ===== Load more button ===== */
 section .load-button {
     width: 100%;

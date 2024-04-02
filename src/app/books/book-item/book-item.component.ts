@@ -4,6 +4,7 @@ import { Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { Book } from '../../shared/models/book.model';
+import { BookDisplayType } from '../bookDisplayType.model';
 
 @Component({
 	selector: 'app-book-item',
@@ -14,8 +15,10 @@ import { Book } from '../../shared/models/book.model';
 })
 export class BookItemComponent implements OnInit 
 {
-	@Input() book:Book;
-	stars:number[] = [1, 2, 3, 4, 5];
+	@Input() book: Book;
+	@Input() displayStyle: BookDisplayType
+	readonly displayEnum = BookDisplayType;
+	stars: number[] = [1, 2, 3, 4, 5];
 
 	constructor() { }
 	ngOnInit(): void { }

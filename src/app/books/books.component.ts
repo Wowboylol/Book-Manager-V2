@@ -31,7 +31,7 @@ export class BooksComponent implements OnInit
 
 	// Others
 	alertToggle: string = 'hidden';
-	displayEnum = BookDisplayType;
+	readonly displayEnum = BookDisplayType;
 	displayType: BookDisplayType = BookDisplayType.Grid;
 
 	constructor(private bookService: BookService) { }
