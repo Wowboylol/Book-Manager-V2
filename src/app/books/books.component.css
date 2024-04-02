@@ -30,14 +30,43 @@ header {
     display: none;
 }
 
-/* ===== Book list ===== */
-section .book-list {
+/* ===== Book grid ===== */
+section .book-grid {
     display: grid;
     grid-gap: 0.5rem;
     grid-template-columns: repeat(5, 1fr);
     justify-content: space-between;
 }
 
+@media (max-width: 1199px) {
+    section .book-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 991px) {
+    section .book-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    section .book-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #button-section #scroll-button {
+        display: block;
+    }
+}
+
+@media (max-width: 575px) {
+    section .book-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Load more button ===== */
 section .load-button {
     width: 100%;
     margin: 1rem auto;
@@ -51,32 +80,4 @@ section .load-button {
 
 section .load-button:hover {
     background: var(--primary-color-light);
-}
-
-@media (max-width: 1199px) {
-    section .book-list {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-@media (max-width: 991px) {
-    section .book-list {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 767px) {
-    section .book-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    #button-section #scroll-button {
-        display: block;
-    }
-}
-
-@media (max-width: 575px) {
-    section .book-list {
-        grid-template-columns: 1fr;
-    }
 }

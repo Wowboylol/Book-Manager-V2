@@ -10,7 +10,9 @@
 
 <section class="container mt-4">
     <article class="row">
-        <div class="col-md-12 book-list">
+        <div class="col-md-12" [ngClass]="{ 
+            'book-grid': displayType === displayEnum.Grid,
+            'book-list': displayType === displayEnum.List }">
             <app-book-item
                 *ngFor="let book of books | bookSearch:searchQuery:searchCount | slice:0:bookDisplayLimit;"
                 [book]="book"
@@ -37,9 +39,9 @@
         <i class='bx bx-down-arrow-alt fs-3'></i>
         <!-- <i class='bx bx-up-arrow-alt fs-3'></i> -->
     </button>
-    <button class="overlay-button rounded mb-2">
-        <i class='bx bx-list-ul fs-3'></i>
-        <!-- <i class='bx bxs-grid fs-3 pt-1'></i> -->
+    <button class="overlay-button rounded mb-2" (click)="changeDisplayType()">
+        <i class='bx bx-list-ul fs-3' *ngIf="displayType === displayEnum.Grid"></i>
+        <i class='bx bxs-grid fs-3 pt-1' *ngIf="displayType === displayEnum.List"></i>
     </button>
     <button class="overlay-button rounded">
         <i class='bx bx-plus fs-3'></i>

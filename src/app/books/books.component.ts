@@ -10,6 +10,7 @@ import { BookService } from '../shared/services/book.service';
 import { BookSearchQuery } from '../shared/models/book-search-query.model';
 import { BookSearchPipe } from '../shared/pipes/book-search.pipe';
 import { AlertComponent } from '../shared/components/alert/alert.component';
+import { BookDisplayType } from './bookDisplayType.model';
 
 @Component({
 	selector: 'app-books',
@@ -21,11 +22,17 @@ import { AlertComponent } from '../shared/components/alert/alert.component';
 export class BooksComponent implements OnInit 
 {
 	private booksChangedSubscription: Subscription;
-	books:Book[] = [];
-	bookDisplayLimit:number;
-	searchQuery:BookSearchQuery;
+
+	// Book display & search properties
+	books: Book[] = [];
+	bookDisplayLimit: number;
+	searchQuery: BookSearchQuery;
 	searchCount = { value: 0 };
-	alertToggle:string = 'hidden';
+
+	// Others
+	alertToggle: string = 'hidden';
+	displayEnum = BookDisplayType;
+	displayType: BookDisplayType = BookDisplayType.Grid;
 
 	constructor(private bookService: BookService) { }
 
@@ -68,5 +75,10 @@ export class BooksComponent implements OnInit
 		setTimeout(() => {
 			this.alertToggle = 'hidden';
 		}, 3000);
+	}
+
+	// Changes the display type
+	changeDisplayType(): void {
+		this.displayType = this.displayType === BookDisplayType.Grid ? BookDisplayType.List : BookDisplayType.Grid;
 	}
 }
