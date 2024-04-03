@@ -6,9 +6,9 @@ import { Directive, HostListener, Input } from '@angular/core';
 })
 export class DropdownDirective 
 {
-	@Input() dropdownMenu: HTMLElement;
+	@Input() appDropdown: HTMLElement;
 
 	@HostListener('click') toggleOpen() {
-		this.dropdownMenu.classList.toggle('show');
+		this.appDropdown.classList.toggle('show');
 	}
 }
