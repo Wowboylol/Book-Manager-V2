@@ -250,10 +250,6 @@ nav.dark-mode .switch::before {
     color: var(--secondary-color);
 }
 
-.navbar-nav .dropdown-toggle.show + .dropdown-menu {
-    display: block;
-}
-
 .navbar-nav .dropdown-menu {
     background: var(--primary-color-light);
     border: none;
