@@ -17,7 +17,7 @@ describe('TagsComponent', () => {
 		fixture.detectChanges();
   	});
 
-	it('should create', () => {
+	it('should create the tags component', () => {
 		expect(component).toBeTruthy();
 	});
 });
