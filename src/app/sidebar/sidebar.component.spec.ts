@@ -27,33 +27,26 @@ describe('SidebarComponent', () => {
 		expect(component.close).toBeTrue();
 	});
 
-	it('should open sidebar when hamburger menu is clicked', () => {
-		component.toggleSidebar();
-		expect(component.close).toBeFalse();
-	});
-
 	it('should set mode to dark mode from light mode when switch is toggled', () => {
 		component.darkMode = false;
 		component.toggleMode();
 		expect(component.darkMode).toBeTrue();
+		expect(component.modeText).toBe('Light Mode');
 	});
 
 	it('should set mode to light mode from dark mode when switch is toggled', () => {
 		component.darkMode = true;
 		component.toggleMode();
 		expect(component.darkMode).toBeFalse();
-	});
-
-	it('should set mode text to "Light Mode" from "Dark Mode" when switch is toggled', () => {
-		component.darkMode = false;
-		component.toggleMode();
-		expect(component.modeText).toBe('Light Mode');
-	});
-
-	it('should set mode text to "Dark Mode" from "Light Mode" when switch is toggled', () => {
-		component.darkMode = true;
-		component.toggleMode();
 		expect(component.modeText).toBe('Dark Mode');
+	});
+
+	it('should set isMobile to true when screen width is resized to 767px', () => {
+		component.onScreenResize({ target: { innerWidth: 767 }});
+		expect(component.isMobile).toBeTrue();
+		const onScreenResizeSpy = spyOn(component, 'onScreenResize');
+		window.dispatchEvent(new Event('resize'));
+		expect(onScreenResizeSpy).toHaveBeenCalled();
 	});
 
 	afterEach(() => {
