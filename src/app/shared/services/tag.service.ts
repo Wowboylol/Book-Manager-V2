@@ -49,7 +49,7 @@ export class TagService
 			tag.lastUsed = new Date();
 		} 
 		else {
-			this.tags.push(new Tag(name, 1, new Date()));
+			this.tags.push(new Tag(name, 1, new Date(), null));
 		}
 		this.tagsChanged.next(this.tags.slice());
 	}
@@ -82,6 +82,19 @@ export class TagService
 		let tag = this.tags.find(tag => tag.name.toLowerCase() === oldName.toLowerCase());
 		try {
 			if(tag) { tag.name = newName; }
+			else { throw new Error('Tag not found'); }
+		}
+		catch(e) {
+			console.error(e);
+		}
+		this.tagsChanged.next(this.tags.slice());
+	}
+
+	// Updates the description of the tag with the given name (case-insensitive)
+	updateTagDescription(name: string, description: string): void {
+		let tag = this.tags.find(tag => tag.name.toLowerCase() === name.toLowerCase());
+		try {
+			if(tag) { tag.description = description; }
 			else { throw new Error('Tag not found'); }
 		}
 		catch(e) {

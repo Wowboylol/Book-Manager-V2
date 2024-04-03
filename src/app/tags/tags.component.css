@@ -28,6 +28,17 @@ section .edit-box input {
     transition: var(--tran-05);
 }
 
+section .edit-box textarea {
+    width: 100%;
+    outline: none;
+    border: none;
+    padding-left: 0;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    transition: var(--tran-05);
+    transition-property: background-color, color;
+}
+
 /* ===== Tag button section ===== */
 section .button-box {
     display: flex;
@@ -55,11 +66,12 @@ section .button-box #clear-button:hover {
 section .tag-box {
     background-color: var(--primary-color);
     transition: var(--tran-05);
-    min-height: 73vh;
+    transition-property: background-color;
+    min-height: 59vh;
 }
 
 @media (max-width: 767px) {
     section .tag-box {
-        min-height: 59.5vh;
+        min-height: 39vh;
     }
 }

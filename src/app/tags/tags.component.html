@@ -11,7 +11,7 @@
 <section class="container mt-4">
     <article class="row">
         <form autocomplete="off" (ngSubmit)="onUpdate()" #tagForm="ngForm">
-            <div class="col-md-6">
+            <div class="col-lg-6 col-md-8">
                 <div class="edit-box rounded px-3">
                     <label class="pt-2">Name</label>
                     <input 
@@ -20,6 +20,20 @@
                         name="name" 
                         [disabled]="!selectedTagName"
                         ngModel required>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-8">
+                <div class="edit-box rounded px-3 mt-3">
+                    <label class="pt-2">Description</label>
+                    <textarea 
+                        class="pb-2" 
+                        placeholder="No description available." 
+                        rows="3" 
+                        name="description" 
+                        [disabled]="!selectedTagName"
+                        ngModel>
+                    </textarea>
                 </div>
             </div>
 

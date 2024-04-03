@@ -39,13 +39,18 @@ export class TagsComponent implements OnInit, OnDestroy
 
 	onSelectTag(tag: Tag): void {
 		this.selectedTagName = tag.name;
-		this.tagForm.setValue({ name: tag.name });
+		this.tagForm.setValue({ 
+			name: tag.name,
+			description: tag.description
+		});
 	}
 
 	onUpdate(): void {
 		const newTagName = this.tagForm.value.name;
+		const newTagDescription = this.tagForm.value.description;
 		this.tagService.updateTagName(this.selectedTagName, newTagName);
 		this.bookService.updateTagInBooks(this.selectedTagName, newTagName);
+		this.tagService.updateTagDescription(newTagName, newTagDescription);
 		this.onClear();
 	}
 
@@ -56,6 +61,7 @@ export class TagsComponent implements OnInit, OnDestroy
 
 	isValidTagName(): boolean {
 		if(!this.tagForm?.value?.name) return false;
+		if(this.selectedTagName === this.tagForm.value.name) return true;
 		return !this.tagService.tagExists(this.tagForm.value.name);
 	}
 }
