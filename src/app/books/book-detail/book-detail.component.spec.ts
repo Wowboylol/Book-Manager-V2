@@ -121,6 +121,14 @@ describe('BookDetailComponent', () => {
 		expect(tagElements.length).toBe(testBook.tags.length);
 	});
 
+	it('tag display should display None when book has no tags', () => {
+		testBook.tags = [];
+		mockBookService.getBookById.and.returnValue(testBook);
+		fixture.detectChanges();
+		let noTagMessageElement = fixture.nativeElement.querySelectorAll("#no-tags");
+		expect(noTagMessageElement.length).toBe(1);
+	});
+
 	it('should display book creation date with date pipe', () => {
 		mockBookService.getBookById.and.returnValue(testBook);
 		fixture.detectChanges();
