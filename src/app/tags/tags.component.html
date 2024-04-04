@@ -8,6 +8,13 @@
     </section>
 </header>
 
+<app-confirm 
+    title="Delete Tag" 
+    [message]="confirmDeleteMessage" 
+    confirmText="Delete"
+    *ngIf="showConfirmDelete">
+</app-confirm>
+
 <section class="container mt-4">
     <article class="row">
         <form autocomplete="off" (ngSubmit)="onUpdate()" #tagForm="ngForm">

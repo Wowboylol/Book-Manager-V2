@@ -7,20 +7,26 @@ import { TagSearchComponent } from './tag-search/tag-search.component';
 import { Tag } from '../shared/models/tag.model';
 import { TagService } from '../shared/services/tag.service';
 import { BookService } from '../shared/services/book.service';
+import { ConfirmComponent } from '../shared/components/confirm/confirm.component';
 
 @Component({
 	selector: 'app-tags',
 	standalone: true,
-	imports: [CommonModule, FormsModule, TagSearchComponent],
+	imports: [CommonModule, FormsModule, TagSearchComponent, ConfirmComponent],
 	templateUrl: './tags.component.html',
 	styleUrls: ['./tags.component.css']
 })
 export class TagsComponent implements OnInit, OnDestroy 
 {
+	// Tag component data
 	@ViewChild('tagForm') tagForm: NgForm;
 	private tagsChangedSubscription: Subscription;
 	tags: Tag[] = [];
-	selectedTagName: string;
+	selectedTagName: string = null;
+
+	// Confirm delete component data
+	showConfirmDelete: boolean = false;
+	confirmDeleteMessage: string = `Are you sure you want to delete the tag "${this.selectedTagName}"? This action is irreversible, and will remove the tag from all books.`;
 
 	constructor(private tagService: TagService, private bookService: BookService) { }
 

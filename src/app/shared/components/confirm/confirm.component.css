@@ -1,0 +1,72 @@
+/* ===== Backdrop ===== */
+.confirm-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+}
+
+/* ===== Confirmation modal ===== */
+.confirm-container {
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    width: 30rem;
+    padding: 1rem;
+    transform: translate(-50%, -50%);
+    background-color: var(--primary-color);
+    z-index: 45;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 767px) {
+    .confirm-container {
+        width: 70%;
+    }
+}
+
+@media (max-width: 575px) {
+    .confirm-container {
+        width: 90%;
+    }
+}
+
+/* ===== Confirmation header ===== */
+.confirm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.confirm-header .confirm-title {
+    color: var(--text-color);
+    margin-bottom: 0;
+}
+
+.confirm-header .btn-close {
+    filter: invert(56%) sepia(0%) saturate(1741%) hue-rotate(142deg) brightness(90%) contrast(81%);
+}
+
+.confirm-header .btn-close:focus {
+    box-shadow: none;
+}
+
+/* ===== Confirmation Body ===== */
+.confirm-body {
+    color: var(--text-color);
+}
+
+.confirm-body .confirm-message {
+    color: var(--text-color);
+    margin-bottom: 0rem;
+}
+
+/* ===== Confirmation Footer ===== */
+.confirm-footer {
+    display: flex;
+    justify-content: flex-end;
+}
