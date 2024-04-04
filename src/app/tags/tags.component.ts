@@ -8,11 +8,12 @@ import { Tag } from '../shared/models/tag.model';
 import { TagService } from '../shared/services/tag.service';
 import { BookService } from '../shared/services/book.service';
 import { ConfirmComponent } from '../shared/components/confirm/confirm.component';
+import { TooltipDirective } from '../shared/directives/tooltip.directive';
 
 @Component({
 	selector: 'app-tags',
 	standalone: true,
-	imports: [CommonModule, FormsModule, TagSearchComponent, ConfirmComponent],
+	imports: [CommonModule, FormsModule, TagSearchComponent, ConfirmComponent, TooltipDirective],
 	templateUrl: './tags.component.html',
 	styleUrls: ['./tags.component.css']
 })

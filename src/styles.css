@@ -61,3 +61,33 @@ input[type="search"]::-webkit-search-cancel-button {
     background-size: contain;
     cursor: pointer;
 }
+
+.tooltip-container {
+    position: fixed;
+    z-index: 11;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 400;
+    line-height: initial;
+    text-align: center;
+    color: #cacaca;
+    background-color: #141417;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    max-width: 20rem;
+    pointer-events: none;
+    animation: tooltip-slide 0.18s ease-out 0.5s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+@keyframes tooltip-slide {
+    0% {
+        opacity: 0;
+        transform: translateY(0.5rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
