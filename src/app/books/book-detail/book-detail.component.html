@@ -58,8 +58,13 @@
                     <label class="pt-2">Tags</label>
                     <p *ngIf="book.tags.length === 0" id="no-tags">None</p>
                     <div class="pb-2 mt-1" id="tags">
-                        <button type="button" class="btn btn-secondary ms-2 mb-2 book-tag" *ngFor="let tag of book.tags">
-                            {{ tag }} <span class="badge bg-light text-muted">{{ getTagAmount(tag) }}</span>
+                        <button 
+                            type="button" 
+                            class="btn btn-secondary ms-2 mb-2 book-tag" 
+                            *ngFor="let tag of book.tags"
+                            [appTooltip]="getTagDescription(tag)">
+                            {{ tag }} 
+                            <span class="badge bg-light text-muted">{{ getTagAmount(tag) }}</span>
                         </button>
                     </div>
                 </div>

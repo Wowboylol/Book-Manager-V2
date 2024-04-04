@@ -64,7 +64,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .tooltip-container {
     position: fixed;
-    z-index: 11;
+    z-index: 35;
     padding: 0.3rem 0.5rem;
     font-size: 0.7rem;
     font-weight: 400;

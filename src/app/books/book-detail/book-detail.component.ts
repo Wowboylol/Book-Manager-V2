@@ -5,11 +5,12 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Book } from 'src/app/shared/models/book.model';
 import { BookService } from '../../shared/services/book.service';
 import { TagService } from '../../shared/services/tag.service';
+import { TooltipDirective } from 'src/app/shared/directives/tooltip.directive';
 
 @Component({
 	selector: 'app-book-detail',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, TooltipDirective],
 	templateUrl: './book-detail.component.html',
 	styleUrls: ['./book-detail.component.css']
 })
@@ -33,5 +34,9 @@ export class BookDetailComponent implements OnInit
 
 	getTagAmount(name: string): number {
 		return this.tagService.getTagByName(name).amount;
+	}
+
+	getTagDescription(name: string): string {
+		return this.tagService.getTagByName(name).description;
 	}
 }

@@ -6,11 +6,12 @@ import { RouterModule } from '@angular/router';
 import { Book } from '../../shared/models/book.model';
 import { BookDisplayType } from '../bookDisplayType.model';
 import { TagService } from 'src/app/shared/services/tag.service';
+import { TooltipDirective } from 'src/app/shared/directives/tooltip.directive';
 
 @Component({
 	selector: 'app-book-item',
 	standalone: true,
-	imports: [CommonModule, RouterModule],
+	imports: [CommonModule, RouterModule, TooltipDirective],
 	templateUrl: './book-item.component.html',
 	styleUrls: ['./book-item.component.css']
 })
@@ -27,5 +28,9 @@ export class BookItemComponent implements OnInit
 
 	getTagAmount(name: string): number {
 		return this.tagService.getTagByName(name).amount;
+	}
+
+	getTagDescription(name: string): string {
+		return this.tagService.getTagByName(name).description;
 	}
 }
