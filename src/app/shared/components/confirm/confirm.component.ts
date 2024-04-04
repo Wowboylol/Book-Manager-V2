@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,12 +8,21 @@ import { CommonModule } from '@angular/common';
 	templateUrl: './confirm.component.html',
 	styleUrls: ['./confirm.component.css']
 })
-export class ConfirmComponent implements OnInit 
+export class ConfirmComponent 
 {
 	@Input() title: string;
 	@Input() message: string;
 	@Input() confirmText?: string = 'Confirm';
+	@Output() cancel = new EventEmitter<void>();
+	@Output() confirm = new EventEmitter<void>();
 
 	constructor() { }
-	ngOnInit(): void { }
+
+	onCancel(): void {
+		this.cancel.emit();
+	}
+
+	onConfirm(): void {
+		this.confirm.emit();
+	}
 }

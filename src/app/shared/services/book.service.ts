@@ -42,4 +42,12 @@ export class BookService
 		});
 		this.booksChanged.next(this.books.slice());
 	}
+
+	// Delete the tag with the given name from all books (case-insensitive)
+	deleteTagFromBooks(tagName: string): void {
+		this.books.forEach(book => {
+			book.tags = book.tags.filter(tag => tag.toLowerCase() !== tagName.toLowerCase());
+		});
+		this.booksChanged.next(this.books.slice());
+	}
 }

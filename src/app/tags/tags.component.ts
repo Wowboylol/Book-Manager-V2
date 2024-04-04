@@ -26,7 +26,7 @@ export class TagsComponent implements OnInit, OnDestroy
 
 	// Confirm delete component data
 	showConfirmDelete: boolean = false;
-	confirmDeleteMessage: string = `Are you sure you want to delete the tag "${this.selectedTagName}"? This action is irreversible, and will remove the tag from all books.`;
+	confirmDeleteMessage: string = null;
 
 	constructor(private tagService: TagService, private bookService: BookService) { }
 
@@ -43,14 +43,19 @@ export class TagsComponent implements OnInit, OnDestroy
 		this.tagsChangedSubscription.unsubscribe();
 	}
 
+	// Ran when a tag is selected from the list, populating the form with the tag's data
 	onSelectTag(tag: Tag): void {
 		this.selectedTagName = tag.name;
+		this.confirmDeleteMessage = 
+			`Are you sure you want to delete the tag "${this.selectedTagName}"? 
+			This action is irreversible, and will remove the tag from all books.`;
 		this.tagForm.setValue({ 
 			name: tag.name,
 			description: tag.description
 		});
 	}
 
+	// Ran when the form is submitted to update the selected tag's name and (optionally) description
 	onUpdate(): void {
 		const newTagName = this.tagForm.value.name;
 		const newTagDescription = this.tagForm.value.description;
@@ -60,11 +65,21 @@ export class TagsComponent implements OnInit, OnDestroy
 		this.onClear();
 	}
 
+	// Ran when the clear button is clicked to reset the form and selected tag
 	onClear(): void {
 		this.tagForm.reset();
 		this.selectedTagName = null;
 	}
 
+	// Ran after deletion is confirmed to delete the selected tag
+	onDelete(): void {
+		this.tagService.deleteTag(this.selectedTagName);
+		this.bookService.deleteTagFromBooks(this.selectedTagName);
+		this.onClear();
+		this.showConfirmDelete = false;
+	}
+
+	// Checks if the entered tag name is valid (unique or same as selected tag name, but cannot be null or empty)
 	isValidTagName(): boolean {
 		if(!this.tagForm?.value?.name) return false;
 		if(this.selectedTagName === this.tagForm.value.name) return true;

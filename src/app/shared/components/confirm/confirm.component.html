@@ -3,14 +3,14 @@
 <section class="confirm-container">
     <header class="confirm-header">
         <p class="confirm-title fs-4">{{ title }}</p>
-        <button class="btn-close"></button>
+        <button class="btn-close" (click)="onCancel()"></button>
     </header>
     <hr>
     <div class="confirm-body">
         <p class="confirm-message">{{ message }}</p>
     </div>
     <footer class="confirm-footer mt-4">
-        <button class="btn btn-secondary">Cancel</button>
-        <button class="btn btn-danger ms-2">{{ confirmText }}</button>
+        <button class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+        <button class="btn btn-danger ms-2" (click)="onConfirm()">{{ confirmText }}</button>
     </footer>
 </section>

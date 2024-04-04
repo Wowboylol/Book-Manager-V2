@@ -9,10 +9,12 @@
 </header>
 
 <app-confirm 
-    title="Delete Tag" 
+    [title]="'Delete Tag'" 
     [message]="confirmDeleteMessage" 
-    confirmText="Delete"
-    *ngIf="showConfirmDelete">
+    [confirmText]="'Delete'"
+    *ngIf="showConfirmDelete"
+    (cancel)="showConfirmDelete = false"
+    (confirm)="onDelete()">
 </app-confirm>
 
 <section class="container mt-4">
@@ -46,8 +48,19 @@
 
             <div class="col-lg-4 col-md-6">
                 <div class="button-box">
-                    <button class="btn btn-warning" type="submit" [disabled]="!tagForm.valid || !isValidTagName()">Update</button>
-                    <button class="btn btn-danger" type="button" [disabled]="!tagForm.valid">Delete</button>
+                    <button 
+                        class="btn btn-warning" 
+                        type="submit" 
+                        [disabled]="!tagForm.valid || !isValidTagName()"> 
+                        Update
+                    </button>
+                    <button 
+                        class="btn btn-danger" 
+                        type="button" 
+                        [disabled]="!tagForm.valid" 
+                        (click)="showConfirmDelete = true">
+                        Delete
+                    </button>
                     <button class="btn" id="clear-button" type="button" (click)="onClear()">Clear</button>
                 </div>
             </div>

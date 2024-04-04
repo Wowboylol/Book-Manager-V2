@@ -55,7 +55,7 @@ export class TagService
 	}
 
 	// Deletes the tag with the given name regardless of its amount (case-insensitive)
-	// Postcondition: The deleted tag should also be removed from all books
+	// Postcondition: The deleted tag should be removed from all books
 	deleteTag(name: string): void {
 		this.tags = this.tags.filter(tag => tag.name.toLowerCase() !== name.toLowerCase());
 		this.tagsChanged.next(this.tags.slice());
