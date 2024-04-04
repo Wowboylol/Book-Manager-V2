@@ -28,7 +28,7 @@ form .search-bar:has(> input:focus) {
     color: var(--secondary-color);
     caret-color: var(--secondary-color);
     transition: var(--tran-03);
-    box-shadow: 0 0 0 0.25rem rgba(118, 101, 201, 0.25);
+    box-shadow: var(--box-shadow-focus);
 }
 
 form .search-bar .search-icon {
@@ -52,5 +52,5 @@ form .search-select {
 }
 
 form .search-select:focus {
-    box-shadow: 0 0 0 0.25rem rgba(118, 101, 201, 0.25);
+    box-shadow: var(--box-shadow-focus);
 }
