@@ -9,11 +9,13 @@ import { TagService } from '../shared/services/tag.service';
 import { BookService } from '../shared/services/book.service';
 import { ConfirmComponent } from '../shared/components/confirm/confirm.component';
 import { TooltipDirective } from '../shared/directives/tooltip.directive';
+import { TagSearchQuery } from '../shared/models/tag-search-query.model';
+import { TagSearchPipe } from '../shared/pipes/tag-search.pipe';
 
 @Component({
 	selector: 'app-tags',
 	standalone: true,
-	imports: [CommonModule, FormsModule, TagSearchComponent, ConfirmComponent, TooltipDirective],
+	imports: [CommonModule, FormsModule, TagSearchComponent, ConfirmComponent, TooltipDirective, TagSearchPipe],
 	templateUrl: './tags.component.html',
 	styleUrls: ['./tags.component.css']
 })
@@ -29,13 +31,22 @@ export class TagsComponent implements OnInit, OnDestroy
 	showConfirmDelete: boolean = false;
 	confirmDeleteMessage: string = null;
 
+	// Search data
+	searchQuery: TagSearchQuery;
+	searchCount = { value: 0 };
+
 	constructor(private tagService: TagService, private bookService: BookService) { }
 
 	ngOnInit(): void { 
+		// Set default data
 		this.tags = this.tagService.getAllTags();
+		this.searchCount.value = this.tags.length;
+
+		// Subscribe to tag changes
 		this.tagsChangedSubscription = this.tagService.tagsChanged
 			.subscribe((tags: Tag[]) => {
 				this.tags = tags;
+				this.searchCount.value = this.tags.length;
 			}
 		);
 	}
@@ -85,5 +96,10 @@ export class TagsComponent implements OnInit, OnDestroy
 		if(!this.tagForm?.value?.name) return false;
 		if(this.selectedTagName === this.tagForm.value.name) return true;
 		return !this.tagService.tagExists(this.tagForm.value.name);
+	}
+
+	// Updates the search query
+	onSearchQuery(searchQuery:TagSearchQuery): void {
+		this.searchQuery = searchQuery;
 	}
 }

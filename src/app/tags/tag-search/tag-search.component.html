@@ -1,20 +1,20 @@
 <form class="row g-3" autocomplete="off" onsubmit="event.preventDefault();">
     <fieldset class="col-lg-8 col-md-6">
         <div class="search-bar rounded">
-            <i class='bx bx-search fs-5 search-icon pt-1 ps-2 pe-1'></i>
-            <input type="search" class="rounded" placeholder="Search tags">
+            <i class='bx bx-search fs-5 search-icon pt-1 ps-2 pe-1' (click)="onSubmitSearch()"></i>
+            <input type="search" class="rounded" placeholder="Search tags" (keydown.enter)="onSubmitSearch()" #searchString>
         </div>
     </fieldset>
 
     <fieldset class="col-lg-2 col-md-3">
-        <select class="form-select search-select">
+        <select class="form-select search-select" #searchSort>
             <option selected value="0">Alphabetical</option>
             <option value="1">Usage Amount</option>
         </select>
     </fieldset>
 
     <fieldset class="col-lg-2 col-md-3">
-        <select class="form-select search-select">
+        <select class="form-select search-select" #searchOrder>
             <option value="0">Descending</option>
             <option selected value="1">Ascending</option>
         </select>

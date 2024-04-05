@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -19,13 +19,15 @@ import { BookDisplayType } from './book-display-type.model';
 	templateUrl: './books.component.html',
 	styleUrls: ['./books.component.css']
 })
-export class BooksComponent implements OnInit 
+export class BooksComponent implements OnInit, OnDestroy 
 {
 	private booksChangedSubscription: Subscription;
 
-	// Book display & search properties
+	// Book display
 	books: Book[] = [];
 	bookDisplayLimit: number;
+
+	// Search data
 	searchQuery: BookSearchQuery;
 	searchCount = { value: 0 };
 
@@ -50,6 +52,10 @@ export class BooksComponent implements OnInit
 				this.searchCount.value = this.books.length;
 			}
 		);
+	}
+
+	ngOnDestroy(): void {
+		this.booksChangedSubscription.unsubscribe();
 	}
 
 	// Resets book display limit to default

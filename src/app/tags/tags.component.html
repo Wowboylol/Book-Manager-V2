@@ -2,7 +2,7 @@
     <section class="container">
         <article class="row search-bar">
             <div class="col-md-12">
-                <app-tag-search></app-tag-search>
+                <app-tag-search (searchQuery)="onSearchQuery($event)"></app-tag-search>
             </div>
         </article>
     </section>
@@ -71,12 +71,16 @@
                 <button 
                     type="button" 
                     class="btn btn-secondary ms-2 mb-2" 
-                    *ngFor="let tag of tags" 
+                    *ngFor="let tag of tags | tagSearch:searchQuery:searchCount;" 
                     (click)="onSelectTag(tag)"
                     [appTooltip]="tag.description">
                     {{ tag.name }}
                     <span class="badge bg-light text-muted">{{ tag.amount }}</span>
                 </button>
+                <aside class="ms-3 mt-2" *ngIf="searchCount.value == 0">
+                    <p style="font-weight: 500;">There are no tags to display</p>
+                    <p>Try another search. New tags can be added by linking them to new or existing books.</p>
+                </aside>
             </div>
         </div>
     </article>
