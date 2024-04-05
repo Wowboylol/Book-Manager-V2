@@ -10,7 +10,7 @@ import { BookService } from '../shared/services/book.service';
 import { BookSearchQuery } from '../shared/models/book-search-query.model';
 import { BookSearchPipe } from '../shared/pipes/book-search.pipe';
 import { AlertComponent } from '../shared/components/alert/alert.component';
-import { BookDisplayType } from './bookDisplayType.model';
+import { BookDisplayType } from './book-display-type.model';
 
 @Component({
 	selector: 'app-books',

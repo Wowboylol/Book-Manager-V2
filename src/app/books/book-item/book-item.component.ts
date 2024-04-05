@@ -4,7 +4,7 @@ import { Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { Book } from '../../shared/models/book.model';
-import { BookDisplayType } from '../bookDisplayType.model';
+import { BookDisplayType } from '../book-display-type.model';
 import { TagService } from 'src/app/shared/services/tag.service';
 import { TooltipDirective } from 'src/app/shared/directives/tooltip.directive';
 
