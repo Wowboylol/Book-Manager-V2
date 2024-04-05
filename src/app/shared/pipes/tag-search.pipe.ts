@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Tag } from '../models/tag.model';
 import { TagSearchQuery } from '../models/tag-search-query.model';
 
-enum SearchSort { Alphabetical, UsageAmount, DateLastUsed }
+enum SearchSort { Alphabetical, UsageAmount }
 enum SearchOrder { Descending, Ascending }
 
 @Pipe({
@@ -54,19 +54,6 @@ export class TagSearchPipe implements PipeTransform
 					return searchOrder == SearchOrder.Ascending ?
 						value.sort((tag1, tag2) => tag1.amount - tag2.amount) :
 						value.sort((tag1, tag2) => tag2.amount - tag1.amount);
-				}
-				case SearchSort.DateLastUsed: {
-					return searchOrder == SearchOrder.Ascending ? 
-						value.sort((tag1, tag2) => {
-							if(tag1.lastUsed == null) { return -1; }
-							if(tag2.lastUsed == null) { return 1; }
-							return +tag1.lastUsed - +tag2.lastUsed;
-						}) :
-						value.sort((tag1, tag2) => {
-							if(tag1.lastUsed == null) { return 1; }
-							if(tag2.lastUsed == null) { return -1; }
-							return +tag2.lastUsed - +tag1.lastUsed;
-						});
 				}
 				default: {
 					throw new Error("Invalid search sort");

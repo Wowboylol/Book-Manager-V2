@@ -12,16 +12,6 @@ export class TagService
 	constructor() { 
 		let json = require('../../../test-data/book-snippet.json');
 		this.tags = json.tags;
-		this.tags = this.convertTagDates(this.tags);
-	}
-
-	// Converts tag lastUsed string into Date object
-	// If the date string is null, the date is set to null
-	private convertTagDates(tags: Tag[]): Tag[] {
-		return tags.map(tag => {
-			tag.lastUsed = tag.lastUsed ? new Date(tag.lastUsed) : null;
-			return tag;
-		});
 	}
 
 	// Return a copy of the array of tags
@@ -40,16 +30,14 @@ export class TagService
 	}
 
 	// Increments amount of tag if it exists, otherwise adds a new tag
-	// Updates the lastUsed date of the tag
 	// Precondition: tag name must be unique
 	addTag(name: string): void {
 		let tag = this.tags.find(tag => tag.name.toLowerCase() === name.toLowerCase());
 		if(tag) {
 			tag.amount++;
-			tag.lastUsed = new Date();
 		} 
 		else {
-			this.tags.push(new Tag(name, 1, new Date(), null));
+			this.tags.push(new Tag(name, 1, null));
 		}
 		this.tagsChanged.next(this.tags.slice());
 	}

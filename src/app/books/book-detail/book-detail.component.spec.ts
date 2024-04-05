@@ -35,7 +35,7 @@ describe('BookDetailComponent', () => {
 		mockBookService = jasmine.createSpyObj('BookService', ['getBookById']);
 		mockTagService = jasmine.createSpyObj(
 			'TagService', { 
-				'getTagByName': { name: "test", amount: 1, lastUsed: new Date() }
+				'getTagByName': { name: "test", amount: 1, description: "test" }
 			}
 		);
 		
