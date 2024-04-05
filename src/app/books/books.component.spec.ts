@@ -58,10 +58,14 @@ describe('BooksComponent', () => {
 		expect(component.searchCount.value).toBe(initialBookCount);
 	});
 
-	it('should display alert when search query is updated', () => {
-		component.onSearchQuery({ searchString: "test", searchType: 0, searchSort: 0, searchOrder: 0 });
-		expect(component.alertToggle).toBe('show');
-	});
+	it('should display alert when search query is updated and then hide alert', 
+		fakeAsync(() => {
+			component.onSearchQuery({ searchString: "test", searchType: 0, searchSort: 0, searchOrder: 0 });
+			expect(component.alertToggle).toBe('show');
+			tick(3000);
+			expect(component.alertToggle).toBe('hidden');
+		}
+	));
 
 	it('should change display type when style button is clicked', 
 		fakeAsync(() => {
@@ -72,4 +76,10 @@ describe('BooksComponent', () => {
 			expect(component.changeDisplayType).toHaveBeenCalled();
 		}
 	));
+
+	it('should unsubscribe from book changes when component is destroyed', () => {
+		spyOn(component['booksChangedSubscription'], 'unsubscribe');
+		component.ngOnDestroy();
+		expect(component['booksChangedSubscription'].unsubscribe).toHaveBeenCalled();
+	});
 });
