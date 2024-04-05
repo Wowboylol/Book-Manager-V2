@@ -1,4 +1,16 @@
 export const testData = {
+    tags: [
+        { name: 'test', amount: 2, description: 'Test description.' },
+        { name: 'book', amount: 4, description: 'This is a book!' },
+        { name: 'zero', amount: 1, description: null },
+        { name: 'one', amount: 1, description: null },
+        { name: 'two', amount: 1, description: null },
+        { name: 'three', amount: 1, description: null },
+        { name: 'four', amount: 1, description: null },
+        { name: 'textbook', amount: 1, description: 'This book is a textbook.' },
+        { name: 'educational', amount: 1, description: 'This book is for educational purposes.' },
+        { name: 'five', amount: 1, description: null },
+    ],
     books: [
         {
             id: 0,
