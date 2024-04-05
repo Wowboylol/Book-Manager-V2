@@ -77,7 +77,7 @@
                     {{ tag.name }}
                     <span class="badge bg-light text-muted">{{ tag.amount }}</span>
                 </button>
-                <aside class="ms-3 mt-2" *ngIf="searchCount.value == 0">
+                <aside class="ms-3 mt-2 me-2" *ngIf="searchCount.value == 0">
                     <p style="font-weight: 500;">There are no tags to display</p>
                     <p>Try another search. New tags can be added by linking them to new or existing books.</p>
                 </aside>
@@ -85,3 +85,9 @@
         </div>
     </article>
 </section>
+
+<app-alert
+    [message]="this.searchCount.value == 0 ? 'No tags found' : this.searchCount.value + ' tags found'"
+    [toggle]="alertToggle"
+    [type]="this.searchCount.value == 0 ? 'warning' : 'success'">
+</app-alert>

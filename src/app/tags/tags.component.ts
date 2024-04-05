@@ -11,11 +11,12 @@ import { ConfirmComponent } from '../shared/components/confirm/confirm.component
 import { TooltipDirective } from '../shared/directives/tooltip.directive';
 import { TagSearchQuery } from '../shared/models/tag-search-query.model';
 import { TagSearchPipe } from '../shared/pipes/tag-search.pipe';
+import { AlertComponent } from '../shared/components/alert/alert.component';
 
 @Component({
 	selector: 'app-tags',
 	standalone: true,
-	imports: [CommonModule, FormsModule, TagSearchComponent, ConfirmComponent, TooltipDirective, TagSearchPipe],
+	imports: [CommonModule, FormsModule, TagSearchComponent, ConfirmComponent, TooltipDirective, TagSearchPipe, AlertComponent],
 	templateUrl: './tags.component.html',
 	styleUrls: ['./tags.component.css']
 })
@@ -26,6 +27,7 @@ export class TagsComponent implements OnInit, OnDestroy
 	private tagsChangedSubscription: Subscription;
 	tags: Tag[] = [];
 	selectedTagName: string = null;
+	alertToggle: string = 'hidden';
 
 	// Confirm delete component data
 	showConfirmDelete: boolean = false;
@@ -101,5 +103,14 @@ export class TagsComponent implements OnInit, OnDestroy
 	// Updates the search query
 	onSearchQuery(searchQuery:TagSearchQuery): void {
 		this.searchQuery = searchQuery;
+		this.runAlert();
+	}
+
+	// Runs the alert component animation
+	runAlert(): void {
+		this.alertToggle = 'show';
+		setTimeout(() => {
+			this.alertToggle = 'hidden';
+		}, 3000);
 	}
 }
