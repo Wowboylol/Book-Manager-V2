@@ -49,7 +49,7 @@ export class TagService
 		this.tagsChanged.next(this.tags.slice());
 	}
 
-	// Decrements amount of tag if it exists and has an amount greater than 1
+	// Decrements amount of tag if it exists and has an amount greater than 1 (case-insensitive)
 	// Otherwise, removes the tag
 	removeTag(name: string): void {
 		let tag = this.tags.find(tag => tag.name.toLowerCase() === name.toLowerCase());

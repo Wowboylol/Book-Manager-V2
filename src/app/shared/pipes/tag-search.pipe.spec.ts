@@ -29,7 +29,7 @@ describe('TagSearchPipe', () => {
 		expect(testSearchCount.value).toBe(2);
 	});
 
-	it('sorts books by alphabetical descending order', () => {
+	it('sorts tags by alphabetical descending order', () => {
 		const searchQuery = { searchString: '', searchSort: 0, searchOrder: 0 };
 		const result = tagSearchPipe.transform(testTags, searchQuery, testSearchCount);
 		expect(result).toEqual([
@@ -38,7 +38,7 @@ describe('TagSearchPipe', () => {
 		expect(testSearchCount.value).toBe(testTags.length);
 	});
 
-	it('sorts books by usage amount ascending order', () => {
+	it('sorts tags by usage amount ascending order', () => {
 		const searchQuery = { searchString: '', searchSort: 1, searchOrder: 1 };
 		const result = tagSearchPipe.transform(testTags, searchQuery, testSearchCount);
 		expect(testSearchCount.value).toBe(testTags.length);
@@ -46,7 +46,7 @@ describe('TagSearchPipe', () => {
 		expect(result[9]).toEqual(testTags[1]);
 	});
 
-	it('sorts books by usage amount descending order', () => {
+	it('sorts tags by usage amount descending order', () => {
 		const searchQuery = { searchString: '', searchSort: 1, searchOrder: 0 };
 		const result = tagSearchPipe.transform(testTags, searchQuery, testSearchCount);
 		expect(testSearchCount.value).toBe(testTags.length);
