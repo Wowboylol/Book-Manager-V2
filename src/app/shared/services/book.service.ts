@@ -50,4 +50,11 @@ export class BookService
 		});
 		this.booksChanged.next(this.books.slice());
 	}
+
+	// Delete the book with the given ID
+	// Postcondition: The deleted book should be removed from all tags
+	deleteBook(id: number): void {
+		this.books = this.books.filter(book => book.id !== id);
+		this.booksChanged.next(this.books.slice());
+	}
 }

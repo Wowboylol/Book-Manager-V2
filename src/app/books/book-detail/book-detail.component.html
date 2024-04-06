@@ -7,7 +7,7 @@
         />
         <div class="button-container">
             <button class="btn btn-secondary mt-3" id="edit-button">Edit</button>
-            <button class="btn btn-danger mt-3" id="delete-button">Delete</button>
+            <button class="btn btn-danger mt-3" id="delete-button" (click)="showConfirmDelete = true">Delete</button>
         </div>
     </section>
 
@@ -86,3 +86,12 @@
         </div>
     </section>
 </div>
+
+<app-confirm 
+    [title]="'Delete Book'" 
+    [message]="confirmDeleteMessage" 
+    [confirmText]="'Delete'"
+    *ngIf="showConfirmDelete"
+    (cancel)="showConfirmDelete = false"
+    (confirm)="onDelete()">
+</app-confirm>
