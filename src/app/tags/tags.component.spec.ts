@@ -16,12 +16,13 @@ describe('TagsComponent', () => {
 	let mockTagService: jasmine.SpyObj<TagService>;
 	let mockBookService: jasmine.SpyObj<BookService>;
 	let pipeSpy: jasmine.Spy;
+	let testTags: Tag[];
 
 	beforeEach(async () => {
 		mockBookService = jasmine.createSpyObj('BookService', ['updateTagInBooks', 'deleteTagFromBooks']);
 		mockTagService = jasmine.createSpyObj(
 			'TagService', { 
-				'getAllTags': testData.tags,
+				'getAllTags': testData.tags.slice(),
 				'updateTagName': undefined,
 				'updateTagDescription': undefined,
 				'deleteTag': undefined,
@@ -41,6 +42,7 @@ describe('TagsComponent', () => {
 		fixture = TestBed.createComponent(TagsComponent);
 		component = fixture.componentInstance;
 		pipeSpy = spyOn(TagSearchPipe.prototype, 'transform');
+		testTags = testData.tags.slice();
 		fixture.detectChanges();
   	});
 
@@ -49,10 +51,10 @@ describe('TagsComponent', () => {
 	});
 
 	it('should update tag form with selected tag data', () => {
-		component.onSelectTag(testData.tags[0]);
-		expect(component.selectedTagName).toBe(testData.tags[0].name);
-		expect(component.tagForm.value.name).toBe(testData.tags[0].name);
-		expect(component.tagForm.value.description).toBe(testData.tags[0].description);
+		component.onSelectTag(testTags[0]);
+		expect(component.selectedTagName).toBe(testTags[0].name);
+		expect(component.tagForm.value.name).toBe(testTags[0].name);
+		expect(component.tagForm.value.description).toBe(testTags[0].description);
 	});
 
 	it('should update tag name, description, and corresponding books when onUpdate is called', () => {
@@ -63,15 +65,15 @@ describe('TagsComponent', () => {
 		formDescriptionInput.value = "new description";
 		formDescriptionInput.dispatchEvent(new Event('input'));
 
-		component.selectedTagName = testData.tags[0].name;
+		component.selectedTagName = testTags[0].name;
 		component.onUpdate();
-		expect(mockTagService.updateTagName).toHaveBeenCalledWith(testData.tags[0].name, "new name");
-		expect(mockBookService.updateTagInBooks).toHaveBeenCalledWith(testData.tags[0].name, "new name");
+		expect(mockTagService.updateTagName).toHaveBeenCalledWith(testTags[0].name, "new name");
+		expect(mockBookService.updateTagInBooks).toHaveBeenCalledWith(testTags[0].name, "new name");
 		expect(mockTagService.updateTagDescription).toHaveBeenCalledWith("new name", "new description");
 	});
 
 	it('should reset form and selected tag when onClear is called', () => {
-		component.onSelectTag(testData.tags[0]);
+		component.onSelectTag(testTags[0]);
 		component.onClear();
 		expect(component.selectedTagName).toBeNull();
 		expect(component.tagForm.value.name).toBeNull();
@@ -79,10 +81,10 @@ describe('TagsComponent', () => {
 	});
 
 	it('should delete tag and tags in corresponding books when onDelete is called', () => {
-		component.selectedTagName = testData.tags[0].name;
+		component.selectedTagName = testTags[0].name;
 		component.onDelete();
-		expect(mockTagService.deleteTag).toHaveBeenCalledWith(testData.tags[0].name);
-		expect(mockBookService.deleteTagFromBooks).toHaveBeenCalledWith(testData.tags[0].name);
+		expect(mockTagService.deleteTag).toHaveBeenCalledWith(testTags[0].name);
+		expect(mockBookService.deleteTagFromBooks).toHaveBeenCalledWith(testTags[0].name);
 	});
 
 	it('should close confirm delete modal when onDelete is called', () => {
@@ -115,9 +117,9 @@ describe('TagsComponent', () => {
 	}));
 
 	it('should display all tags if search query is default', () => {
-		component.tags = testData.tags;
+		component.tags = testTags;
 		component.onSearchQuery({ searchString: "", searchSort: 0, searchOrder: 1 });
-		expect(component.searchCount.value).toBe(testData.tags.length);
+		expect(component.searchCount.value).toBe(testTags.length);
 	});
 
 	it('should unsubscribe from tag changes on destroy', () => {
