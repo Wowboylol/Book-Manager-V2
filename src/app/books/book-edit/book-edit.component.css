@@ -61,6 +61,7 @@
     outline: none;
     border: none;
     padding-left: 0;
+    padding-top: 0;
     background-color: var(--primary-color);
     color: var(--text-color);
 }
@@ -76,5 +77,5 @@
 
 /* ===== Tag Edit Form ===== */
 .form-container .tag-edit-buttons button {
-    padding: 5px 4px 0 4px;
+    padding: 0.25rem 0.31rem 0 0.25rem;
 }
