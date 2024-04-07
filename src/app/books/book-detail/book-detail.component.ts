@@ -17,8 +17,12 @@ import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.comp
 })
 export class BookDetailComponent implements OnInit 
 {
+	// Overlay data
+	overlayTitle = new Promise<string>((resolve, reject) => {
+		resolve('View Book');
+	});
+	
 	// Book data
-	overlayTitle = 'View Book';
 	stars: number[] = [1, 2, 3, 4, 5];
 	book: Book;
 

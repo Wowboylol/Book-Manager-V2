@@ -15,8 +15,13 @@ import { BookService } from 'src/app/shared/services/book.service';
 })
 export class BookEditComponent implements OnInit 
 {
+	// Overlay data
+	overlayResolve: (value?: string | PromiseLike<string>) => void;
+	overlayTitle = new Promise<string>((resolve, reject) => {
+		this.overlayResolve = resolve;
+	});
+	
 	// Component data
-	overlayTitle = 'Edit Book';
 	editMode: boolean = false;
 	book: Book;
 	bookForm: FormGroup
@@ -29,6 +34,7 @@ export class BookEditComponent implements OnInit
 				let bookId = +params['id'];
 				this.book = this.bookService.getBookById(bookId);
 				this.editMode = params['id'] != null;
+				this.overlayResolve(this.editMode ? 'Edit Book' : 'Add Book');
 				this.initForm();
 			}
 		);
