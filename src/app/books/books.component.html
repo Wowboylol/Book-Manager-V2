@@ -44,7 +44,7 @@
         <i class='bx bx-list-ul fs-3' *ngIf="displayType === displayEnum.Grid"></i>
         <i class='bx bxs-grid fs-3' *ngIf="displayType === displayEnum.List"></i>
     </button>
-    <button class="overlay-button rounded">
+    <button class="overlay-button rounded" [routerLink]="['o', 'new']" >
         <i class='bx bx-plus fs-3'></i>
     </button>
 </footer>

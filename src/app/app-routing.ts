@@ -18,6 +18,7 @@ export const routes: Route[] = [
                 component: OverlayComponent,
                 children: [
                     { path: '', redirectTo: '/books', pathMatch: 'full' },
+                    { path: 'new', component: BookEditComponent },
                     { path: ':id', component: BookDetailComponent },
                     { path: ':id/edit', component: BookEditComponent }
                 ]
