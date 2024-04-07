@@ -6,7 +6,7 @@
             alt="illustration of {{ book.name }}"
         />
         <div class="button-container">
-            <button class="btn btn-secondary mt-3" id="edit-button">Edit</button>
+            <button class="btn btn-secondary mt-3" id="edit-button" [routerLink]="['edit']">Edit</button>
             <button class="btn btn-danger mt-3" id="delete-button" (click)="showConfirmDelete = true">Delete</button>
         </div>
     </section>

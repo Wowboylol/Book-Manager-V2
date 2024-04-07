@@ -4,6 +4,7 @@ import { BooksComponent } from './books/books.component';
 import { OverlayComponent } from './shared/components/overlay/overlay.component';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { TagsComponent } from './tags/tags.component';
+import { BookEditComponent } from './books/book-edit/book-edit.component';
 
 export const routes: Route[] = [
     { path: '', redirectTo: '/books', pathMatch: 'full' },
@@ -17,7 +18,8 @@ export const routes: Route[] = [
                 component: OverlayComponent,
                 children: [
                     { path: '', redirectTo: '/books', pathMatch: 'full' },
-                    { path: ':id', component: BookDetailComponent }
+                    { path: ':id', component: BookDetailComponent },
+                    { path: ':id/edit', component: BookEditComponent }
                 ]
             }
         ]

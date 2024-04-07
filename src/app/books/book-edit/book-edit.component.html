@@ -1,0 +1,73 @@
+<div class="row g-3">
+    <section class="col-sm-4 col-lg-3 col-xxl-2 image-container">
+        <img id="image" [src]="'assets/images/book-placeholder.png'"/>
+        <div class="button-container">
+            <button class="btn btn-secondary mt-3" id="save-button">Save</button>
+            <button class="btn btn-danger mt-3" id="cancel-button">Cancel</button>
+        </div>
+    </section>
+
+    <form class="col-sm-8 col-lg-9 col-xxl-10 form-container" autocomplete="off">
+        <section class="row">
+            <div class="col-12">
+                <div class="edit-box rounded mb-3 px-3">
+                    <label class="pt-2">Name</label>
+                    <input type="text" class="pb-2">
+                </div>
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-12">
+                <div class="edit-box rounded mb-3 px-3">
+                    <label class="pt-2">Image URL</label>
+                    <input type="text" class="pb-2">
+                </div>
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-12">
+                <div class="edit-box rounded mb-3 px-3">
+                    <label class="pt-2">Link</label>
+                    <input type="text" class="pb-2">
+                </div>
+            </div>
+        </section>
+        <section class="row gx-3">
+            <div class="col-sm-6 col-12">
+                <div class="edit-box rounded mb-3 px-3">
+                    <label class="pt-2">Rating (0-5)</label>
+                    <input type="number" class="pb-2">
+                </div>
+            </div>
+            <div class="col-sm-6 col-12">
+                <div class="edit-box rounded mb-3 px-3">
+                    <label class="pt-2">Collection</label>
+                    <input type="text" class="pb-2">
+                </div>
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-12">
+                <div class="edit-box rounded mb-3 px-3">
+                    <label class="pt-2">Description</label>
+                    <textarea type="text" rows="4"></textarea>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="row gx-3">
+                <div class="col-9 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                    <div class="edit-box rounded px-3">
+                        <input type="text" class="py-2" placeholder="Tag name">
+                    </div>
+                </div>
+                <div class="col-3 align-self-center">
+                    <div class="tag-edit-buttons">
+                        <button class="btn btn-danger" type="button"><i class='bx bx-x fs-4'></i></button>
+                        <button class="btn btn-secondary ms-1" type="button"><i class='bx bx-chevron-up fs-4'></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>

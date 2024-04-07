@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 
 import { Book } from 'src/app/shared/models/book.model';
 import { BookService } from '../../shared/services/book.service';
@@ -11,7 +11,7 @@ import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.comp
 @Component({
 	selector: 'app-book-detail',
 	standalone: true,
-	imports: [CommonModule, TooltipDirective, ConfirmComponent],
+	imports: [CommonModule, TooltipDirective, ConfirmComponent, RouterModule],
 	templateUrl: './book-detail.component.html',
 	styleUrls: ['./book-detail.component.css']
 })
