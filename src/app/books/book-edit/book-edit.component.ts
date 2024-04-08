@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Params } from '@angular/router';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Book } from 'src/app/shared/models/book.model';
 import { BookService } from 'src/app/shared/services/book.service';
@@ -50,29 +50,46 @@ export class BookEditComponent implements OnInit
 		if (this.editMode && this.book.tags) {
 			for (let tag of this.book.tags) {
 				tagFormArray.push(
-					new FormGroup({ 'name': new FormControl(tag) })
+					new FormGroup({ 'name': new FormControl(tag, Validators.required) })
 				);
 			}
 		}
 
 		this.bookForm = new FormGroup({
-			'name': new FormControl(this.editMode ? this.book.name : null),
-			'imagePath': new FormControl(this.editMode ? this.book.imagePath : null),
-			'link': new FormControl(this.editMode ? this.book.link : null),
-			'rating': new FormControl(this.editMode ? this.book.rating : null),
-			'collection': new FormControl(this.editMode ? this.book.collection : null),
-			'description': new FormControl(this.editMode ? this.book.description : null),
+			'name': new FormControl(
+				this.editMode ? this.book.name : null,
+				Validators.required
+			),
+			'imagePath': new FormControl(
+				this.editMode ? this.book.imagePath : null,
+				Validators.required
+			),
+			'link': new FormControl(
+				this.editMode ? this.book.link : null,
+				Validators.required
+			),
+			'rating': new FormControl(
+				this.editMode ? this.book.rating : null,
+				[Validators.required, Validators.min(0), Validators.max(5)]
+			),
+			'collection': new FormControl(
+				this.editMode ? this.book.collection : null
+			),
+			'description': new FormControl(
+				this.editMode ? this.book.description : null,
+				Validators.required
+			),
 			'tags': tagFormArray
 		});
 	}
 
-	onSubmit(): void {
-		console.log(this.bookForm);
-	}
-
 	onAddTag(): void {
 		(<FormArray>this.bookForm.get('tags')).push(
-			new FormGroup({ 'name': new FormControl(null) })
+			new FormGroup({ 'name': new FormControl(null, Validators.required) })
 		);
+	}
+
+	onSubmit(): void {
+		console.log(this.bookForm);
 	}
 }

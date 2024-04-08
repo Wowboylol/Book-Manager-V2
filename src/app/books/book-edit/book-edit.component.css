@@ -33,7 +33,8 @@
     background-color: var(--primary-color);
 }
 
-.form-container .edit-box:has(> input:focus) {
+.form-container .edit-box:has(> input:focus),
+.form-container .edit-box:has(> textarea:focus) {
     color: var(--secondary-color);
     caret-color: var(--secondary-color);
     box-shadow: var(--box-shadow-focus);
@@ -41,12 +42,13 @@
     transition-property: box-shadow;
 }
 
-.form-container .edit-box:has(> textarea:focus) {
-    color: var(--secondary-color);
-    caret-color: var(--secondary-color);
-    box-shadow: var(--box-shadow-focus);
-    transition: var(--tran-02);
-    transition-property: box-shadow;
+.form-container .edit-box:has(> .ng-invalid.ng-touched) {
+    border: 1px solid var(--invalid-border-color);
+}
+
+.form-container .edit-box:has(> .ng-invalid.ng-touched:focus) {
+    caret-color: var(--invalid-border-color);
+    box-shadow: var(--invalid-box-shadow-focus);
 }
 
 .form-container .edit-box label {

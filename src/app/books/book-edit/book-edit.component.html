@@ -2,7 +2,13 @@
     <section class="col-sm-4 col-lg-3 col-xxl-2 image-container">
         <img id="image" [src]="'assets/images/book-placeholder.png'"/>
         <div class="button-container">
-            <button type="submit" class="btn btn-secondary mt-3" id="save-button">Save</button>
+            <button 
+                type="submit" 
+                class="btn btn-secondary mt-3" 
+                id="save-button"
+                [disabled]="!bookForm.valid">
+                Save
+            </button>
             <button type="button" class="btn btn-danger mt-3" id="cancel-button">Cancel</button>
         </div>
     </section>
