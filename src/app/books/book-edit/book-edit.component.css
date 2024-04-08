@@ -79,3 +79,16 @@
 .form-container .tag-edit-buttons button {
     padding: 0.25rem 0.31rem 0 0.25rem;
 }
+
+.form-container #add-tag-button {
+    font-weight: 500;
+    border-style: none;
+    height: 2.5rem;
+    width: 9.5rem;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.form-container #add-tag-button:hover {
+    background-color: var(--primary-color-light);
+}

@@ -39,8 +39,8 @@ export class BookEditComponent implements OnInit
 		);
 	}
 
-	get tagControls(): FormArray {
-		return (<FormArray>this.bookForm.get('tags')).value;
+	get tagControls() {
+		return (<FormArray>this.bookForm.get('tags')).controls;
 	}
 
 	private initForm(): void 
@@ -68,5 +68,11 @@ export class BookEditComponent implements OnInit
 
 	onSubmit(): void {
 		console.log(this.bookForm);
+	}
+
+	onAddTag(): void {
+		(<FormArray>this.bookForm.get('tags')).push(
+			new FormGroup({ 'name': new FormControl(null) })
+		);
 	}
 }
