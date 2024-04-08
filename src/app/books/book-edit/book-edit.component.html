@@ -54,11 +54,11 @@
                 </div>
             </div>
         </div>
-        <div>
-            <div class="row gx-3">
+        <div formArrayName="tags">
+            <div class="row gx-3 mb-1" *ngFor="let tagControl of tagControls; let i = index" [formGroupName]="i">
                 <div class="col-9 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <div class="edit-box rounded px-3">
-                        <input type="text" class="py-2" placeholder="Tag name">
+                        <input type="text" class="py-2" placeholder="Tag {{ i+1 }}" formControlName="name">
                     </div>
                 </div>
                 <div class="col-3 align-self-center">
