@@ -57,4 +57,28 @@ export class BookService
 		this.books = this.books.filter(book => book.id !== id);
 		this.booksChanged.next(this.books.slice());
 	}
+
+	// Add a new book with the given data
+	// Postcondition: The tags linked to the book should be updated
+	addBook(book: Book): void {
+		book.id = this.books.length ? Math.max(...this.books.map(book => book.id)) + 1 : 0;
+		this.books.push(book);
+		this.booksChanged.next(this.books.slice());
+	}
+
+	// Update the book with the given updated book
+	// Postcondition: The tags linked to the book should be updated (new tags should be added, old tags should be removed)
+	updateBook(newBook: Book): void {
+		let bookIndex = this.books.findIndex(book => book.id === newBook.id);
+		try{
+			if(bookIndex !== -1) {
+				this.books[bookIndex] = newBook;
+				this.booksChanged.next(this.books.slice());
+			}
+			else { throw new Error('Book not found'); }
+		}
+		catch(e) {
+			console.error(e);
+		}
+	}
 }

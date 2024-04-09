@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Book } from 'src/app/shared/models/book.model';
-import { BookService } from 'src/app/shared/services/book.service';
+import { BookService } from '../../shared/services/book.service';
+import { TagService } from '../../shared/services/tag.service';
+import { Tag } from 'src/app/shared/models/tag.model';
 
 @Component({
 	selector: 'app-book-edit',
 	standalone: true,
-	imports: [CommonModule, ReactiveFormsModule],
+	imports: [CommonModule, ReactiveFormsModule, RouterModule],
 	templateUrl: './book-edit.component.html',
 	styleUrls: ['./book-edit.component.css']
 })
@@ -26,7 +28,12 @@ export class BookEditComponent implements OnInit
 	book: Book;
 	bookForm: FormGroup
 
-	constructor(private route: ActivatedRoute, private bookService: BookService) { }
+	constructor(
+		private route: ActivatedRoute, 
+		private bookService: BookService, 
+		private tagService: TagService,
+		private router: Router
+	) { }
 	
 	ngOnInit(): void { 
 		this.route.params.subscribe(
@@ -43,8 +50,65 @@ export class BookEditComponent implements OnInit
 		return (<FormArray>this.bookForm.get('tags')).controls;
 	}
 
-	private initForm(): void 
-	{
+	get allTags(): Tag[] {
+		return this.tagService.getAllTags();
+	}
+
+	onAddTag(): void {
+		(<FormArray>this.bookForm.get('tags')).push(
+			new FormGroup({ 'name': new FormControl(null, Validators.required) })
+		);
+	}
+
+	onSubmit(): void {
+		// Create a new book object with info that must exist for both adding and updating a book
+		const newBook = new Book(
+			-1,
+			this.bookForm.value['name'],
+			this.bookForm.value['description'],
+			this.bookForm.value['link'],
+			this.bookForm.value['imagePath'],
+			this.bookForm.value['rating'],
+			null,
+			new Date(),
+			this.bookForm.value['tags'].map(tag => tag['name']),
+			this.bookForm.value['collection']
+		)
+
+		if(this.editMode) {
+			// Copy the ID and date created from the old book since we are updating it
+			newBook.id = this.book.id;
+			newBook.dateCreated = this.book.dateCreated;
+
+			// Update the book and tags
+			this.book.tags.filter(tag => !newBook.tags.includes(tag)).forEach(tag => this.tagService.removeTag(tag));
+			newBook.tags.filter(tag => !this.book.tags.includes(tag)).forEach(tag => this.tagService.addTag(tag));
+			this.bookService.updateBook(newBook);
+		}
+		else {
+			// Set the collection to 'None' if it is empty and set the date created to now
+			if(!newBook.collection) { newBook.collection = 'None'; }
+			newBook.dateCreated = new Date();
+
+			// Add the book and tags
+			newBook.tags.forEach(tag => this.tagService.addTag(tag));
+			this.bookService.addBook(newBook);
+		}
+		this.router.navigate(['../'], { relativeTo: this.route });
+	}
+
+	onDeleteTag(index: number): void {
+		(<FormArray>this.bookForm.get('tags')).removeAt(index);
+	}
+
+	onInsertTag(index: number): void {
+		(<FormArray>this.bookForm.get('tags')).insert(
+			index, 
+			new FormGroup({ 'name': new FormControl(null, Validators.required) })
+		);
+	}
+
+	private initForm(): void {
 		let tagFormArray = new FormArray([]);
 
 		if (this.editMode && this.book.tags) {
@@ -81,15 +145,5 @@ export class BookEditComponent implements OnInit
 			),
 			'tags': tagFormArray
 		});
-	}
-
-	onAddTag(): void {
-		(<FormArray>this.bookForm.get('tags')).push(
-			new FormGroup({ 'name': new FormControl(null, Validators.required) })
-		);
-	}
-
-	onSubmit(): void {
-		console.log(this.bookForm);
 	}
 }

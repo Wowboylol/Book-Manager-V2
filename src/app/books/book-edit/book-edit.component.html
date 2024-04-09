@@ -9,7 +9,13 @@
                 [disabled]="!bookForm.valid">
                 Save
             </button>
-            <button type="button" class="btn btn-danger mt-3" id="cancel-button">Cancel</button>
+            <button 
+                type="button" 
+                class="btn btn-danger mt-3" 
+                id="cancel-button"
+                routerLink="../">
+                Cancel
+            </button>
         </div>
     </section>
 
@@ -64,13 +70,20 @@
             <div class="row gx-3 mb-1" *ngFor="let tagControl of tagControls; let i = index" [formGroupName]="i">
                 <div class="col-9 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <div class="edit-box rounded px-3">
-                        <input type="text" class="py-2" placeholder="Tag {{ i+1 }}" formControlName="name">
+                        <input type="text" class="py-2" placeholder="Tag {{ i+1 }}" formControlName="name" list="tag-list">
+                        <datalist id="tag-list">
+                            <option *ngFor="let tag of allTags" [value]="tag.name">{{ tag.name }}</option>
+                        </datalist>
                     </div>
                 </div>
                 <div class="col-3 align-self-center">
                     <div class="tag-edit-buttons">
-                        <button class="btn btn-danger" type="button"><i class='bx bx-x fs-4'></i></button>
-                        <button class="btn btn-secondary ms-1" type="button"><i class='bx bx-chevron-up fs-4'></i></button>
+                        <button type="button" class="btn btn-danger" (click)="onDeleteTag(i)">
+                            <i class='bx bx-x fs-4'></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary ms-1" (click)="onInsertTag(i)">
+                            <i class='bx bx-chevron-up fs-4'></i>
+                        </button>
                     </div>
                 </div>
             </div>
