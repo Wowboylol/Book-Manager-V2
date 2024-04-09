@@ -74,8 +74,7 @@ export class BookEditComponent implements OnInit, AfterContentInit
 			this.bookForm.value['link'],
 			this.bookForm.value['imagePath'],
 			this.bookForm.value['rating'],
-			null,
-			new Date(),
+			null, null,
 			this.bookForm.value['tags'].map(tag => tag['name']),
 			this.bookForm.value['collection']
 		)
@@ -91,10 +90,6 @@ export class BookEditComponent implements OnInit, AfterContentInit
 			this.bookService.updateBook(newBook);
 		}
 		else {
-			// Set the collection to 'None' if it is empty and set the date created to now
-			if(!newBook.collection) { newBook.collection = 'None'; }
-			newBook.dateCreated = new Date();
-
 			// Add the book and tags
 			newBook.tags.forEach(tag => this.tagService.addTag(tag));
 			this.bookService.addBook(newBook);

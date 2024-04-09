@@ -58,20 +58,25 @@ export class BookService
 		this.booksChanged.next(this.books.slice());
 	}
 
-	// Add a new book with the given data
+	// Add a new book with the given data and update necessary data
 	// Postcondition: The tags linked to the book should be updated
 	addBook(book: Book): void {
 		book.id = this.books.length ? Math.max(...this.books.map(book => book.id)) + 1 : 0;
+		book.dateCreated = new Date();
+		book.dateUpdated = book.dateCreated;
+		if(!book.collection) { book.collection = 'None'; }
+
 		this.books.push(book);
 		this.booksChanged.next(this.books.slice());
 	}
 
-	// Update the book with the given updated book
+	// Update the book with the given updated book and update necessary data
 	// Postcondition: The tags linked to the book should be updated (new tags should be added, old tags should be removed)
 	updateBook(newBook: Book): void {
 		let bookIndex = this.books.findIndex(book => book.id === newBook.id);
 		try{
 			if(bookIndex !== -1) {
+				newBook.dateUpdated = new Date();
 				this.books[bookIndex] = newBook;
 				this.booksChanged.next(this.books.slice());
 			}
