@@ -24,9 +24,9 @@ describe('OverlayComponent', () => {
 	});
 
 	it('should set overlay title based on displayed component', () => {
-		const displayedComponent = { overlayTitle: 'Test Title' };
+		const displayedComponent = { overlayTitle: new Promise<string>((resolve, reject) => resolve('Test Title')) };
 		component.updateOverlayTitle(displayedComponent);
-		expect(component.overlayTitle).toEqual('Test Title');
+		expect(component.overlayTitle).toEqual(displayedComponent.overlayTitle);
 	});
 
 	it('should set overflow hidden on body element on init', () => {

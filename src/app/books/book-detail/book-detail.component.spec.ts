@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { BookDetailComponent } from './book-detail.component';
 import { BookService } from 'src/app/shared/services/book.service';
 import { TagService } from 'src/app/shared/services/tag.service';
 import { Book } from 'src/app/shared/models/book.model';
-import { routes } from 'src/app/app-routing';
 
 describe('BookDetailComponent', () => {
 	let fixture: ComponentFixture<BookDetailComponent>;
 	let component: BookDetailComponent;
+	let router: Router;
 	let mockBookService: jasmine.SpyObj<BookService>;
 	let mockTagService: jasmine.SpyObj<TagService>;
 	let testBook: Book = {
@@ -43,7 +43,9 @@ describe('BookDetailComponent', () => {
 		);
 		
 		TestBed.configureTestingModule({
-			imports: [ BookDetailComponent, RouterTestingModule.withRoutes(routes) ],
+			imports: [ BookDetailComponent, RouterTestingModule.withRoutes([
+				{ path: 'books', component: BookDetailComponent }
+			]) ],
 			providers: [
 				{ provide: BookService, useValue: mockBookService },
 				{ provide: ActivatedRoute, useValue: mockActivatedRoute },
@@ -53,6 +55,7 @@ describe('BookDetailComponent', () => {
 
 		fixture = TestBed.createComponent(BookDetailComponent);
 		component = fixture.componentInstance;
+		router = TestBed.inject(Router);
   	});
 
 	it('should create book detail component', () => {
@@ -173,16 +176,20 @@ describe('BookDetailComponent', () => {
 	});
 
 	it('should delete the book and decrement linked tags when onDelete is called', () => {
+		const routerSpy = spyOn(router, 'navigate');
 		component.book = { ...testBook };
 		component.onDelete();
 		expect(mockTagService.removeTag).toHaveBeenCalledTimes(testBook.tags.length);
 		expect(mockBookService.deleteBook).toHaveBeenCalledWith(testBook.id);
+		expect(routerSpy).toHaveBeenCalledWith(['/books']);
 	});
 
 	it('should close confirm delete modal when onDelete is called', () => {
+		const routerSpy = spyOn(router, 'navigate');
 		component.book = { ...testBook };
 		component.showConfirmDelete = true;
 		component.onDelete();
 		expect(component.showConfirmDelete).toBeFalse();
+		expect(routerSpy).toHaveBeenCalledWith(['/books']);
 	});
 });

@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 })
 export class OverlayComponent implements OnInit, OnDestroy
 {
-	overlayTitle = 'Overlay Title';
+	overlayTitle = new Promise<string>((resolve, reject) => resolve('Overlay Title'));
 
 	constructor(
 		@Inject(DOCUMENT) private document: Document, 
