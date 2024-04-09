@@ -1,6 +1,6 @@
 <form class="row g-3" [formGroup]="bookForm" (ngSubmit)="onSubmit()" autocomplete="off">
     <section class="col-sm-4 col-lg-3 col-xxl-2 image-container">
-        <img id="image" [src]="'assets/images/book-placeholder.png'"/>
+        <img id="image" [src]="imagePreview"/>
         <div class="button-container">
             <button 
                 type="submit" 
@@ -32,7 +32,7 @@
             <div class="col-12">
                 <div class="edit-box rounded mb-3 px-3">
                     <label class="pt-2">Image URL</label>
-                    <input type="text" class="pb-2" formControlName="imagePath">
+                    <input type="text" class="pb-2" formControlName="imagePath" (focusout)="imagePreview = $event.srcElement.value">
                 </div>
             </div>
         </div>

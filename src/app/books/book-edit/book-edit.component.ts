@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -15,7 +15,7 @@ import { Tag } from 'src/app/shared/models/tag.model';
 	templateUrl: './book-edit.component.html',
 	styleUrls: ['./book-edit.component.css']
 })
-export class BookEditComponent implements OnInit 
+export class BookEditComponent implements OnInit, AfterContentInit 
 {
 	// Overlay data
 	overlayResolve: (value?: string | PromiseLike<string>) => void;
@@ -27,6 +27,7 @@ export class BookEditComponent implements OnInit
 	editMode: boolean = false;
 	book: Book;
 	bookForm: FormGroup
+	imagePreview: string = 'assets/images/book-placeholder.png';
 
 	constructor(
 		private route: ActivatedRoute, 
@@ -44,6 +45,10 @@ export class BookEditComponent implements OnInit
 				this.initForm();
 			}
 		);
+	}
+
+	ngAfterContentInit(): void {
+		this.imagePreview = this.editMode ? this.book.imagePath : this.imagePreview;
 	}
 
 	get tagControls() {
