@@ -1,4 +1,5 @@
-import { Directive, ElementRef, HostListener, Input, OnDestroy } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Directive, HostListener, Inject, Input, OnDestroy, Renderer2 } from '@angular/core';
 
 @Directive({
 	selector: '[appTooltip]',
@@ -7,15 +8,18 @@ import { Directive, ElementRef, HostListener, Input, OnDestroy } from '@angular/
 export class TooltipDirective implements OnDestroy
 {
   	@Input() appTooltip: string = null;
-	@Input() displayDelay?: number = 1000;
+	@Input() displayDelay?: number = 750;
 	private tooltipElement: HTMLElement;
 	private timer;
 	
-	constructor(private elementRef: ElementRef) { }
+	constructor(
+		@Inject(DOCUMENT) private document: Document,
+		private renderer: Renderer2
+	) { }
 
 	ngOnDestroy(): void { 
 		if (this.tooltipElement) {
-			this.tooltipElement.remove();
+			this.renderer.removeChild(this.document.body, this.tooltipElement);
 		}
 	}
 
@@ -31,18 +35,18 @@ export class TooltipDirective implements OnDestroy
 			this.timer = null;
 		}
 		if(this.tooltipElement) {
-			this.tooltipElement.remove();
+			this.renderer.removeChild(this.document.body, this.tooltipElement);
 		}
 	}
 
 	private createTooltip(x: number, y: number) 
 	{
-		let tooltip = document.createElement('div');
-		tooltip.innerText = this.appTooltip ? this.appTooltip : 'No description available.';
-		tooltip.style.left = x.toString() + 'px';
-		tooltip.style.top = y.toString() + 'px';
-		tooltip.setAttribute('class', 'tooltip-container');
-		document.body.appendChild(tooltip);
+		const tooltip = this.renderer.createElement('div');
+		this.renderer.setProperty(tooltip, 'innerText', this.appTooltip ? this.appTooltip : 'No description available.');
+		this.renderer.setStyle(tooltip, 'left', x.toString() + 'px');
+		this.renderer.setStyle(tooltip, 'top', y.toString() + 'px');
+		this.renderer.addClass(tooltip, 'tooltip-container');
+		this.renderer.appendChild(this.document.body, tooltip);
 		this.tooltipElement = tooltip;
 	}
 }

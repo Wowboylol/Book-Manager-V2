@@ -1,4 +1,4 @@
-import { Component, DebugElement, ElementRef } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { TooltipDirective } from './tooltip.directive';
@@ -25,11 +25,6 @@ describe('TooltipDirective', () => {
 		fixture.detectChanges();
 		directiveParent = fixture.nativeElement.querySelector('div');
 		testElement = fixture.debugElement.queryAll(By.directive(TooltipDirective));
-	});
-
-	it('should create an instance of tooltip directive', () => {
-		const directive = new TooltipDirective(new ElementRef(document.createElement('div')));
-		expect(directive).toBeTruthy();
 	});
 
 	it('should create tooltip element with given tooltip description on mouse enter', fakeAsync(() => {
