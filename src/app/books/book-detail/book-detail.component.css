@@ -31,6 +31,7 @@
 /* ===== Info ===== */
 .detail-container .data-box {
     background-color: var(--primary-color);
+    overflow-wrap: break-word;
 }
 
 .detail-container .data-box label {

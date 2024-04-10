@@ -42,4 +42,6 @@ testem.log
 Thumbs.db
 
 # Other files
+/utils
 src/test-data/book-snippet.json
+src/test-data/complete-data.json

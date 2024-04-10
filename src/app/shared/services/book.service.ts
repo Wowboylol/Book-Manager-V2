@@ -10,7 +10,7 @@ export class BookService
 	booksChanged = new Subject<Book[]>();
 
 	constructor() { 
-		let json = require('../../../test-data/book-snippet.json');
+		let json = require('../../../test-data/complete-data.json');
 		this.books = json.books;
 		this.books = this.convertBookDates(this.books);
 	}

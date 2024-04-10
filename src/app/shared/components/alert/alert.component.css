@@ -6,6 +6,7 @@
     border-radius: 0.375rem 0.375rem 0 0 !important;
     border-bottom: none !important;
     transition: var(--tran-05);
+    white-space: nowrap;
 }
 
 #alert-box::before {

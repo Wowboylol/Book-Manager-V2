@@ -10,7 +10,7 @@ export class TagService
 	tagsChanged = new Subject<Tag[]>();
 
 	constructor() { 
-		let json = require('../../../test-data/book-snippet.json');
+		let json = require('../../../test-data/complete-data.json');
 		this.tags = json.tags;
 	}
 
