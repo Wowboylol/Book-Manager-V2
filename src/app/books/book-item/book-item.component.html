@@ -8,15 +8,17 @@
         class="book-image" 
         [ngClass]="{ 
             'grid-style': displayStyle === displayEnum.Grid, 
-            'list-style float-end': displayStyle === displayEnum.List }">
-        <img loading="lazy" [src]="book.imagePath" alt="illustration of {{book.name}}">
+            'list-style float-end': displayStyle === displayEnum.List }"
+        #imageContainer>
+        <img loading="lazy" [src]="book.imagePath" alt="illustration of {{book.name}}" (load)="onImageLoad($event)">
     </div>
 
     <section 
         class="book-details" 
         [ngClass]="{
             'grid-style': displayStyle === displayEnum.Grid,
-            'list-style': displayStyle === displayEnum.List }">
+            'list-style': displayStyle === displayEnum.List }"
+        #detailsContainer>
         <p>{{book.name}}</p>
 
         <i class='bx bxs-star' *ngFor="let star of stars" [ngClass]="{'checked':book.rating >= star}"></i>
