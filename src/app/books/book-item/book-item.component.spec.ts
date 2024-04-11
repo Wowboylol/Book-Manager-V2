@@ -81,4 +81,49 @@ describe('BookItemComponent', () => {
 		let tags = fixture.nativeElement.querySelectorAll(".book-tag");
 		expect(tags.length).toBe(component.book.tags.length);
 	});
+
+	it('should create new resize observable and call fill gap when image is loaded', () => {
+		let imageElement = fixture.nativeElement.querySelector("img");
+		spyOn(component.resizeObserver, 'observe');
+		spyOn<any>(component, 'fillImageGap');
+		imageElement.dispatchEvent(new Event('load'));
+		expect(component.resizeObserver.observe).toHaveBeenCalled();
+		expect(component['fillImageGap']).toHaveBeenCalled();
+	});
+
+	it('should unsubscribe from resize observer on destroy', () => {
+		spyOn(component.resizeObserver, 'disconnect');
+		component.ngOnDestroy();
+		expect(component.resizeObserver.disconnect).toHaveBeenCalled();
+	});
+
+	it('should fill image gap when image is smaller than image container and display style is grid', () => {
+		let testImageHeight = 50;
+		component.detailsContainer.nativeElement.style.marginTop = '0px';
+		component.displayStyle = 0;
+		fixture.detectChanges();
+		component.imageContainer.nativeElement.style.height = '100px';
+		component['fillImageGap'](testImageHeight);
+		expect(component.detailsContainer.nativeElement.style.marginTop).toBe(`-${100 - testImageHeight}px`);
+	});
+
+	it('should not fill image gap when image is bigger than image container and display style is grod', () => {
+		let testImageHeight = 110;
+		component.detailsContainer.nativeElement.style.marginTop = '0px';
+		component.displayStyle = 0;
+		fixture.detectChanges();
+		component.imageContainer.nativeElement.style.height = '100px';
+		component['fillImageGap'](testImageHeight);
+		expect(component.detailsContainer.nativeElement.style.marginTop).toBe('0px');
+	});
+
+	it('should set image gap to 0px when display style is list', () => {
+		let testImageHeight = 50;
+		component.detailsContainer.nativeElement.style.marginTop = '50px';
+		component.displayStyle = 1;
+		fixture.detectChanges();
+		component.imageContainer.nativeElement.style.height = '100px';
+		component['fillImageGap'](testImageHeight);
+		expect(component.detailsContainer.nativeElement.style.marginTop).toBe('0px');
+	});
 });
