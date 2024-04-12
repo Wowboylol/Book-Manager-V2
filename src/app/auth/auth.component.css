@@ -1,0 +1,155 @@
+/* ===== Auth container ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.form-backdrop {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--body-color);
+}
+
+.form-container {
+    max-width: 26rem;
+    width: 100%;
+    padding: 1.8rem;
+    margin: 0 1rem;
+    background-color: var(--primary-color);
+    border-radius: 0.5rem;
+}
+
+header {
+    color: var(--text-color);
+    text-align: center;
+    font-weight: 600;
+}
+
+.custom-hr {
+    position: relative;
+    height: 1px;
+    width: 100%;
+    margin: 2rem 0;
+    background-color: grey;
+}
+
+.custom-hr::before {
+    content: 'Or';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 0 1rem;
+}
+
+.form-container .field {
+    position: relative;
+    width: 100%;
+    height: 3rem;
+    margin-top: 1.25rem;
+    border-radius: 0.4rem;
+}
+
+/* ===== Form ===== */
+form {
+    margin-top: 1.5rem;
+}
+
+.field input,
+.field button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0.4rem;
+}
+
+.field input {
+    padding: 0 1rem;
+    border: 1px solid var(--hr-color);
+    background-color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    outline: none;
+}
+
+.field input:focus {
+    border-bottom-width: 0.15rem;
+}
+
+.field button {
+    color: white;
+    background-color: var(--secondary-button);
+    transition: background-color 0.15s ease-in-out;
+    font-weight: 500;
+}
+
+.field button:hover {
+    background-color: var(--secondary-button-hover);
+}
+
+.form-link {
+    text-align: center;
+    margin-top: 0.6rem;
+}
+
+.form-link a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.form-link a:hover {
+    text-decoration: underline;
+}
+
+.form-link span,
+.form-link span a {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 400rem;
+}
+
+.form-link span a {
+    color: var(--secondary-color);
+}
+
+.eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: grey;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+/* ===== Login options ===== */
+.login-options a {
+    display: flex;
+    background-color: var(--secondary-button);
+    color: white;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.login-options a:hover {
+    background-color: var(--secondary-button-hover);
+}
+
+.login-icon {
+    font-size: 1.5rem;
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-45%);
+}

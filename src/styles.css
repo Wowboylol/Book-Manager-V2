@@ -11,6 +11,8 @@
     --toggle-color: #4d5669;
     --hr-color: #babfc6;
     --invalid-border-color: #dc3545;
+    --secondary-button: #6c3bbb;
+    --secondary-button-hover: #5820b2;
 
     --box-shadow-focus: 0 0 0 0.25rem rgba(118, 101, 201, 0.25);
     --invalid-box-shadow-focus: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
@@ -34,6 +36,8 @@
     --toggle-color: #ffffff;
     --hr-color: #414147;
     --invalid-border-color: #ea868f;
+    --secondary-button: #5820b2;
+    --secondary-button-hover: #6c3bbb;
 }
 
 body {
