@@ -10,6 +10,9 @@ import { CommonModule } from '@angular/common';
 })
 export class AuthComponent implements OnInit 
 {
+	showPassword: boolean = false;
+	isLoginMode: boolean = true;
+
 	constructor() { }
 	ngOnInit(): void {}
 }

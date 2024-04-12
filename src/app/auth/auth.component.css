@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: center;
     background-color: var(--body-color);
+    transition: var(--tran-05);
 }
 
 .form-container {
@@ -21,12 +22,14 @@
     margin: 0 1rem;
     background-color: var(--primary-color);
     border-radius: 0.5rem;
+    transition: var(--tran-05);
 }
 
 header {
     color: var(--text-color);
     text-align: center;
     font-weight: 600;
+    transition: var(--tran-02);
 }
 
 .custom-hr {
@@ -46,6 +49,7 @@ header {
     background-color: var(--primary-color);
     color: var(--text-color);
     padding: 0 1rem;
+    transition: var(--tran-05);
 }
 
 .form-container .field {
@@ -77,6 +81,7 @@ form {
     font-weight: 500;
     color: var(--text-color);
     outline: none;
+    transition: var(--tran-05);
 }
 
 .field input:focus {
@@ -103,6 +108,8 @@ form {
     color: var(--secondary-color);
     text-decoration: none;
     font-size: 0.9rem;
+    transition: var(--tran-02);
+    cursor: pointer;
 }
 
 .form-link a:hover {
@@ -114,6 +121,7 @@ form {
     color: var(--text-color);
     font-size: 0.9rem;
     font-weight: 400rem;
+    transition: var(--tran-02);
 }
 
 .form-link span a {
@@ -129,6 +137,11 @@ form {
     color: grey;
     cursor: pointer;
     padding: 0.5rem;
+    transition: var(--tran-02);
+}
+
+.eye-icon:hover {
+    color: var(--text-color);
 }
 
 /* ===== Login options ===== */
@@ -146,10 +159,22 @@ form {
     background-color: var(--secondary-button-hover);
 }
 
-.login-icon {
-    font-size: 1.5rem;
+.login-icon,
+.image-icon {
     position: absolute;
     top: 50%;
-    left: 1rem;
+}
+
+.login-icon {
+    font-size: 1.55rem;
     transform: translateY(-45%);
+    left: 0.9rem;
+}
+
+.image-icon {
+    height: 1.4rem;
+    width: 1.4rem;
+    object-fit: cover;
+    transform: translateY(-47%);
+    left: 1rem;
 }
