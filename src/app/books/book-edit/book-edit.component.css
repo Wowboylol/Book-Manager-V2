@@ -20,12 +20,12 @@
 }
 
 .button-container #save-button {
-    background-color: var(--primary-color);
+    background-color: var(--sidebar-color);
     color: var(--text-color);
 }
 
 .button-container #save-button:hover {
-    background-color: var(--primary-color-light);
+    background-color: var(--primary-color);
 }
 
 /* ===== Form ===== */
@@ -87,10 +87,10 @@
     border-style: none;
     height: 2.5rem;
     width: 9.5rem;
-    background-color: var(--primary-color);
+    background-color: var(--sidebar-color);
     color: var(--text-color);
 }
 
 .form-container #add-tag-button:hover {
-    background-color: var(--primary-color-light);
+    background-color: var(--primary-color);
 }

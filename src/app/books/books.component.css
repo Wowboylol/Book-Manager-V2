@@ -82,9 +82,9 @@ section .load-button {
     font-weight: 500;
     background: var(--sidebar-color);
     color: var(--text-color);
-    transition: var(--tran-04);
+    transition: var(--tran-button);
 }
 
 section .load-button:hover {
-    background: var(--primary-color-light);
+    background: var(--primary-color);
 }

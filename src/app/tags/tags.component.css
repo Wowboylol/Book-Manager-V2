@@ -54,12 +54,12 @@ section .button-box button {
 }
 
 section .button-box #clear-button {
-    background-color: var(--primary-color);
+    background-color: var(--sidebar-color);
     color: var(--text-color);
 }
 
 section .button-box #clear-button:hover {
-    background-color: var(--primary-color-light);
+    background-color: var(--primary-color);
 }
 
 /* ===== Tag display ===== */
