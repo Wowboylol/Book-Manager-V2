@@ -23,6 +23,7 @@
     background-color: var(--primary-color);
     border-radius: 0.5rem;
     transition: var(--tran-05);
+    box-shadow: rgba(0, 0, 0, 0.35) 0rem 0.25rem 0.8rem;
 }
 
 header {
