@@ -41,6 +41,8 @@ describe('BooksComponent', () => {
 	});
 
 	it('should increase book display limit when load more button is clicked', () => {
+		component.searchCount.value = 20;
+		fixture.detectChanges();
 		let initialLimit = component.bookDisplayLimit;
 		let loadMoreButton = fixture.nativeElement.querySelector(".load-button");
 		loadMoreButton.click();
