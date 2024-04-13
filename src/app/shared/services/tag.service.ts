@@ -9,14 +9,17 @@ export class TagService
 	private tags: Tag[] = [];
 	tagsChanged = new Subject<Tag[]>();
 
-	constructor() { 
-		let json = require('../../../test-data/complete-data.json');
-		this.tags = json.tags;
-	}
+	constructor() { }
 
 	// Return a copy of the array of tags
 	getAllTags(): Tag[] {
 		return this.tags.slice();
+	}
+
+	// Set current tags to the given array of tags
+	setTags(tags: Tag[]): void {
+		this.tags = tags;
+		this.tagsChanged.next(this.tags.slice());
 	}
 
 	// Returns the tag with the given name, or undefined if not found (case-insensitive)

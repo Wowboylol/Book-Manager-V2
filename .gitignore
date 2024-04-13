@@ -43,5 +43,6 @@ Thumbs.db
 
 # Other files
 /utils
+src/environments
 src/test-data/book-snippet.json
 src/test-data/complete-data.json

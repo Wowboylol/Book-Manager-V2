@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ThemeService } from '../shared/services/theme.service';
 import { DropdownDirective } from '../shared/directives/dropdown.directive';
+import { DataStorageService } from '../shared/services/data-storage.service';
 
 @Component({
 	selector: 'app-sidebar',
@@ -21,7 +22,7 @@ export class SidebarComponent implements OnInit, OnDestroy
 	darkMode: boolean;
 	modeText: string;
 
-	constructor(private themeService: ThemeService) { 
+	constructor(private themeService: ThemeService, private dataStorageService: DataStorageService) { 
 		this.darkMode = themeService.isDarkMode();
 		this.modeText = this.darkMode ? 'Light Mode' : 'Dark Mode';
 		this.isMobile = window.innerWidth < 768 ? true : false;
@@ -49,5 +50,13 @@ export class SidebarComponent implements OnInit, OnDestroy
 
 	onScreenResize(event) {
 		event.target.innerWidth < 768 ? this.isMobile = true : this.isMobile = false;
+	}
+
+	onSaveData() {
+		this.dataStorageService.storeData();
+	}
+
+	onFetchData() {
+		this.dataStorageService.fetchData();
 	}
 }

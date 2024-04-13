@@ -9,11 +9,7 @@ export class BookService
 	private books: Book[] = [];
 	booksChanged = new Subject<Book[]>();
 
-	constructor() { 
-		let json = require('../../../test-data/complete-data.json');
-		this.books = json.books;
-		this.books = this.convertBookDates(this.books);
-	}
+	constructor() { }
 
 	// Converts book date strings into Date objects
 	// If the date string is null, the date is set to null
@@ -28,6 +24,13 @@ export class BookService
 	// Return a copy of the array of books
 	getAllBooks(): Book[] {
 		return this.books.slice();
+	}
+
+	// Set current books to the given array of books and convert date strings to Date objects
+	// Precondition: The dates in the books must be of type string
+	setAndParseBooks(books: Book[]): void {
+		this.books = this.convertBookDates(books);
+		this.booksChanged.next(this.books.slice());
 	}
 
 	// Return the book with the given ID, or undefined if not found
