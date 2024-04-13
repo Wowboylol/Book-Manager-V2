@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { Book } from '../models/book.model';
-import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class BookService 
@@ -11,25 +11,14 @@ export class BookService
 
 	constructor() { }
 
-	// Converts book date strings into Date objects
-	// If the date string is null, the date is set to null
-	private convertBookDates(books: Book[]): Book[] {
-		return books.map(book => {
-			book.dateCreated = book.dateCreated ? new Date(book.dateCreated) : null;
-			book.dateUpdated = book.dateUpdated ? new Date(book.dateUpdated) : null;
-			return book;
-		});
-	}
-
 	// Return a copy of the array of books
 	getAllBooks(): Book[] {
 		return this.books.slice();
 	}
 
-	// Set current books to the given array of books and convert date strings to Date objects
-	// Precondition: The dates in the books must be of type string
-	setAndParseBooks(books: Book[]): void {
-		this.books = this.convertBookDates(books);
+	// Set current books to the given array of books
+	setBooks(books: Book[]): void {
+		this.books = books;
 		this.booksChanged.next(this.books.slice());
 	}
 
