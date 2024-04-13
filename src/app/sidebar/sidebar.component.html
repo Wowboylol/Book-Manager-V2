@@ -146,3 +146,18 @@
         </article>
     </section>
 </nav>
+
+<app-alert 
+    [message]="alertMessage" 
+    [toggle]="alertToggle" 
+    [type]="alertType">
+</app-alert>
+
+<app-confirm 
+    [title]="'No Books To Save'" 
+    [message]="'Are you sure you want to save an empty list of books? This will overwrite currently saved data.'" 
+    [confirmText]="'Save'"
+    *ngIf="showConfirmSave"
+    (cancel)="showConfirmSave = false"
+    (confirm)="onSaveData()">
+</app-confirm>

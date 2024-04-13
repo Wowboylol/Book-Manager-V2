@@ -6,11 +6,14 @@ import { Subscription } from 'rxjs';
 import { ThemeService } from '../shared/services/theme.service';
 import { DropdownDirective } from '../shared/directives/dropdown.directive';
 import { DataStorageService } from '../shared/services/data-storage.service';
+import { AlertComponent } from '../shared/components/alert/alert.component';
+import { ConfirmComponent } from '../shared/components/confirm/confirm.component';
+import { BookService } from '../shared/services/book.service';
 
 @Component({
 	selector: 'app-sidebar',
 	standalone: true,
-	imports: [CommonModule, RouterModule, DropdownDirective],
+	imports: [CommonModule, RouterModule, DropdownDirective, AlertComponent, ConfirmComponent],
 	templateUrl: './sidebar.component.html',
 	styleUrls: ['./sidebar.component.css']
 })
@@ -23,7 +26,18 @@ export class SidebarComponent implements OnInit, OnDestroy
 	darkMode: boolean;
 	modeText: string;
 
-	constructor(private themeService: ThemeService, private dataStorageService: DataStorageService) { 
+	// Dynamic component data (alert and confirm)
+	alertToggle: string = 'hidden';
+	alertMessage: string = '';
+	alertType: string = '';
+	dataServiceCooldownTimer = null;
+	showConfirmSave: boolean = false;
+
+	constructor(
+		private themeService: ThemeService, 
+		private dataStorageService: DataStorageService,
+		private bookService: BookService
+	) { 
 		this.darkMode = themeService.isDarkMode();
 		this.modeText = this.darkMode ? 'Light Mode' : 'Dark Mode';
 		this.isMobile = window.innerWidth < 768 ? true : false;
@@ -43,21 +57,72 @@ export class SidebarComponent implements OnInit, OnDestroy
 		this.themeChangedSubscription.unsubscribe(); 
 	}
 
+	// Toggle between dark and light mode
 	toggleMode() { 
 		this.darkMode = !this.darkMode;
 		this.modeText = this.darkMode ? 'Light Mode' : 'Dark Mode';
 		this.themeService.setDarkMode(this.darkMode); 
 	}
 
+	// Runs when screen is resized
 	onScreenResize(event) {
 		event.target.innerWidth < 768 ? this.isMobile = true : this.isMobile = false;
 	}
 
+	// Runs when user clicks on save data button
 	onSaveData() {
-		this.dataStorageService.storeData();
+		if(this.bookService.getAllBooks().length == 0 && !this.showConfirmSave) {
+			this.showConfirmSave = true;
+		}
+		else if(!this.dataServiceCooldownTimer) {
+			this.setDataServiceCooldownTimer();
+			this.dataStorageService.storeData();
+			this.showConfirmSave = false;
+			this.alertMessage = 'Data saved successfully!';
+			this.alertType = 'success';
+			this.runAlert();
+		}
+		else {
+			this.displayCooldownError();
+		}
 	}
 
+	// Runs when user clicks on fetch data button
 	onFetchData() {
-		this.dataStorageService.fetchData();
+		if(!this.dataServiceCooldownTimer) {
+			this.setDataServiceCooldownTimer();
+			this.dataStorageService.fetchData();
+			this.alertMessage = 'Data fetched successfully!';
+			this.alertType = 'success';
+			this.runAlert();
+		}
+		else {
+			this.displayCooldownError();
+		}
+	}
+
+	// Sets a cooldown timer for the data service
+	private setDataServiceCooldownTimer() {
+		this.dataServiceCooldownTimer = setTimeout(() => {
+			this.dataServiceCooldownTimer = null;
+		}, 5000);
+	}
+
+	// Is called when user tries to save or fetch data before cooldown
+	private displayCooldownError() {
+		this.alertMessage = 'Please wait 5 seconds before trying again.';
+		this.alertType = 'danger';
+		this.runAlert();
+	}
+
+	// Runs the alert component animation
+	runAlert(): void {
+		if(this.alertToggle === 'hidden')
+		{
+			this.alertToggle = 'show';
+			setTimeout(() => {
+				this.alertToggle = 'hidden';
+			}, 3000);			
+		}
 	}
 }
