@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
 import { Subscription } from 'rxjs';
+
 import { ThemeService } from '../shared/services/theme.service';
 import { DropdownDirective } from '../shared/directives/dropdown.directive';
 import { DataStorageService } from '../shared/services/data-storage.service';
@@ -16,6 +16,7 @@ import { DataStorageService } from '../shared/services/data-storage.service';
 })
 export class SidebarComponent implements OnInit, OnDestroy 
 {
+	// Sidebar styling data
 	private themeChangedSubscription: Subscription;
 	close: boolean = true;
 	isMobile: boolean;
