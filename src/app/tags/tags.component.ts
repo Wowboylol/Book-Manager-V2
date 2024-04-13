@@ -108,9 +108,12 @@ export class TagsComponent implements OnInit, OnDestroy
 
 	// Runs the alert component animation
 	runAlert(): void {
-		this.alertToggle = 'show';
-		setTimeout(() => {
-			this.alertToggle = 'hidden';
-		}, 3000);
+		if(this.alertToggle === 'hidden')
+		{
+			this.alertToggle = 'show';
+			setTimeout(() => {
+				this.alertToggle = 'hidden';
+			}, 3000);
+		}
 	}
 }

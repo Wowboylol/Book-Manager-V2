@@ -52,6 +52,6 @@
 <app-alert 
     [message]="this.searchCount.value == 0 ? 'No books found' : this.searchCount.value + ' books found'" 
     [toggle]="alertToggle" 
-    [type]="this.searchCount.value == 0 ? 'warning' : 'success'">
+    [type]="this.searchCount.value == 0 ? 'warning' : 'info'">
 </app-alert>
 <router-outlet></router-outlet>
