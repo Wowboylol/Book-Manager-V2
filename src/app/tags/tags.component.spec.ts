@@ -109,7 +109,8 @@ describe('TagsComponent', () => {
 		expect(pipeSpy).toHaveBeenCalled();
 	});
 
-	it('should show alert when search query is updated and then hide aleart', fakeAsync(() => {
+	it('should show alert when search query is updated and then hide alert', fakeAsync(() => {
+		component.alertToggle = 'hidden';
 		component.onSearchQuery({ searchString: "test", searchSort: 0, searchOrder: 0 });
 		expect(component.alertToggle).toBe('show');
 		tick(3000);

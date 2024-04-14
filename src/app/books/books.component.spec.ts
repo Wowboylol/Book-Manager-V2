@@ -62,6 +62,7 @@ describe('BooksComponent', () => {
 
 	it('should display alert when search query is updated and then hide alert', 
 		fakeAsync(() => {
+			component.alertToggle = 'hidden';
 			component.onSearchQuery({ searchString: "test", searchType: 0, searchSort: 0, searchOrder: 0 });
 			expect(component.alertToggle).toBe('show');
 			tick(3000);
@@ -69,15 +70,12 @@ describe('BooksComponent', () => {
 		}
 	));
 
-	it('should change display type when style button is clicked', 
-		fakeAsync(() => {
-			spyOn<BooksComponent, any>(component, 'changeDisplayType');
-			let styleButton = fixture.nativeElement.querySelector(".change-type-button");
-			styleButton.click();
-			tick();
-			expect(component.changeDisplayType).toHaveBeenCalled();
-		}
-	));
+	it('should change display type when style button is clicked', () => {
+		component.displayType = 0;
+		let styleButton = fixture.nativeElement.querySelector(".change-type-button");
+		styleButton.click();
+		expect(component.displayType).toBeGreaterThan(0);
+	});
 
 	it('should unsubscribe from book changes when component is destroyed', () => {
 		spyOn(component['booksChangedSubscription'], 'unsubscribe');
