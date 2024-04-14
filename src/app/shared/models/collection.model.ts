@@ -2,7 +2,7 @@ export class Collection
 {
     public constructor(
         public name: string,
-        public books: number[],
+        public amount: number,
         public color: string
     ) {}
 }
