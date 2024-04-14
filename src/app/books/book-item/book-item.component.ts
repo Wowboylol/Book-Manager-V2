@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -7,6 +7,7 @@ import { Book } from '../../shared/models/book.model';
 import { BookDisplayType } from '../book-display-type.model';
 import { TagService } from 'src/app/shared/services/tag.service';
 import { TooltipDirective } from 'src/app/shared/directives/tooltip.directive';
+import { CollectionService } from 'src/app/shared/services/collection.service';
 
 @Component({
 	selector: 'app-book-item',
@@ -15,13 +16,14 @@ import { TooltipDirective } from 'src/app/shared/directives/tooltip.directive';
 	templateUrl: './book-item.component.html',
 	styleUrls: ['./book-item.component.css']
 })
-export class BookItemComponent implements OnDestroy
+export class BookItemComponent implements OnInit, OnDestroy 
 {
 	// Book item data
 	@Input() book: Book;
 	@Input() displayStyle: BookDisplayType
 	readonly displayEnum = BookDisplayType;
 	stars: number[] = [1, 2, 3, 4, 5];
+	bookmarkColor: string = 'transparent';
 
 	// Dynamic styling data
 	@ViewChild('imageContainer') imageContainer: ElementRef;
@@ -32,7 +34,15 @@ export class BookItemComponent implements OnDestroy
 		});
 	});
 
-	constructor(private tagService: TagService, private renderer: Renderer2) { }
+	constructor(
+		private tagService: TagService, 
+		private renderer: Renderer2, 
+		private collectionService: CollectionService
+	) { }
+
+	ngOnInit(): void {
+		this.bookmarkColor = this.book.collection == 'None' ? 'transparent' : this.collectionService.getCollectionByName(this.book.collection).color;
+	}
 
 	ngOnDestroy(): void {
 		this.resizeObserver.disconnect();

@@ -23,6 +23,7 @@
 
 /* ===== Book image ===== */
 div .book-image.grid-style {
+    position: relative;
     overflow: hidden;
     aspect-ratio: 128/178;
 }
@@ -40,6 +41,18 @@ div .book-image.grid-style img {
 div .book-image.list-style img {
     max-height: 200px;
     border-radius: 0.375rem;
+}
+
+div .book-image.grid-style .bookmark {
+    position: absolute;
+    top: 0;
+    left: 5%;
+    width: 10%;
+    height: 20%;
+    mask-image: url('../../../assets/images/bookmark.svg');
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
 }
 
 /* ===== Book details ===== */

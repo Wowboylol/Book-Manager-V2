@@ -11,6 +11,11 @@
             'list-style float-end': displayStyle === displayEnum.List }"
         #imageContainer>
         <img loading="lazy" [src]="book.imagePath" alt="illustration of {{book.name}}" (load)="onImageLoad($event)">
+        <aside 
+            *ngIf="displayStyle === displayEnum.Grid && book.collection != 'None'" 
+            class="bookmark" 
+            [ngStyle]="{'background-color': bookmarkColor}">
+        </aside>
     </div>
 
     <section 
