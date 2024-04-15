@@ -32,8 +32,7 @@ export class TagService
 		return this.tags.some(tag => tag.name.toLowerCase() === name.toLowerCase());
 	}
 
-	// Increments amount of tag if it exists, otherwise adds a new tag
-	// Precondition: tag name must be unique
+	// Increments tag amount if it exists, otherwise adds a new tag
 	addTag(name: string): void {
 		let tag = this.tags.find(tag => tag.name.toLowerCase() === name.toLowerCase());
 		if(tag) {

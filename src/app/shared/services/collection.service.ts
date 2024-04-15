@@ -26,4 +26,38 @@ export class CollectionService
 	getCollectionByName(collectionName: string): Collection {
 		return this.collections.find(collection => collection.name.toLowerCase() === collectionName.toLowerCase());
 	}
+
+	// Increments collection book amount if it exists, otherwise adds a new collection
+	addCollection(collectionName: string): void {
+		let collection = this.collections.find(collection => collection.name.toLowerCase() === collectionName.toLowerCase());
+		if(collection) {
+			collection.amount++;
+		} 
+		else {
+			this.collections.push(new Collection(collectionName, 1, 'black'));
+		}
+		this.collectionsChanged.next(this.collections.slice());
+	}
+
+	// Deletes the collection with the given name regardless of its amount (case-insensitive)
+	// Postcondition: The deleted collection should be removed from all books
+	deleteCollection(collectionName: string): void {
+		this.collections = this.collections.filter(collection => collection.name.toLowerCase() !== collectionName.toLowerCase());
+		this.collectionsChanged.next(this.collections.slice());
+	}
+
+	// Decrements amount of collection if it exists and has an amount greater than 1 (case-insensitive)
+	// Otherwise, removes the collection
+	removeCollection(collectionName: string): void {
+		let collection = this.collections.find(collection => collection.name.toLowerCase() === collectionName.toLowerCase());
+		if(collection) {
+			if(collection.amount > 1) {
+				collection.amount--;
+				this.collectionsChanged.next(this.collections.slice());
+			} 
+			else {
+				this.deleteCollection(collectionName);
+			}
+		}
+	}
 }

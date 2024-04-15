@@ -7,6 +7,8 @@ import { Book } from 'src/app/shared/models/book.model';
 import { BookService } from '../../shared/services/book.service';
 import { TagService } from '../../shared/services/tag.service';
 import { Tag } from 'src/app/shared/models/tag.model';
+import { CollectionService } from 'src/app/shared/services/collection.service';
+import { Collection } from 'src/app/shared/models/collection.model';
 
 @Component({
 	selector: 'app-book-edit',
@@ -32,8 +34,9 @@ export class BookEditComponent implements OnInit, AfterContentInit
 	constructor(
 		private route: ActivatedRoute, 
 		private bookService: BookService, 
-		private tagService: TagService,
-		private router: Router
+		private tagService: TagService, 
+		private router: Router, 
+		private collectionService: CollectionService
 	) { }
 	
 	ngOnInit(): void { 
@@ -57,6 +60,10 @@ export class BookEditComponent implements OnInit, AfterContentInit
 
 	get allTags(): Tag[] {
 		return this.tagService.getAllTags();
+	}
+
+	get allCollections(): Collection[] {
+		return this.collectionService.getAllCollections();
 	}
 
 	onAddTag(): void {
@@ -88,11 +95,22 @@ export class BookEditComponent implements OnInit, AfterContentInit
 			this.book.tags.filter(tag => !newBook.tags.includes(tag)).forEach(tag => this.tagService.removeTag(tag));
 			newBook.tags.filter(tag => !this.book.tags.includes(tag)).forEach(tag => this.tagService.addTag(tag));
 			this.bookService.updateBook(newBook);
+
+			// Update the collection
+			this.collectionService.removeCollection(this.book.collection);
+			if(newBook.collection && newBook.collection !== 'None') {
+				this.collectionService.addCollection(newBook.collection);
+			}
 		}
 		else {
 			// Add the book and tags
 			newBook.tags.forEach(tag => this.tagService.addTag(tag));
 			this.bookService.addBook(newBook);
+
+			// Add collection if it isn't null or 'None'
+			if(newBook.collection && newBook.collection !== 'None') {
+				this.collectionService.addCollection(newBook.collection);
+			}
 		}
 		this.router.navigate(['../'], { relativeTo: this.route });
 	}

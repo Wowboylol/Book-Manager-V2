@@ -69,6 +69,7 @@ export class BookService
 		try{
 			if(bookIndex !== -1) {
 				newBook.dateUpdated = new Date();
+				if(!newBook.collection) { newBook.collection = 'None'; }
 				this.books[bookIndex] = newBook;
 				this.booksChanged.next(this.books.slice());
 			}
