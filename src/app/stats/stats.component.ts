@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { BookRatingGraphComponent } from './book-rating-graph/book-rating-graph.component';
 
 @Component({
 	selector: 'app-stats',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, BookRatingGraphComponent],
 	templateUrl: './stats.component.html',
 	styleUrls: ['./stats.component.css']
 })
-export class StatsComponent implements OnInit 
+export class StatsComponent 
 {
 	constructor() { }
-	ngOnInit(): void { }
 }

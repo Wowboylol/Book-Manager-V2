@@ -17,7 +17,7 @@ describe('StatsComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should create the stats component', () => {
 		expect(component).toBeTruthy();
 	});
 });
