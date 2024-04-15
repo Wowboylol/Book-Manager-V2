@@ -6,6 +6,7 @@ import { BookDetailComponent } from './book-detail.component';
 import { BookService } from 'src/app/shared/services/book.service';
 import { TagService } from 'src/app/shared/services/tag.service';
 import { Book } from 'src/app/shared/models/book.model';
+import { CollectionService } from 'src/app/shared/services/collection.service';
 
 describe('BookDetailComponent', () => {
 	let fixture: ComponentFixture<BookDetailComponent>;
@@ -13,6 +14,7 @@ describe('BookDetailComponent', () => {
 	let router: Router;
 	let mockBookService: jasmine.SpyObj<BookService>;
 	let mockTagService: jasmine.SpyObj<TagService>;
+	let mockCollectionService: jasmine.SpyObj<CollectionService>;
 	let testBook: Book = {
 		id: 0,
 		name: "Test Book",
@@ -35,6 +37,7 @@ describe('BookDetailComponent', () => {
 			}
 		}
 		mockBookService = jasmine.createSpyObj('BookService', ['getBookById', 'deleteBook']);
+		mockCollectionService = jasmine.createSpyObj('CollectionService', ['removeCollection']);
 		mockTagService = jasmine.createSpyObj(
 			'TagService', { 
 				'getTagByName': { name: "test", amount: 1, description: "test" },
@@ -49,7 +52,8 @@ describe('BookDetailComponent', () => {
 			providers: [
 				{ provide: BookService, useValue: mockBookService },
 				{ provide: ActivatedRoute, useValue: mockActivatedRoute },
-				{ provide: TagService, useValue: mockTagService }
+				{ provide: TagService, useValue: mockTagService },
+				{ provide: CollectionService, useValue: mockCollectionService }
 			]
 		})
 
@@ -175,11 +179,12 @@ describe('BookDetailComponent', () => {
 		expect(component.showConfirmDelete).toBeTrue();
 	});
 
-	it('should delete the book and decrement linked tags when onDelete is called', () => {
+	it('should delete the book and decrement linked tags and collection when onDelete is called', () => {
 		const routerSpy = spyOn(router, 'navigate');
 		component.book = { ...testBook };
 		component.onDelete();
 		expect(mockTagService.removeTag).toHaveBeenCalledTimes(testBook.tags.length);
+		expect(mockCollectionService.removeCollection).toHaveBeenCalledWith(testBook.collection);
 		expect(mockBookService.deleteBook).toHaveBeenCalledWith(testBook.id);
 		expect(routerSpy).toHaveBeenCalledWith(['/books']);
 	});
