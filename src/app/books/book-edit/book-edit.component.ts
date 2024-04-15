@@ -82,7 +82,7 @@ export class BookEditComponent implements OnInit, AfterContentInit
 			this.bookForm.value['imagePath'],
 			this.bookForm.value['rating'],
 			null, null,
-			this.bookForm.value['tags'].map(tag => tag['name']),
+			this.bookForm.value['tags'].map(tag => tag['name']?.toLowerCase()),
 			this.bookForm.value['collection']
 		)
 

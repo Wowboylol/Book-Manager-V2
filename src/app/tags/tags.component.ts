@@ -71,7 +71,7 @@ export class TagsComponent implements OnInit, OnDestroy
 
 	// Ran when the form is submitted to update the selected tag's name and (optionally) description
 	onUpdate(): void {
-		const newTagName = this.tagForm.value.name;
+		const newTagName = this.tagForm.value.name.toLowerCase();
 		const newTagDescription = this.tagForm.value.description;
 		this.tagService.updateTagName(this.selectedTagName, newTagName);
 		this.bookService.updateTagInBooks(this.selectedTagName, newTagName);
