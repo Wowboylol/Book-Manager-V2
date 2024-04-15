@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BookItemComponent } from './book-item.component';
 import { routes } from 'src/app/app-routing';
 import { TagService } from 'src/app/shared/services/tag.service';
+import { CollectionService } from 'src/app/shared/services/collection.service';
 
 describe('BookItemComponent', () => {
 	let component: BookItemComponent;
@@ -12,6 +13,7 @@ describe('BookItemComponent', () => {
 	let imageElement: HTMLMediaElement;
 	let ratingElements: NodeListOf<Element>;
 	let mockTagService: jasmine.SpyObj<TagService>;
+	let mockCollectionService: jasmine.SpyObj<TagService>;
 
   	beforeEach(async () => {
 		mockTagService = jasmine.createSpyObj(
@@ -19,11 +21,17 @@ describe('BookItemComponent', () => {
 				'getTagByName': { name: "test", amount: 1, description: "test" }
 			}
 		);
+		mockCollectionService = jasmine.createSpyObj(
+			'CollectionService', { 
+				'getCollectionByName': { name: "myBookCollection", color: "black" }
+			}
+		);
 
 		await TestBed.configureTestingModule({
 			imports: [ BookItemComponent, RouterTestingModule.withRoutes(routes) ],
 			providers: [
-				{ provide: TagService, useValue: mockTagService }
+				{ provide: TagService, useValue: mockTagService },
+				{ provide: CollectionService, useValue: mockCollectionService }
 			]
 		})
     	.compileComponents();
