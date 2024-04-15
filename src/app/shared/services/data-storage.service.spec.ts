@@ -6,22 +6,26 @@ import { testData } from 'src/test-data/test-data';
 import { DataStorageService } from './data-storage.service';
 import { BookService } from './book.service';
 import { TagService } from './tag.service';
+import { CollectionService } from './collection.service';
 
 describe('DataStorageService', () => {
   	let service: DataStorageService;
 	let controller: HttpTestingController;
 	let mockBookService: jasmine.SpyObj<BookService>;
 	let mockTagService: jasmine.SpyObj<TagService>;
+	let mockCollectionService: jasmine.SpyObj<CollectionService>;
 
 	beforeEach(() => {
 		mockBookService = jasmine.createSpyObj('BookService', ['getAllBooks', 'setBooks']);
 		mockTagService = jasmine.createSpyObj('TagService', ['getAllTags', 'setTags']);
+		mockCollectionService = jasmine.createSpyObj('CollectionService', ['getAllCollections', 'setCollections']);
 		TestBed.configureTestingModule({
 			imports: [HttpClientTestingModule],
 			providers: [
 				DataStorageService,
 				{ provide: BookService, useValue: mockBookService },
-				{ provide: TagService, useValue: mockTagService }
+				{ provide: TagService, useValue: mockTagService },
+				{ provide: CollectionService, useValue: mockCollectionService }
 			]
 		});
 		service = TestBed.inject(DataStorageService);
@@ -34,26 +38,29 @@ describe('DataStorageService', () => {
 		expect(service.storeData).toHaveBeenCalled();
 		expect(mockBookService.getAllBooks).toHaveBeenCalled();
 		expect(mockTagService.getAllTags).toHaveBeenCalled();
+		expect(mockCollectionService.getAllCollections).toHaveBeenCalled();
 	})
 
-	it('fetches data from database and returns empty book & tag array when response is empty', () => {
+	it('fetches data from database and returns empty book, tag, and collection array when response is empty', () => {
 		service.fetchData();
 		const request = controller.expectOne(`${environment.firebaseEndpoint}data.json`);
 		request.flush({ });
 		expect(mockTagService.setTags).toHaveBeenCalledWith([]);
 		expect(mockBookService.setBooks).toHaveBeenCalledWith([]);
+		expect(mockCollectionService.setCollections).toHaveBeenCalledWith([]);
 	});
 
-	it('fetches data from database and returns empty tag array when only books exist', () => {
+	it('fetches data from database and returns empty tag & collection array when only books exist', () => {
 		let testBooks = structuredClone(testData.books);
 		service.fetchData();
 		const request = controller.expectOne(`${environment.firebaseEndpoint}data.json`);
 		request.flush({ books: testBooks });
 		expect(mockTagService.setTags).toHaveBeenCalledWith([]);
+		expect(mockCollectionService.setCollections).toHaveBeenCalledWith([]);
 		expect(mockBookService.setBooks).toHaveBeenCalledWith(testBooks);
 	});
 
-	it('fetches data from database and returns book & tag data when data exists', () => {
+	it('fetches data from database and returns book, tag, and collection data when data exists', () => {
 		let testBook = structuredClone(testData.books[2]);
 		testBook.dateCreated = undefined;
 		testBook.dateUpdated = undefined;
@@ -62,9 +69,11 @@ describe('DataStorageService', () => {
 		let testTag = structuredClone(testData.tags[2]);
 		testTag.description = undefined;
 
+		let testCollection = structuredClone(testData.collections[1]);
+
 		service.fetchData();
 		const request = controller.expectOne(`${environment.firebaseEndpoint}data.json`);
-		request.flush({ books: [testBook], tags: [testTag] });
+		request.flush({ books: [testBook], tags: [testTag], collections: [testCollection] });
 
 		testBook.dateCreated = null;
 		testBook.dateUpdated = null;
@@ -74,5 +83,6 @@ describe('DataStorageService', () => {
 
 		expect(mockTagService.setTags).toHaveBeenCalledWith([testTag]);
 		expect(mockBookService.setBooks).toHaveBeenCalledWith([testBook]);
+		expect(mockCollectionService.setCollections).toHaveBeenCalledWith([testCollection]);
 	});
 });
