@@ -134,4 +134,11 @@ describe('BookItemComponent', () => {
 		component['fillImageGap'](testImageHeight);
 		expect(component.detailsContainer.nativeElement.style.marginTop).toBe('0px');
 	});
+
+	it('should display bookmark when display style is list', () => {
+		component.displayStyle = 0;
+		fixture.detectChanges();
+		let bookmark = fixture.nativeElement.querySelector(".bookmark");
+		expect(bookmark).toBeTruthy();
+	});
 });

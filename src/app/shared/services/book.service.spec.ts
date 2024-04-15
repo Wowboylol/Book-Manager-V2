@@ -31,6 +31,11 @@ describe('BookService', () => {
 		expect(service.getAllBooks()).toEqual(controlGroup);
 	});
 
+	it('should set the books to the given array of books', () => {
+		service.setBooks([newBook]);
+		expect(service.getAllBooks()).toEqual([newBook]);
+	});
+
 	it('should return a book by ID', () => {
 		expect(service.getBookById(3)).toEqual(controlGroup[3]);
 	});
@@ -73,5 +78,6 @@ describe('BookService', () => {
 		controlGroup[3] = newBook;
 		expect(service.getAllBooks()).toEqual(controlGroup);
 		expect(service.getBookById(3).dateUpdated).not.toBeNull();
+		expect(service.getBookById(3).collection).toEqual('None');
 	});
 });

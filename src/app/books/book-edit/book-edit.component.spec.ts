@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormArray } from '@angular/forms';
 
 import { BookEditComponent } from './book-edit.component';
 import { routes } from 'src/app/app-routing';
@@ -8,14 +9,14 @@ import { BookService } from 'src/app/shared/services/book.service';
 import { TagService } from 'src/app/shared/services/tag.service';
 import { Book } from 'src/app/shared/models/book.model';
 import { testData } from 'src/test-data/test-data';
-import { FormArray } from '@angular/forms';
+import { CollectionService } from 'src/app/shared/services/collection.service';
 
 describe('BookEditComponent', () => {
 	let component: BookEditComponent;
 	let fixture: ComponentFixture<BookEditComponent>;
-	let router: Router;
 	let mockBookService: jasmine.SpyObj<BookService>;
 	let mockTagService: jasmine.SpyObj<TagService>;
+	let mockCollectionService: jasmine.SpyObj<CollectionService>;
 	let testBook: Book;
 
   	beforeEach(async () => {
@@ -33,20 +34,22 @@ describe('BookEditComponent', () => {
 			}
 		);
 		mockTagService = jasmine.createSpyObj('TagService', ['getAllTags', 'removeTag', 'addTag']);
+		mockCollectionService = jasmine.createSpyObj('CollectionService', ['getAllCollections', 'addCollection', 'removeCollection']);
 		
 		await TestBed.configureTestingModule({
 			imports: [ BookEditComponent, RouterTestingModule.withRoutes(routes) ],
 			providers: [
 				{ provide: ActivatedRoute, useValue: mockActivatedRoute },
 				{ provide: BookService, useValue: mockBookService },
-				{ provide: TagService, useValue: mockTagService }
+				{ provide: TagService, useValue: mockTagService },
+				{ provide: CollectionService, useValue: mockCollectionService }
 			]
 		})
     	.compileComponents();
 
 		fixture = TestBed.createComponent(BookEditComponent);
 		component = fixture.componentInstance;
-		router = TestBed.inject(Router);
+		TestBed.inject(Router);
 		fixture.detectChanges();
 	});
 
@@ -124,18 +127,22 @@ describe('BookEditComponent', () => {
 		expect(mockTagService.addTag).toHaveBeenCalledTimes(0);
 		expect(mockTagService.removeTag).toHaveBeenCalledTimes(0);
 		expect(mockBookService.updateBook).toHaveBeenCalled();
+		expect(mockCollectionService.removeCollection).toHaveBeenCalledTimes(1);
+		expect(mockCollectionService.addCollection).toHaveBeenCalledTimes(0);
 	});
 
 	it('should submit new book after clicking save', () => {
 		component.editMode = false;
 		component.book = null;
 		component['initForm']();
+		component.bookForm.get('collection').setValue('New Collection');
 		let addTagButton = fixture.nativeElement.querySelector('#add-tag-button');
 		addTagButton.click();
 		let saveButton = fixture.nativeElement.querySelector('#save-button');
 		saveButton.click();
 		expect(mockBookService.addBook).toHaveBeenCalled();
 		expect(mockTagService.addTag).toHaveBeenCalledTimes(1);
+		expect(mockCollectionService.addCollection).toHaveBeenCalledTimes(1);
 	});
 
 	it('should remove tag form group from the form array on clicking delete tag', () => {
