@@ -6,6 +6,7 @@ import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { TagsComponent } from './tags/tags.component';
 import { BookEditComponent } from './books/book-edit/book-edit.component';
 import { AuthComponent } from './auth/auth.component';
+import { StatsComponent } from './stats/stats.component';
 
 export const routes: Route[] = [
     { path: '', redirectTo: '/books', pathMatch: 'full' },
@@ -27,5 +28,6 @@ export const routes: Route[] = [
         ]
     },
     { path: 'tags', component: TagsComponent },
+    { path: 'stats', component: StatsComponent },
     { path: 'auth', component: AuthComponent }
 ];
