@@ -5,6 +5,7 @@ import { Chart, registerables } from 'chart.js';
 
 import { BookService } from 'src/app/shared/services/book.service';
 import { Book } from 'src/app/shared/models/book.model';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 
 @Component({
 	selector: 'app-book-rating-graph',
@@ -17,6 +18,7 @@ export class BookRatingGraphComponent implements OnInit, OnDestroy
 {
 	// Component data
 	private bookSubscription: Subscription
+	private themeSubscription: Subscription;
 	bookRatingChart: Chart;
 
 	// Data
@@ -24,13 +26,14 @@ export class BookRatingGraphComponent implements OnInit, OnDestroy
 	averageRating: number = 0;
 	starRatings: number[] = [0, 0, 0, 0, 0, 0];
 
-	constructor(private bookService: BookService) { }
+	constructor(private bookService: BookService, private themeService: ThemeService) { }
 
 	ngOnInit(): void 
 	{ 
 		Chart.register(...registerables);
 		this.updateData(this.bookService.getAllBooks());
 		this.createChart();
+		this.changeChartTheme(this.themeService.isDarkMode());
 
 		this.bookSubscription = this.bookService.booksChanged
 			.subscribe((books: Book[]) => {
@@ -38,10 +41,17 @@ export class BookRatingGraphComponent implements OnInit, OnDestroy
 				this.updateChart();
 			}
 		);
+
+		this.themeSubscription = this.themeService.themeChanged
+			.subscribe((isDarkMode: boolean) => {
+				this.changeChartTheme(isDarkMode);
+			}
+		);
 	}
 
 	ngOnDestroy(): void {
 		this.bookSubscription.unsubscribe();
+		this.themeSubscription.unsubscribe();
 	}
 
 	private updateData(books: Book[]): void {
@@ -108,7 +118,7 @@ export class BookRatingGraphComponent implements OnInit, OnDestroy
 		});
 	}
 
-	public updateChart(): void {
+	private updateChart(): void {
 		this.bookRatingChart.data.datasets[0].data = [
 			this.starRatings[0], 
 			this.starRatings[1], 
@@ -117,6 +127,13 @@ export class BookRatingGraphComponent implements OnInit, OnDestroy
 			this.starRatings[4], 
 			this.starRatings[5]
 		];
+		this.bookRatingChart.update();
+	}
+
+	private changeChartTheme(isDarkMode: boolean): void {
+		let color = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+		this.bookRatingChart.options.scales.x.grid.color = color;
+		this.bookRatingChart.options.scales.y.grid.color = color;
 		this.bookRatingChart.update();
 	}
 }
