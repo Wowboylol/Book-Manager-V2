@@ -84,5 +84,9 @@ export const testData = {
             tags: ['textbook', 'educational', 'five'],
             collection: 'None'
         },
+    ],
+    collections: [
+        { name: 'Test Collection', amount: 2, color: 'red' },
+        { name: 'Best Books', amount: 1, color: 'blue' },
     ]
 }

@@ -19,6 +19,15 @@ describe('TagService', () => {
 		expect(service.getAllTags()).toEqual(controlGroup);
 	});
 
+	it('should set tags given an array of tags', () => {
+		let newTags = [
+			new Tag('new1', 1, 'new description'),
+			new Tag('new2', 2, 'another description')
+		];
+		service.setTags(newTags);
+		expect(service.getAllTags()).toEqual(newTags);
+	});
+
 	it('should return a tag by case-insensitive name', () => {
 		expect(service.getTagByName('three')).toEqual(controlGroup[5]);
 		expect(service.getTagByName('tHrEE')).toEqual(controlGroup[5]);
