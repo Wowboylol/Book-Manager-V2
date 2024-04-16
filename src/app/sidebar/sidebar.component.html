@@ -122,10 +122,10 @@
                         <i class='bx bxs-data me-1'></i> Data
                     </a>
                     <ul class="dropdown-menu" #dropdown1>
-                        <li><a class="dropdown-item bg-transparent">
+                        <li><a class="dropdown-item bg-transparent" (click)="onSaveData()">
                             <i class='bx bxs-save me-1'></i> Save Data
                         </a></li>
-                        <li><a class="dropdown-item bg-transparent">
+                        <li><a class="dropdown-item bg-transparent" (click)="onFetchData()">
                             <i class='bx bxs-download me-1'></i> Fetch Data
                         </a></li>
                     </ul>
