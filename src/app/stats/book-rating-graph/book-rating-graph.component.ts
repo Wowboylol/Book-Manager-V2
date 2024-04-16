@@ -21,7 +21,7 @@ export class BookRatingGraphComponent implements OnInit, OnDestroy
 	private themeSubscription: Subscription;
 	bookRatingChart: Chart;
 
-	// Data
+	// Graph data
 	totalBooks: number = 0;
 	averageRating: number = 0;
 	starRatings: number[] = [0, 0, 0, 0, 0, 0];
@@ -58,8 +58,7 @@ export class BookRatingGraphComponent implements OnInit, OnDestroy
 		this.starRatings = [0, 0, 0, 0, 0, 0];
 		this.totalBooks = books.length;
 		this.averageRating = this.totalBooks > 0 ? 
-			Math.round(books.reduce((accumulator, book) => accumulator + book.rating, 0) / this.totalBooks * 100) / 100 : 
-			0;
+			Math.round(books.reduce((accumulator, book) => accumulator + book.rating, 0) / this.totalBooks * 100) / 100 : 0;
 
 		books.forEach(book => {
 			this.starRatings[book.rating]++;

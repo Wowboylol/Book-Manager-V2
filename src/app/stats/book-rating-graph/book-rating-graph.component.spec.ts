@@ -30,7 +30,7 @@ describe('BookRatingGraphComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create the book rating graph', () => {
+	it('should create the book rating graph component', () => {
 		expect(component).toBeTruthy();
 	});
 

@@ -3,3 +3,8 @@ article {
     transition: var(--tran-05);
     transition-property: background-color;
 }
+
+h5 strong,
+h5 span {
+    color: var(--secondary-color);
+}
