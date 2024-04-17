@@ -62,6 +62,7 @@ export class TagRatingGraphComponent implements OnInit, OnDestroy
 	}
 
 	ngOnDestroy(): void { 
+		this.tagRatingChart.destroy();
 		this.bookSubscription.unsubscribe();
 		this.themeSubscription.unsubscribe();
 	}
@@ -74,6 +75,7 @@ export class TagRatingGraphComponent implements OnInit, OnDestroy
 		this.chosenTag = this.queryValue.toLowerCase();
 		this.updateData(this.bookService.getBooksByTag(this.chosenTag));
 		this.updateChart();
+		this.isDisplayingQuery = true;
 	}
 
 	isValidTag(event: Event): void {
@@ -152,7 +154,6 @@ export class TagRatingGraphComponent implements OnInit, OnDestroy
 				}
 			}
 		});
-		this.isDisplayingQuery = true;
 	}
 
 	private updateChart(): void {

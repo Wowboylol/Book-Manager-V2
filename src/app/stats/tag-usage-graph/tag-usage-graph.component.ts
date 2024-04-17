@@ -56,6 +56,7 @@ export class TagUsageGraphComponent implements OnInit, OnDestroy
 	}
 
 	ngOnDestroy(): void {
+		this.tagUsageChart.destroy();
 		this.bookSubscription.unsubscribe();
 		this.themeSubscription.unsubscribe();
 	}

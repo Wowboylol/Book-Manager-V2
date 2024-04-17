@@ -50,6 +50,7 @@ export class BookRatingGraphComponent implements OnInit, OnDestroy
 	}
 
 	ngOnDestroy(): void {
+		this.bookRatingChart.destroy();
 		this.bookSubscription.unsubscribe();
 		this.themeSubscription.unsubscribe();
 	}

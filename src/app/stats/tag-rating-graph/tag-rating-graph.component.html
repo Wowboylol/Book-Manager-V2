@@ -1,24 +1,19 @@
 <section class="row mb-3">
     <article class="col-12 rounded p-3">
-        <form class="row g-3 mb-3" autocomplete="off" onsubmit="event.preventDefault();">
-            <div class="col-sm-9 col-lg-10 col-xl-11">
+        <canvas id="tag-rating-chart" class="mb-3">{{ tagRatingChart }}</canvas>
+        <form class="row g-3" autocomplete="off" onsubmit="event.preventDefault();">
+            <fieldset class="col-sm-9 col-lg-10 col-xl-11">
                 <div class="search-bar rounded">
-                    <input 
-                        type="text" 
-                        class="rounded" 
-                        (input)="isValidTag($event)"
-                        placeholder="Search for a tag here" 
-                        list="tag-list">
+                    <input type="text" class="rounded" (input)="isValidTag($event)"placeholder="Search for a tag here..." list="tag-list">
                     <datalist id="tag-list">
-                        <option *ngFor="let tag of allTags" [value]="tag.name">{{tag.name}}</option>
+                        <option *ngFor="let tag of allTags" [value]="tag.name"></option>
                     </datalist>
                 </div>
-            </div>
-            <div class="col-sm-3 col-lg-2 col-xl-1">
+            </fieldset>
+            <fieldset class="col-sm-3 col-lg-2 col-xl-1">
                 <button type="button" class="btn btn-warning" [disabled]="!validQuery" (click)="onSubmit()">View</button>
-            </div>
+            </fieldset>
         </form>
-        <canvas id="tag-rating-chart">{{ tagRatingChart }}</canvas>
     </article>
 </section>
 

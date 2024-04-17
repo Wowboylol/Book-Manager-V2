@@ -56,7 +56,7 @@
                     <label class="pt-2">Collection</label>
                     <input type="text" class="pb-2" formControlName="collection" list="collection-list">
                     <datalist id="collection-list">
-                        <option *ngFor="let collection of allCollections" [value]="collection.name">{{ collection.name }}</option>
+                        <option *ngFor="let collection of allCollections" [value]="collection.name"></option>
                     </datalist>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                     <div class="edit-box rounded px-3">
                         <input type="text" class="py-2" placeholder="Tag {{ i+1 }}" formControlName="name" list="tag-list">
                         <datalist id="tag-list">
-                            <option *ngFor="let tag of allTags" [value]="tag.name">{{ tag.name }}</option>
+                            <option *ngFor="let tag of allTags" [value]="tag.name"></option>
                         </datalist>
                     </div>
                 </div>
