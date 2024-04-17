@@ -24,12 +24,14 @@ export class CollectionService
 
 	// Returns the collection with the given name, or undefined if not found (case-insensitive)
 	getCollectionByName(collectionName: string): Collection {
-		return this.collections.find(collection => collection.name.toLowerCase() === collectionName.toLowerCase());
+		var collectionNameLower = collectionName.toLowerCase();
+		return this.collections.find(collection => collection.name.toLowerCase() === collectionNameLower);
 	}
 
 	// Increments collection book amount if it exists, otherwise adds a new collection
 	addCollection(collectionName: string): void {
-		let collection = this.collections.find(collection => collection.name.toLowerCase() === collectionName.toLowerCase());
+		var collectionNameLower = collectionName.toLowerCase();
+		let collection = this.collections.find(collection => collection.name.toLowerCase() === collectionNameLower);
 		if(collection) {
 			collection.amount++;
 		} 
@@ -42,14 +44,16 @@ export class CollectionService
 	// Deletes the collection with the given name regardless of its amount (case-insensitive)
 	// Postcondition: The deleted collection should be removed from all books
 	deleteCollection(collectionName: string): void {
-		this.collections = this.collections.filter(collection => collection.name.toLowerCase() !== collectionName.toLowerCase());
+		var collectionNameLower = collectionName.toLowerCase();
+		this.collections = this.collections.filter(collection => collection.name.toLowerCase() !== collectionNameLower);
 		this.collectionsChanged.next(this.collections.slice());
 	}
 
 	// Decrements amount of collection if it exists and has an amount greater than 1 (case-insensitive)
 	// Otherwise, removes the collection
 	removeCollection(collectionName: string): void {
-		let collection = this.collections.find(collection => collection.name.toLowerCase() === collectionName.toLowerCase());
+		var collectionNameLower = collectionName.toLowerCase();
+		let collection = this.collections.find(collection => collection.name.toLowerCase() === collectionNameLower);
 		if(collection) {
 			if(collection.amount > 1) {
 				collection.amount--;

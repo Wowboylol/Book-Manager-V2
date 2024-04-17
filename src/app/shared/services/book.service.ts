@@ -27,10 +27,17 @@ export class BookService
 		return this.books.find(book => book.id === id); 
 	}
 
+	// Returns the books with the given tag name (case-insensitive)
+	getBooksByTag(tagName: string): Book[] {
+		var tagNameLower = tagName.toLowerCase();
+		return this.books.filter(book => book.tags.map(tag => tag.toLowerCase()).includes(tagNameLower));
+	}
+
 	// Update all books with the given tag name to the new tag name (case-insensitive)
 	updateTagInBooks(oldName: string, newName: string): void {
 		this.books.forEach(book => {
-			book.tags = book.tags.map(tag => tag.toLowerCase() === oldName.toLowerCase() ? newName : tag);
+			var oldNameLower = oldName.toLowerCase();
+			book.tags = book.tags.map(tag => tag.toLowerCase() === oldNameLower ? newName : tag);
 		});
 		this.booksChanged.next(this.books.slice());
 	}

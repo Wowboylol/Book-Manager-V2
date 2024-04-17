@@ -24,17 +24,20 @@ export class TagService
 
 	// Returns the tag with the given name, or undefined if not found (case-insensitive)
 	getTagByName(name: string): Tag {
-		return this.tags.find(tag => tag.name.toLowerCase() === name.toLowerCase());
+		var nameLower = name.toLowerCase();
+		return this.tags.find(tag => tag.name.toLowerCase() === nameLower);
 	}
 
 	// Checks if the tag with the given name exists (case-insensitive)
 	tagExists(name: string): boolean {
-		return this.tags.some(tag => tag.name.toLowerCase() === name.toLowerCase());
+		var nameLower = name.toLowerCase();
+		return this.tags.some(tag => tag.name.toLowerCase() === nameLower);
 	}
 
 	// Increments tag amount if it exists, otherwise adds a new tag
 	addTag(name: string): void {
-		let tag = this.tags.find(tag => tag.name.toLowerCase() === name.toLowerCase());
+		var nameLower = name.toLowerCase();
+		let tag = this.tags.find(tag => tag.name.toLowerCase() === nameLower);
 		if(tag) {
 			tag.amount++;
 		} 
@@ -47,14 +50,16 @@ export class TagService
 	// Deletes the tag with the given name regardless of its amount (case-insensitive)
 	// Postcondition: The deleted tag should be removed from all books
 	deleteTag(name: string): void {
-		this.tags = this.tags.filter(tag => tag.name.toLowerCase() !== name.toLowerCase());
+		var nameLower = name.toLowerCase();
+		this.tags = this.tags.filter(tag => tag.name.toLowerCase() !== nameLower);
 		this.tagsChanged.next(this.tags.slice());
 	}
 
 	// Decrements amount of tag if it exists and has an amount greater than 1 (case-insensitive)
 	// Otherwise, removes the tag
 	removeTag(name: string): void {
-		let tag = this.tags.find(tag => tag.name.toLowerCase() === name.toLowerCase());
+		var nameLower = name.toLowerCase();
+		let tag = this.tags.find(tag => tag.name.toLowerCase() === nameLower);
 		if(tag) {
 			if(tag.amount > 1) {
 				tag.amount--;
@@ -69,7 +74,8 @@ export class TagService
 	// Updates the name of the tag with the given name (case-insensitive)
 	// Postcondition: The updated tag should be updated in all books
 	updateTagName(oldName: string, newName: string): void {
-		let tag = this.tags.find(tag => tag.name.toLowerCase() === oldName.toLowerCase());
+		var oldNameLower = oldName.toLowerCase();
+		let tag = this.tags.find(tag => tag.name.toLowerCase() === oldNameLower);
 		try {
 			if(tag) { tag.name = newName; }
 			else { throw new Error('Tag not found'); }
@@ -82,7 +88,8 @@ export class TagService
 
 	// Updates the description of the tag with the given name (case-insensitive)
 	updateTagDescription(name: string, description: string): void {
-		let tag = this.tags.find(tag => tag.name.toLowerCase() === name.toLowerCase());
+		var nameLower = name.toLowerCase();
+		let tag = this.tags.find(tag => tag.name.toLowerCase() === nameLower);
 		try {
 			if(tag) { tag.description = description; }
 			else { throw new Error('Tag not found'); }
