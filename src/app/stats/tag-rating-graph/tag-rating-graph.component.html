@@ -4,7 +4,14 @@
         <form class="row g-3" autocomplete="off" onsubmit="event.preventDefault();">
             <fieldset class="col-sm-9 col-lg-10 col-xl-11">
                 <div class="search-bar rounded">
-                    <input type="text" class="rounded" (input)="isValidTag($event)"placeholder="Search for a tag here..." list="tag-list">
+                    <input 
+                        type="text" 
+                        class="rounded" 
+                        (input)="isValidTag($event)" 
+                        (keydown.enter)="onSubmit()" 
+                        placeholder="Search for a tag here..." 
+                        list="tag-list"
+                    >
                     <datalist id="tag-list">
                         <option *ngFor="let tag of allTags" [value]="tag.name"></option>
                     </datalist>

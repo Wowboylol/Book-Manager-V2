@@ -72,6 +72,7 @@ export class TagRatingGraphComponent implements OnInit, OnDestroy
 	}
 
 	onSubmit(): void {
+		if(!this.validQuery) { return; }
 		this.chosenTag = this.queryValue.toLowerCase();
 		this.updateData(this.bookService.getBooksByTag(this.chosenTag));
 		this.updateChart();
