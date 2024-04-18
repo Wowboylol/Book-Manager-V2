@@ -65,10 +65,12 @@ describe('BookRatingGraphComponent', () => {
 		expect(component.bookRatingChart.update).toHaveBeenCalled();
 	});
 
-	it('should unsubscribe from subscriptions on destroy', () => {
+	it('should destroy chart and unsubscribe from subscriptions on destroy', () => {
+		spyOn(component.bookRatingChart, 'destroy');
 		spyOn(component['bookSubscription'], 'unsubscribe');
 		spyOn(component['themeSubscription'], 'unsubscribe');
 		component.ngOnDestroy();
+		expect(component.bookRatingChart.destroy).toHaveBeenCalled();
 		expect(component['bookSubscription'].unsubscribe).toHaveBeenCalled();
 		expect(component['themeSubscription'].unsubscribe).toHaveBeenCalled();
 	});

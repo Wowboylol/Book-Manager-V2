@@ -72,10 +72,12 @@ describe('TagUsageGraphComponent', () => {
 		expect(component.tagUsageChart.update).toHaveBeenCalled();
 	});
 
-	it('should unsubscribe from subscriptions on destroy', () => {
+	it('should destroy chart and unsubscribe from subscriptions on destroy', () => {
+		spyOn(component.tagUsageChart, 'destroy');
 		spyOn(component['bookSubscription'], 'unsubscribe');
 		spyOn(component['themeSubscription'], 'unsubscribe');
 		component.ngOnDestroy();
+		expect(component.tagUsageChart.destroy).toHaveBeenCalled();
 		expect(component['bookSubscription'].unsubscribe).toHaveBeenCalled();
 		expect(component['themeSubscription'].unsubscribe).toHaveBeenCalled();
 	});
