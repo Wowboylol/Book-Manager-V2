@@ -54,13 +54,7 @@ describe('CollectionService', () => {
 		expect(service.getCollectionByName('Best Books')).toBeUndefined();
 	});
 
-	it('should delete a collection if its amount is 1 before decrement', () => {
-		service.removeCollection('BEsT BoOkS');
-		expect(service.getAllCollections().length).toBe(controlGroup.length - 1);
-		expect(service.getCollectionByName('Best Books')).toBeUndefined();
-	});
-
-	it('should decrement the amount of an existing collection if it exists and has an amount greater than 1', () => {
+	it('should decrement the amount of an existing collection if it exists', () => {
 		service.removeCollection('Test Collection');
 		expect(service.getCollectionByName('Test Collection').amount).toBe(1);
 	});

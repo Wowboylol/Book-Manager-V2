@@ -49,19 +49,13 @@ export class CollectionService
 		this.collectionsChanged.next(this.collections.slice());
 	}
 
-	// Decrements amount of collection if it exists and has an amount greater than 1 (case-insensitive)
-	// Otherwise, removes the collection
+	// Decrements amount of collection if it exists (case-insensitive)
 	removeCollection(collectionName: string): void {
 		var collectionNameLower = collectionName.toLowerCase();
 		let collection = this.collections.find(collection => collection.name.toLowerCase() === collectionNameLower);
 		if(collection) {
-			if(collection.amount > 1) {
-				collection.amount--;
-				this.collectionsChanged.next(this.collections.slice());
-			} 
-			else {
-				this.deleteCollection(collectionName);
-			}
+			collection.amount--;
+			this.collectionsChanged.next(this.collections.slice());
 		}
 	}
 }
