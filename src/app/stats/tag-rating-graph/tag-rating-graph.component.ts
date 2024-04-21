@@ -85,6 +85,10 @@ export class TagRatingGraphComponent implements OnInit, OnDestroy
 		else { this.validQuery = this.tagService.tagExists(this.queryValue); }
 	}
 
+	blurInput(event: Event): void {
+		(event.target as HTMLInputElement).blur();
+	}
+
 	private updateData(booksWithTag: Book[]): void {
 		this.starRatings = [0, 0, 0, 0, 0, 0];
 		this.totalTagged = booksWithTag.length;

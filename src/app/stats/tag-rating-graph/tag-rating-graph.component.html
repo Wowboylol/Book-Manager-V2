@@ -8,7 +8,7 @@
                         type="text" 
                         class="rounded" 
                         (input)="isValidTag($event)" 
-                        (keydown.enter)="onSubmit()" 
+                        (keydown.enter)="onSubmit(); blurInput($event)" 
                         placeholder="Search for a tag here..." 
                         list="tag-list"
                     >
