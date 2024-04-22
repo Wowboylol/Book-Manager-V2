@@ -1,3 +1,4 @@
+<!-- Sidebar (when viewport >= 768px) -->
 <nav 
     [ngClass]="{'sidebar px-3 pt-3': true, 'close': close, 'dark-mode': darkMode}" 
     *ngIf="!isMobile" 
@@ -21,7 +22,7 @@
                 </a>
             </li>
             <li class="menu-item mt-3">
-                <a class="rounded">
+                <a class="rounded" routerLink="/collections" routerLinkActive="active">
                     <i class='bx bx-library fs-4 item-icon'></i>
                     <span class="fs-5 item-text">Collections</span>
                 </a>
@@ -84,7 +85,6 @@
 </nav>
 
 <!-- Headerbar (when viewport < 768px) -->
-
 <nav class="navbar navbar-expand-md" *ngIf="isMobile" (window:resize)="onScreenResize($event)">
     <section class="container-fluid">
         <header class="navbar-brand fs-4">
@@ -103,7 +103,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">
+                    <a class="nav-link" routerLink="/collections" routerLinkActive="active">
                         <i class='bx bx-library me-1'></i> Collections
                     </a>
                 </li>
@@ -147,6 +147,7 @@
     </section>
 </nav>
 
+<!-- Other components -->
 <app-alert 
     [message]="alertMessage" 
     [toggle]="alertToggle" 
