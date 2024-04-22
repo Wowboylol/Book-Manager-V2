@@ -1,0 +1,10 @@
+.collection-container {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: var(--primary-color);
+    transition: var(--tran-05);
+    transition-property: background;
+    height: 8rem;
+}

@@ -33,6 +33,12 @@ export class BookService
 		return this.books.filter(book => book.tags.map(tag => tag.toLowerCase()).includes(tagNameLower));
 	}
 
+	// Returns the books with the given collection name (case-insensitive)
+	getBooksByCollection(collectionName: string): Book[] {
+		var collectionNameLower = collectionName.toLowerCase();
+		return this.books.filter(book => book.collection.toLowerCase() === collectionNameLower);
+	}
+
 	// Update all books with the given tag name to the new tag name (case-insensitive)
 	updateTagInBooks(oldName: string, newName: string): void {
 		this.books.forEach(book => {
