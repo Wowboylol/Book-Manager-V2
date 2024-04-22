@@ -1,3 +1,7 @@
-<div class="collection-container">
-    <h5>Collection item</h5>
+<div class="collection-container" [ngStyle]="{'background-image': getCollectionImage()}">
+    <input type="color" class="collection-color" [value]="getCollectionColor()">
+    <div>
+        <h3 class="collection-name">{{ collection.name }}</h3>
+        <p class="collection-book-count">Books: {{ collection.amount }}</p>
+    </div>
 </div>
