@@ -93,6 +93,17 @@ export class BookService
 		this.booksChanged.next(this.books.slice());
 	}
 
+	// Update all books with the given collection name to the new collection name (case-insensitive)
+	updateCollectionInBooks(oldName: string, newName: string): void {
+		var oldNameLower = oldName.toLowerCase();
+		this.books.forEach(book => {
+			if(book.collection.toLowerCase() === oldNameLower) {
+				book.collection = newName;
+			}
+		});
+		this.booksChanged.next(this.books.slice());
+	}
+
 	// Delete the collection with the given name from all books (case-insensitive)
 	deleteCollectionFromBooks(collectionName: string): void {
 		this.books.forEach(book => {

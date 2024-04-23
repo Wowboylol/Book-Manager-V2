@@ -28,6 +28,12 @@ export class CollectionService
 		return this.collections.find(collection => collection.name.toLowerCase() === collectionNameLower);
 	}
 
+	// Checks if the collection with the given name exists (case-insensitive)
+	collectionExists(collectionName: string): boolean {
+		var collectionNameLower = collectionName.toLowerCase();
+		return this.collections.some(collection => collection.name.toLowerCase() === collectionNameLower);
+	}
+
 	// Increments collection book amount if it exists, otherwise adds a new collection
 	addCollection(collectionName: string): void {
 		var collectionNameLower = collectionName.toLowerCase();
@@ -66,6 +72,23 @@ export class CollectionService
 		try {
 			if(collection) {
 				collection.color = color;
+				this.collectionsChanged.next(this.collections.slice());
+			}
+			else { throw new Error('Collection not found'); }
+		}
+		catch(e) {
+			console.log(e);
+		}
+	}
+
+	// Updates the name of the collection with the given name
+	// Postcondition: The collection name should be updated in all books
+	updateCollectionName(collectionName: string, newName: string): void {
+		var collectionNameLower = collectionName.toLowerCase();
+		let collection = this.collections.find(collection => collection.name.toLowerCase() === collectionNameLower);
+		try {
+			if(collection) {
+				collection.name = newName;
 				this.collectionsChanged.next(this.collections.slice());
 			}
 			else { throw new Error('Collection not found'); }

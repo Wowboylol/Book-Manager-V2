@@ -81,6 +81,13 @@ describe('BookService', () => {
 		expect(service.getBookById(3).collection).toEqual('None');
 	});
 
+	it('should update the collection with the given name to the new name in all books', () => {
+		service.updateCollectionInBooks('TEst ColLECtion', 'new collection');
+		controlGroup[0].collection = 'new collection';
+		controlGroup[2].collection = 'new collection';
+		expect(service.getAllBooks()).toEqual(controlGroup);
+	});
+
 	it('delete the collection with the given name from all books', () => {
 		service.deleteCollectionFromBooks('tEst ColLeCtion');
 		controlGroup[0].collection = 'None';

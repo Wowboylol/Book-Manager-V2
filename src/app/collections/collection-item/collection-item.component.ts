@@ -16,7 +16,11 @@ import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.comp
 })
 export class CollectionItemComponent implements OnInit 
 {
+    // Component data
     @Input() collection: Collection;
+    editMode: boolean = false;
+
+    // Confirm modal data
     showConfirmDelete: boolean = false;
     confirmDeleteMessage: string = null;
 
@@ -45,5 +49,19 @@ export class CollectionItemComponent implements OnInit
     onDeleteCollection(): void {
         this.bookService.deleteCollectionFromBooks(this.collection.name);
         this.collectionService.deleteCollection(this.collection.name);
+    }
+
+    onUpdateName(event: Event): void {
+        let newName = (event.target as HTMLInputElement).value;
+        if(this.isValidCollectionName(newName)) {
+            this.bookService.updateCollectionInBooks(this.collection.name, newName);
+            this.collectionService.updateCollectionName(this.collection.name, newName);
+            this.editMode = false;
+        }
+    }
+
+    isValidCollectionName(name: string): boolean {
+        if(!name || name === '') { return false; }
+        return !this.collectionService.collectionExists(name);
     }
 }
