@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { Collection } from 'src/app/shared/models/collection.model';
 import { BookService } from 'src/app/shared/services/book.service';
 import { CollectionService } from 'src/app/shared/services/collection.service';
+import { DropdownDirective } from 'src/app/shared/directives/dropdown.directive';
 
 @Component({
     selector: 'app-collection-item',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, DropdownDirective],
     templateUrl: './collection-item.component.html',
     styleUrls: ['./collection-item.component.css']
 })

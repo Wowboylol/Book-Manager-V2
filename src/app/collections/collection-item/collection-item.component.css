@@ -41,3 +41,17 @@
     color: white;
     font-size: 0.9rem;
 }
+
+.dropdown {
+    margin-left: auto;
+}
+
+.dropdown:hover {
+    color: gainsboro;
+}
+
+.dropdown-menu {
+    transform: translateX(-85%);
+    --bs-dropdown-link-active-bg: var(--secondary-button);
+    user-select: none;
+}

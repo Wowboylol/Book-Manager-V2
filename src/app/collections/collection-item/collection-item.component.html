@@ -4,4 +4,12 @@
         <h3 class="collection-name">{{ collection.name }}</h3>
         <p class="collection-book-count">Books: {{ collection.amount }}</p>
     </div>
+    <div class="dropdown">
+        <i class='bx bxs-caret-down-circle fs-3' [appDropdown]="dropdown2"></i>
+        <ul class="dropdown-menu" #dropdown2>
+            <li><a class="dropdown-item" [appDropdown]="dropdown2">Change name</a></li> 
+            <li><hr class="dropdown-divider"></li> 
+            <li><a class="dropdown-item" [appDropdown]="dropdown2">Delete collection</a></li> 
+        </ul>
+    </div>
 </div>
