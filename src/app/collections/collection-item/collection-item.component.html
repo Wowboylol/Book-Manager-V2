@@ -1,5 +1,5 @@
 <div class="collection-container" [ngStyle]="{'background-image': getCollectionImage()}">
-    <input type="color" class="collection-color" [value]="getCollectionColor()">
+    <input type="color" class="collection-color" [value]="getCollectionColor()" (blur)="updateCollectionColor($event)">
     <div>
         <h3 class="collection-name">{{ collection.name }}</h3>
         <p class="collection-book-count">Books: {{ collection.amount }}</p>

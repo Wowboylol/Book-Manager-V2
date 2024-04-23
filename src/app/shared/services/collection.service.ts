@@ -58,4 +58,20 @@ export class CollectionService
 			this.collectionsChanged.next(this.collections.slice());
 		}
 	}
+
+	// Updates the color of the collection with the given name (case-insensitive)
+	updateCollectionColor(collectionName: string, color: string): void {
+		var collectionNameLower = collectionName.toLowerCase();
+		let collection = this.collections.find(collection => collection.name.toLowerCase() === collectionNameLower);
+		try {
+			if(collection) {
+				collection.color = color;
+				this.collectionsChanged.next(this.collections.slice());
+			}
+			else { throw new Error('Collection not found'); }
+		}
+		catch(e) {
+			console.log(e);
+		}
+	}
 }

@@ -63,4 +63,9 @@ describe('CollectionService', () => {
 		service.removeCollection('nonexistent');
 		expect(service.getAllCollections()).toEqual(controlGroup);
 	});
+
+	it('should update the color of a collection by case-insensitive name', () => {
+		service.updateCollectionColor('Test Collection', '#d916c2');
+		expect(service.getCollectionByName('Test Collection').color).toBe('#d916c2');
+	});
 });

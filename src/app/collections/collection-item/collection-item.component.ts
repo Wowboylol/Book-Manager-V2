@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { Collection } from 'src/app/shared/models/collection.model';
 import { BookService } from 'src/app/shared/services/book.service';
+import { CollectionService } from 'src/app/shared/services/collection.service';
 
 @Component({
     selector: 'app-collection-item',
@@ -15,7 +16,7 @@ export class CollectionItemComponent implements OnInit
 {
     @Input() collection: Collection;
 
-    constructor(private bookService: BookService) { }
+    constructor(private bookService: BookService, private collectionService: CollectionService) { }
 
     ngOnInit(): void { }
 
@@ -26,5 +27,10 @@ export class CollectionItemComponent implements OnInit
 
     getCollectionColor(): string {
         return this.collection.color;
+    }
+
+    updateCollectionColor(event: Event): void {
+        let color = (event.target as HTMLInputElement).value;
+        this.collectionService.updateCollectionColor(this.collection.name, color);
     }
 }
