@@ -80,4 +80,11 @@ describe('BookService', () => {
 		expect(service.getBookById(3).dateUpdated).not.toBeNull();
 		expect(service.getBookById(3).collection).toEqual('None');
 	});
+
+	it('delete the collection with the given name from all books', () => {
+		service.deleteCollectionFromBooks('tEst ColLeCtion');
+		controlGroup[0].collection = 'None';
+		controlGroup[2].collection = 'None';
+		expect(service.getAllBooks()).toEqual(controlGroup);
+	});
 });

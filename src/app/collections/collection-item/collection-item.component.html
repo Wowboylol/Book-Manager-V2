@@ -1,5 +1,5 @@
 <div class="collection-container" [ngStyle]="{'background-image': getCollectionImage()}">
-    <input type="color" class="collection-color" [value]="getCollectionColor()" (blur)="updateCollectionColor($event)">
+    <input type="color" class="collection-color" [value]="getCollectionColor()" (blur)="onUpdateColor($event)">
     <div>
         <h3 class="collection-name">{{ collection.name }}</h3>
         <p class="collection-book-count">Books: {{ collection.amount }}</p>
@@ -9,7 +9,16 @@
         <ul class="dropdown-menu" #dropdown2>
             <li><a class="dropdown-item" [appDropdown]="dropdown2">Change name</a></li> 
             <li><hr class="dropdown-divider"></li> 
-            <li><a class="dropdown-item" [appDropdown]="dropdown2">Delete collection</a></li> 
+            <li><a class="dropdown-item" (click)="showConfirmDelete = true" [appDropdown]="dropdown2">Delete collection</a></li> 
         </ul>
     </div>
 </div>
+
+<app-confirm 
+    [title]="'Delete collection'" 
+    [message]="confirmDeleteMessage" 
+    [confirmText]="'Delete'"
+    *ngIf="showConfirmDelete"
+    (cancel)="showConfirmDelete = false"
+    (confirm)="onDeleteCollection()">
+</app-confirm>

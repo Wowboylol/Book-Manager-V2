@@ -39,23 +39,6 @@ export class BookService
 		return this.books.filter(book => book.collection.toLowerCase() === collectionNameLower);
 	}
 
-	// Update all books with the given tag name to the new tag name (case-insensitive)
-	updateTagInBooks(oldName: string, newName: string): void {
-		this.books.forEach(book => {
-			var oldNameLower = oldName.toLowerCase();
-			book.tags = book.tags.map(tag => tag.toLowerCase() === oldNameLower ? newName : tag);
-		});
-		this.booksChanged.next(this.books.slice());
-	}
-
-	// Delete the tag with the given name from all books (case-insensitive)
-	deleteTagFromBooks(tagName: string): void {
-		this.books.forEach(book => {
-			book.tags = book.tags.filter(tag => tag.toLowerCase() !== tagName.toLowerCase());
-		});
-		this.booksChanged.next(this.books.slice());
-	}
-
 	// Delete the book with the given ID
 	// Postcondition: The deleted book should be removed from all tags
 	deleteBook(id: number): void {
@@ -91,5 +74,32 @@ export class BookService
 		catch(e) {
 			console.error(e);
 		}
+	}
+
+	// Update all books with the given tag name to the new tag name (case-insensitive)
+	updateTagInBooks(oldName: string, newName: string): void {
+		this.books.forEach(book => {
+			var oldNameLower = oldName.toLowerCase();
+			book.tags = book.tags.map(tag => tag.toLowerCase() === oldNameLower ? newName : tag);
+		});
+		this.booksChanged.next(this.books.slice());
+	}
+
+	// Delete the tag with the given name from all books (case-insensitive)
+	deleteTagFromBooks(tagName: string): void {
+		this.books.forEach(book => {
+			book.tags = book.tags.filter(tag => tag.toLowerCase() !== tagName.toLowerCase());
+		});
+		this.booksChanged.next(this.books.slice());
+	}
+
+	// Delete the collection with the given name from all books (case-insensitive)
+	deleteCollectionFromBooks(collectionName: string): void {
+		this.books.forEach(book => {
+			if(book.collection.toLowerCase() === collectionName.toLowerCase()) {
+				book.collection = 'None';
+			}
+		});
+		this.booksChanged.next(this.books.slice());
 	}
 }
