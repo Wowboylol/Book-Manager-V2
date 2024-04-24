@@ -17,7 +17,13 @@ describe('CollectionsComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should create collection component', () => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should unsubscribe from collections subscription on destroy', () => {
+		spyOn(component['collectionsSubscription'], 'unsubscribe');
+		component.ngOnDestroy();
+		expect(component['collectionsSubscription'].unsubscribe).toHaveBeenCalled();
 	});
 });
