@@ -6,11 +6,13 @@ import { BookService } from 'src/app/shared/services/book.service';
 import { CollectionService } from 'src/app/shared/services/collection.service';
 import { DropdownDirective } from 'src/app/shared/directives/dropdown.directive';
 import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
+import { RouterModule } from '@angular/router';
+import { BookSearchQuery } from 'src/app/shared/models/book-search-query.model';
 
 @Component({
     selector: 'app-collection-item',
     standalone: true,
-    imports: [CommonModule, DropdownDirective, ConfirmComponent],
+    imports: [CommonModule, DropdownDirective, ConfirmComponent, RouterModule],
     templateUrl: './collection-item.component.html',
     styleUrls: ['./collection-item.component.css']
 })
@@ -19,6 +21,7 @@ export class CollectionItemComponent implements OnInit
     // Component data
     @Input() collection: Collection;
     editMode: boolean = false;
+    collectionSearchQuery: BookSearchQuery;
 
     // Confirm modal data
     showConfirmDelete: boolean = false;
@@ -27,6 +30,7 @@ export class CollectionItemComponent implements OnInit
     constructor(private bookService: BookService, private collectionService: CollectionService) { }
 
     ngOnInit(): void { 
+        this.collectionSearchQuery = { searchString: this.collection.name, searchType: 2, searchSort: 0, searchOrder: 0 };
         this.confirmDeleteMessage = 
             `Are you sure you want to delete the collection "${this.collection.name}"? 
             This action is irreversible, and will remove all books from the collection.`;
@@ -56,6 +60,7 @@ export class CollectionItemComponent implements OnInit
         if(this.isValidCollectionName(newName)) {
             this.bookService.updateCollectionInBooks(this.collection.name, newName);
             this.collectionService.updateCollectionName(this.collection.name, newName);
+            this.collectionSearchQuery.searchString = newName;
             this.editMode = false;
         }
     }

@@ -1,5 +1,11 @@
-<div class="collection-container" [ngStyle]="{'background-image': getCollectionImage()}">
-    <input type="color" class="collection-color" [value]="getCollectionColor()" (blur)="onUpdateColor($event)">
+<div class="collection-container" [ngStyle]="{'background-image': getCollectionImage()}" [routerLink]="['/books']" [queryParams]="collectionSearchQuery">
+    <input 
+        type="color" 
+        class="collection-color" 
+        (click)="$event.stopPropagation()"
+        [value]="getCollectionColor()" 
+        (blur)="onUpdateColor($event)"
+    >
     <div>
         <h3 *ngIf="!editMode" class="collection-name">{{ collection.name }}</h3>
         <input 
@@ -7,12 +13,13 @@
             type="text" 
             class="collection-input rounded" 
             [value]="collection.name" 
+            (click)="$event.stopPropagation()"
             (blur)="onUpdateName($event)" 
             (keyup.enter)="onUpdateName($event)"
         >
         <p class="collection-book-count">Books: {{ collection.amount }}</p>
     </div>
-    <div class="dropdown">
+    <div class="dropdown" (click)="$event.stopPropagation()">
         <i class='bx bxs-caret-down-circle fs-3' [appDropdown]="dropdown2"></i>
         <ul class="dropdown-menu" #dropdown2>
             <li>
