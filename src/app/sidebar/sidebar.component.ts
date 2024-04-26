@@ -72,19 +72,19 @@ export class SidebarComponent implements OnInit, OnDestroy
 	}
 
 	// Toggle between dark and light mode
-	toggleMode() { 
+	toggleMode(): void { 
 		this.darkMode = !this.darkMode;
 		this.modeText = this.darkMode ? 'Light Mode' : 'Dark Mode';
 		this.themeService.setDarkMode(this.darkMode); 
 	}
 
 	// Runs when screen is resized
-	onScreenResize(event) {
+	onScreenResize(event): void {
 		event.target.innerWidth < 768 ? this.isMobile = true : this.isMobile = false;
 	}
 
 	// Runs when user clicks on save data button
-	onSaveData() {
+	onSaveData(): void {
 		if(this.bookService.getAllBooks().length == 0 && !this.showConfirmSave) {
 			this.showConfirmSave = true;
 		}
@@ -102,7 +102,7 @@ export class SidebarComponent implements OnInit, OnDestroy
 	}
 
 	// Runs when user clicks on fetch data button
-	onFetchData() {
+	onFetchData(): void {
 		if(!this.dataServiceCooldownTimer) {
 			this.setDataServiceCooldownTimer();
 			this.dataStorageService.fetchData();
@@ -113,6 +113,11 @@ export class SidebarComponent implements OnInit, OnDestroy
 		else {
 			this.displayCooldownError();
 		}
+	}
+
+	// Runs when user clicks on logout button
+	onLogout(): void {
+		this.authService.logout();
 	}
 
 	// Sets a cooldown timer for the data service
