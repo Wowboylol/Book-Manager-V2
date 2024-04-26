@@ -85,6 +85,11 @@ form {
     transition: var(--tran-05);
 }
 
+.input-field.invalid {
+    border: 1px solid var(--invalid-border-color);
+    box-shadow: var(--invalid-box-shadow-focus);
+}
+
 .field input:focus {
     border-bottom-width: 0.15rem;
 }

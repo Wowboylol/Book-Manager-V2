@@ -2,18 +2,18 @@
     <div class="form-container">
         <div class="form-content">
             <header class="fs-3">{{ isLoginMode ? 'Login' : 'Registration' }}</header>
-            <form>
+            <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
                 <div class="field input-field">
-                    <input type="email" placeholder="Email" class="input">
+                    <input type="email" placeholder="Email" class="input" ngModel name="email" required email>
                 </div>
 
                 <div class="field input-field">
-                    <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" class="password">
+                    <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" class="password" ngModel name="password" required minlength="6">
                     <i class="eye-icon bx bx-{{ showPassword ? 'show' : 'hide' }}" (click)="showPassword = !showPassword"></i>
                 </div>
 
-                <div class="field input-field" *ngIf="!isLoginMode">
-                    <input [type]="showPassword ? 'text' : 'password'" placeholder="Confirm password" class="password">
+                <div class="field input-field" *ngIf="!isLoginMode" [ngClass]="{'invalid': !isValidConfirmPassword}">
+                    <input [type]="showPassword ? 'text' : 'password'" placeholder="Confirm password" class="password" ngModel name="repassword" required minlength="6">
                     <i class="eye-icon bx bx-{{ showPassword ? 'show' : 'hide' }}" (click)="showPassword = !showPassword"></i>
                 </div>
 
@@ -22,9 +22,13 @@
                 </div>
 
                 <div class="field button-field">
-                    <button>{{ isLoginMode ? 'Login' : 'Register' }}</button>
+                    <button class="btn" type="submit" [disabled]="!authForm.valid">{{ isLoginMode ? 'Login' : 'Register' }}</button>
                 </div>
             </form>
+
+            <div *ngIf="isLoading" style="text-align: center; height: 200px;">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
 
             <div class="form-link">
                 <span>{{ isLoginMode ? 'Don\'t' : 'Already' }} have an account? 
@@ -47,3 +51,9 @@
         </div>
     </div>
 </section>
+
+<app-alert 
+    [message]="this.errorMessage" 
+    [toggle]="alertToggle" 
+    [type]="'danger'">
+</app-alert>
