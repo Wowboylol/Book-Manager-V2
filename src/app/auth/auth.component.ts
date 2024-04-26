@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
 
-import { AuthService } from '../shared/services/auth.service';
+import { AuthResponseData, AuthService } from '../shared/services/auth.service';
 import { LoadingSpinnerComponent } from '../shared/components/loading-spinner/loading-spinner.component';
 import { AlertComponent } from '../shared/components/alert/alert.component';
 
@@ -34,27 +35,30 @@ export class AuthComponent implements OnInit
 		if(!form.valid) { return; }
 		const email = form.value.email;
 		const password = form.value.password;
+		let authObservable: Observable<AuthResponseData>;
 
 		if(this.isLoginMode) {
 			this.isLoading = true;
-			// TODO: Login
-			this.isLoading = false;
+			authObservable = this.authService.login(email, password);
 		}
 		else {
 			if(!this.validateConfirmPassword(form)) { return; }
 			this.isLoading = true;
-			this.authService.signup(email, password).subscribe({
-				next: response => {
-					console.log(response);
-				},
-				error: errorMessage => {
-					console.error(errorMessage);
-					this.errorMessage = errorMessage;
-					this.runAlert();
-				}
-			});
-			this.isLoading = false;
+			authObservable = this.authService.signup(email, password);
 		}
+
+		authObservable.subscribe({
+			next: response => {
+				console.log(response);
+				this.isLoading = false;
+			},
+			error: errorMessage => {
+				console.error(errorMessage);
+				this.errorMessage = errorMessage;
+				this.runAlert();
+				this.isLoading = false;
+			}
+		});
 		form.reset();
 	}
 

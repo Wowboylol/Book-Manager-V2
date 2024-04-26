@@ -12,6 +12,7 @@ export interface AuthResponseData
     refreshToken: string;
     expiresIn: string;
     localId: string;
+    registered?: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -27,8 +28,19 @@ export class AuthService
 				password: password,
 				returnSecureToken: true
 			}
-		).pipe(catchError(this.handleError))
+		).pipe(catchError(this.handleError));
 	}
+
+    login(email: string, password: string): Observable<AuthResponseData> {
+        return this.http.post<AuthResponseData>(
+            `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseApiKey}`,
+            {
+                email: email,
+                password: password,
+                returnSecureToken: true
+            }
+        ).pipe(catchError(this.handleError));
+    }
 
 	private handleError(errorRes: HttpErrorResponse)
     {
@@ -41,14 +53,11 @@ export class AuthService
             case "EMAIL_EXISTS":
                 errorMessage = new Error("This email already exists!");
                 break;
+            case "INVALID_LOGIN_CREDENTIALS":
+                errorMessage = new Error("The email or password is incorrect!");
+                break;
             case "TOO_MANY_ATTEMPTS_TRY_LATER":
                 errorMessage = new Error("Too many attempts, try again later!");
-                break;
-            case "EMAIL_NOT_FOUND":
-                errorMessage = new Error("This email does not exist!");
-                break;
-            case "INVALID_PASSWORD":
-                errorMessage = new Error("The password is incorrect!");
                 break;
         }
         return throwError(() => errorMessage);
