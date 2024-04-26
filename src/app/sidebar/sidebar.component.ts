@@ -9,6 +9,8 @@ import { DataStorageService } from '../shared/services/data-storage.service';
 import { AlertComponent } from '../shared/components/alert/alert.component';
 import { ConfirmComponent } from '../shared/components/confirm/confirm.component';
 import { BookService } from '../shared/services/book.service';
+import { AuthService } from '../shared/services/auth.service';
+import { User } from '../shared/models/user.model';
 
 @Component({
 	selector: 'app-sidebar',
@@ -33,10 +35,15 @@ export class SidebarComponent implements OnInit, OnDestroy
 	dataServiceCooldownTimer = null;
 	showConfirmSave: boolean = false;
 
+	// Authenticaion data
+	private authSubscription: Subscription;
+	isLoggedIn: boolean = false;
+
 	constructor(
 		private themeService: ThemeService, 
 		private dataStorageService: DataStorageService,
-		private bookService: BookService
+		private bookService: BookService, 
+		private authService: AuthService
 	) { 
 		this.darkMode = themeService.isDarkMode();
 		this.modeText = this.darkMode ? 'Light Mode' : 'Dark Mode';
@@ -51,10 +58,17 @@ export class SidebarComponent implements OnInit, OnDestroy
 				this.modeText = this.darkMode ? 'Light Mode' : 'Dark Mode';
 			}
 		);
+
+		this.authSubscription = this.authService.user
+			.subscribe((user: User) => {
+				this.isLoggedIn = !!user;
+			}
+		);
 	}
 
 	ngOnDestroy(): void { 
 		this.themeChangedSubscription.unsubscribe(); 
+		this.authSubscription.unsubscribe();
 	}
 
 	// Toggle between dark and light mode
