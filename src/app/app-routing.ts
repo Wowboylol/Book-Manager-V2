@@ -8,6 +8,7 @@ import { BookEditComponent } from './books/book-edit/book-edit.component';
 import { AuthComponent } from './auth/auth.component';
 import { StatsComponent } from './stats/stats.component';
 import { CollectionsComponent } from './collections/collections.component';
+import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Route[] = [
     { path: '', redirectTo: '/books', pathMatch: 'full' },
@@ -15,6 +16,7 @@ export const routes: Route[] = [
     { 
         path: 'books', 
         component: BooksComponent,
+        canActivate: [AuthGuard],
         children: [
             { 
                 path: 'o', 
@@ -28,8 +30,8 @@ export const routes: Route[] = [
             }
         ]
     },
-    { path: 'collections', component: CollectionsComponent },
-    { path: 'tags', component: TagsComponent },
-    { path: 'stats', component: StatsComponent },
+    { path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard]},
+    { path: 'tags', component: TagsComponent, canActivate: [AuthGuard]},
+    { path: 'stats', component: StatsComponent, canActivate: [AuthGuard]},
     { path: 'auth', component: AuthComponent }
 ];
