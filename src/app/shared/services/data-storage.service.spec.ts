@@ -31,7 +31,7 @@ describe('DataStorageService', () => {
 		});
 		service = TestBed.inject(DataStorageService);
 		controller = TestBed.inject(HttpTestingController);
-		service['authService'].user.next(new User('test@test.com', '123', 'abc', new Date()));
+		service['authService'].user.next(new User('test@test.com', '123', null, new Date()));
 	});
 
 	it('stores data to database', () => {
@@ -45,7 +45,7 @@ describe('DataStorageService', () => {
 
 	it('fetches data from database and returns empty book, tag, and collection array when response is empty', () => {
 		service.fetchData();
-		const request = controller.expectOne(`${environment.firebaseEndpoint}123.json?auth=abc`);
+		const request = controller.expectOne(`${environment.firebaseEndpoint}123.json?auth=null`);
 		request.flush({ });
 		expect(mockTagService.setTags).toHaveBeenCalledWith([]);
 		expect(mockBookService.setBooks).toHaveBeenCalledWith([]);
@@ -55,7 +55,7 @@ describe('DataStorageService', () => {
 	it('fetches data from database and returns empty tag & collection array when only books exist', () => {
 		let testBooks = structuredClone(testData.books);
 		service.fetchData();
-		const request = controller.expectOne(`${environment.firebaseEndpoint}123.json?auth=abc`);
+		const request = controller.expectOne(`${environment.firebaseEndpoint}123.json?auth=null`);
 		request.flush({ books: testBooks });
 		expect(mockTagService.setTags).toHaveBeenCalledWith([]);
 		expect(mockCollectionService.setCollections).toHaveBeenCalledWith([]);
@@ -74,7 +74,7 @@ describe('DataStorageService', () => {
 		let testCollection = structuredClone(testData.collections[1]);
 
 		service.fetchData();
-		const request = controller.expectOne(`${environment.firebaseEndpoint}123.json?auth=abc`);
+		const request = controller.expectOne(`${environment.firebaseEndpoint}123.json?auth=null`);
 		request.flush({ books: [testBook], tags: [testTag], collections: [testCollection] });
 
 		testBook.dateCreated = null;
