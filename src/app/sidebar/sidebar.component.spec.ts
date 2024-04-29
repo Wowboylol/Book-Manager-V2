@@ -104,6 +104,14 @@ describe('SidebarComponent', () => {
 		expect(mockDataStorageService.storeData).toHaveBeenCalled();
 	});
 
+	it('should unsubscribe from subscriptions when destroyed', () => {
+		spyOn(component['themeChangedSubscription'], 'unsubscribe');
+		spyOn(component['authSubscription'], 'unsubscribe');
+		component.ngOnDestroy();
+		expect(component['themeChangedSubscription'].unsubscribe).toHaveBeenCalled();
+		expect(component['authSubscription'].unsubscribe).toHaveBeenCalled();
+	});
+
 	afterEach(() => {
 		fixture.destroy();
 	});
