@@ -43,7 +43,8 @@ export class AuthComponent implements OnInit
 			authObservable = this.authService.login(email, password);
 		}
 		else {
-			if(!this.validateConfirmPassword(form)) { return; }
+			this.validateConfirmPassword(form);
+			if(!this.isValidConfirmPassword) { return; }
 			this.isLoading = true;
 			authObservable = this.authService.signup(email, password);
 		}
@@ -65,13 +66,13 @@ export class AuthComponent implements OnInit
 	}
 
 	// Checks if the confirm password is same as password
-	private validateConfirmPassword(form: NgForm): boolean {
+	private validateConfirmPassword(form: NgForm): void {
 		if(form.value.password !== form.value.repassword) {
 			this.isValidConfirmPassword = false;
-			return false;
 		}
-		this.isValidConfirmPassword = true;
-		return true;
+		else {
+			this.isValidConfirmPassword = true;
+		}
 	}
 
 	// Runs the alert component animation
