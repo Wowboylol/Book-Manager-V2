@@ -69,6 +69,7 @@ export class AuthService
             clearTimeout(this.tokenExpirationTimer);
         }
         this.tokenExpirationTimer = null;
+        location.reload();
     }
 
     // Auto login user if token is still valid and page is refreshed

@@ -77,7 +77,7 @@ export class CollectionService
 			else { throw new Error('Collection not found'); }
 		}
 		catch(e) {
-			console.log(e);
+			console.error(e);
 		}
 	}
 
@@ -94,7 +94,7 @@ export class CollectionService
 			else { throw new Error('Collection not found'); }
 		}
 		catch(e) {
-			console.log(e);
+			console.error(e);
 		}
 	}
 }

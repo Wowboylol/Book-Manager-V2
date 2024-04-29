@@ -51,12 +51,10 @@ export class AuthComponent implements OnInit
 
 		authObservable.subscribe({
 			next: response => {
-				console.log(response);
 				this.isLoading = false;
 				this.router.navigate(['/books']);
 			},
 			error: errorMessage => {
-				console.error(errorMessage);
 				this.errorMessage = errorMessage;
 				this.runAlert();
 				this.isLoading = false;
