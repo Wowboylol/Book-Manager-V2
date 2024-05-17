@@ -21,9 +21,12 @@ export interface AuthResponseData
 export class AuthService 
 {
     private tokenExpirationTimer: any;
+    private reloadWindow: any;
     user = new BehaviorSubject<User>(null);
 
-	constructor(private http: HttpClient, private router: Router) {}
+	constructor(private http: HttpClient, private router: Router) {
+        this.reloadWindow = window; // Used to provide window override in tests
+    }
 
     // Signup user and redirect to home page
 	signup(email: string, password: string): Observable<AuthResponseData> {
@@ -69,7 +72,7 @@ export class AuthService
             clearTimeout(this.tokenExpirationTimer);
         }
         this.tokenExpirationTimer = null;
-        location.reload();
+        this.reloadWindow.location.reload();
     }
 
     // Auto login user if token is still valid and page is refreshed

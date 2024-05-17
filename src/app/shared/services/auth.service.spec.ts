@@ -36,6 +36,12 @@ describe('AuthService', () => {
 		});
 		service = TestBed.inject(AuthService);
 		controller = TestBed.inject(HttpTestingController);
+		
+		service['reloadWindow'] = {
+			location: {
+				reload: () => {}
+			}
+		};
 	});
 
 	it('should signup user', () => {
