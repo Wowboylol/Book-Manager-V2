@@ -47,3 +47,9 @@ header .overlay-header h3 {
 section .overlay-content {
     padding: 1rem 1.8rem;
 }
+
+@media (max-width: 767px) {
+    .overlay {
+        padding-bottom: 4rem;
+    }
+}
