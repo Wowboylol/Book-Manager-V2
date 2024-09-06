@@ -41,6 +41,13 @@ describe('BookSearchPipe', () => {
 		expect(testSearchCount.value).toBe(3);
 	});
 
+	it('filters books by ID', () => {
+		const searchQuery = { searchString: '2', searchType: 3, searchSort: 0, searchOrder: 0 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual([testBooks[2]]);
+		expect(testSearchCount.value).toBe(1);
+	});
+
 	it('sorts books by dateAdded ascending', () => {
 		const searchQuery = { searchString: '', searchType: 0, searchSort: 0, searchOrder: 1 };
 		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
@@ -102,5 +109,12 @@ describe('BookSearchPipe', () => {
 		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
 		expect(result).toEqual([testBooks[2]]);
 		expect(testSearchCount.value).toBe(1);
+	});
+
+	it('filters books by mix of valid and invalid IDs', () => {
+		const searchQuery = { searchString: '1,  ,2 , test, -5 , 5', searchType: 3, searchSort: 0, searchOrder: 0 };
+		const result = bookSearchPipe.transform(testBooks, searchQuery, testSearchCount);
+		expect(result).toEqual([testBooks[5], testBooks[2], testBooks[1]]);
+		expect(testSearchCount.value).toBe(3);
 	});
 });

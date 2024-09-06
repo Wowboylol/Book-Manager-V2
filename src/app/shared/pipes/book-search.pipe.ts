@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Book } from '../models/book.model';
 import { BookSearchQuery } from '../models/book-search-query.model';
 
-enum SearchType { Name, Tag, Collection }
+enum SearchType { Name, Tag, Collection, ID }
 enum SearchSort { DateAdded, DateUpdated, Alphabetical, Rating }
 enum SearchOrder { Descending, Ascending }
 
@@ -44,6 +44,9 @@ export class BookSearchPipe implements PipeTransform
 				}
 				case SearchType.Collection: {
 					return value.filter(book => book.collection.toLowerCase().includes(searchString.toLowerCase()));
+				}
+				case SearchType.ID: {
+					return this.filterById(value, searchString);
 				}
 				default: {
 					throw new Error("Invalid search type");
@@ -119,6 +122,17 @@ export class BookSearchPipe implements PipeTransform
 				value = value.filter(book => book.tags.includes(tag));
 			}
 		});
+		return value;
+	}
+
+	private filterById(value: Book[], searchString: string): Book[]
+	{
+		const ids: number[] = 
+			searchString
+				.split(",")
+				.map(id => parseInt(id.trim()))
+				.filter(id => !isNaN(id) && id >= 0);
+		value = value.filter(book => ids.includes(book.id));
 		return value;
 	}
 }
