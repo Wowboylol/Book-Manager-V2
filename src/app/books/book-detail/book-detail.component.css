@@ -53,3 +53,7 @@ i.checked {
 .detail-container #tags {
     margin-left: -0.5rem;
 }
+
+.detail-container .data-box #description {
+    white-space: pre-wrap;
+}
