@@ -13,7 +13,7 @@
 
 .button-container #save-button,
 .button-container #cancel-button {
-    font-weight: 500;
+    font-weight: 600;
     border-style: none;
     height: 2.5rem;
     width: 48%;
@@ -83,7 +83,7 @@
 }
 
 .form-container #add-tag-button {
-    font-weight: 500;
+    font-weight: 600;
     border-style: none;
     height: 2.5rem;
     width: 9.5rem;

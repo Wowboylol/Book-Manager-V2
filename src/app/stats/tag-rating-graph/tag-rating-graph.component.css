@@ -42,7 +42,7 @@ form .search-bar input {
     border: none;
     background: var(--primary-color-lighter);
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-color);
     transition: var(--tran-05);
 }
@@ -61,7 +61,7 @@ form button {
     border: none;
     outline: none;
     color: var(--text-color);
-    font-weight: 500;
+    font-weight: 600;
     transition: var(--tran-05);
 }
 

@@ -40,7 +40,7 @@
 }
 
 header .logo .logo-name {
-    font-weight: 500;
+    font-weight: 600;
 }
 
 header #toggle {
@@ -83,7 +83,7 @@ header #toggle:hover {
 }
 
 .menu li .item-text {
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-color);
     transition: var(--tran-02);
     white-space: nowrap;
@@ -220,7 +220,7 @@ nav.dark-mode .switch::before {
 .navbar header {
     color: var(--text-color);
     transition: var(--tran-02);
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .navbar .navbar-toggler {
@@ -243,7 +243,7 @@ nav.dark-mode .switch::before {
 .navbar-nav .nav-link {
     color: var(--text-color);
     transition: var(--tran-02);
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .navbar-nav .nav-link.active {
@@ -258,7 +258,7 @@ nav.dark-mode .switch::before {
 
 .navbar-nav .dropdown-menu .dropdown-item {
     color: var(--text-color);
-    font-weight: 500;
+    font-weight: 600;
     transition: var(--tran-02);
 }
 

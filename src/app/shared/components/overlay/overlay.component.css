@@ -42,6 +42,7 @@ header .overlay-header h3 {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-weight: 600;
 }
 
 section .overlay-content {
