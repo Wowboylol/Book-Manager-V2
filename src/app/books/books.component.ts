@@ -11,11 +11,12 @@ import { BookSearchQuery } from '../shared/models/book-search-query.model';
 import { BookSearchPipe } from '../shared/pipes/book-search.pipe';
 import { AlertComponent } from '../shared/components/alert/alert.component';
 import { BookDisplayType } from './book-display-type.model';
+import { ViewportDetectDirective } from '../shared/directives/viewport-detect.directive';
 
 @Component({
 	selector: 'app-books',
 	standalone: true,
-	imports: [CommonModule, BookSearchComponent, BookItemComponent, RouterModule, BookSearchPipe, AlertComponent],
+	imports: [CommonModule, BookSearchComponent, BookItemComponent, RouterModule, BookSearchPipe, AlertComponent, ViewportDetectDirective],
 	templateUrl: './books.component.html',
 	styleUrls: ['./books.component.css']
 })
@@ -35,6 +36,7 @@ export class BooksComponent implements OnInit, OnDestroy
 	alertToggle: string = 'hidden';
 	readonly displayEnum = BookDisplayType;
 	displayType: BookDisplayType = BookDisplayType.Grid;
+	scrollButtonDirectionUp: boolean = false;
 
 	constructor(private bookService: BookService) { }
 
@@ -89,5 +91,15 @@ export class BooksComponent implements OnInit, OnDestroy
 	// Changes the display type
 	changeDisplayType(): void {
 		this.displayType = this.displayType === BookDisplayType.Grid ? BookDisplayType.List : BookDisplayType.Grid;
+	}
+
+	// Scrolls the page to the top or bottom
+	scrollPage(): void {
+		if(this.scrollButtonDirectionUp) {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		}
+		else {
+			window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+		}
 	}
 }

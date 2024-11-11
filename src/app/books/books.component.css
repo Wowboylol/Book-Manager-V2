@@ -26,10 +26,6 @@ header {
     background: var(--primary-color-light);
 }
 
-#button-section #scroll-button {
-    display: none;
-}
-
 /* ===== Book grid ===== */
 section .book-grid {
     display: grid;
@@ -53,10 +49,6 @@ section .book-grid {
 @media (max-width: 767px) {
     section .book-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    #button-section #scroll-button {
-        display: block;
     }
 }
 

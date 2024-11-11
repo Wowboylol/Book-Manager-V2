@@ -1,6 +1,10 @@
 <header>
     <section class="container">
-        <article class="row search-bar">
+        <article 
+            class="row search-bar" 
+            appViewportDetect 
+            (exitedViewport)="scrollButtonDirectionUp = true"
+            (enteredViewport)="scrollButtonDirectionUp = false">
             <div class="col-md-12">
                 <app-book-search (searchQuery)="onSearchQuery($event)"></app-book-search>
             </div>
@@ -36,9 +40,9 @@
 </section>
 
 <footer id="button-section">
-    <button class="overlay-button rounded mb-2" id="scroll-button">
-        <i class='bx bx-down-arrow-alt fs-3'></i>
-        <!-- <i class='bx bx-up-arrow-alt fs-3'></i> -->
+    <button class="overlay-button rounded mb-2" id="scroll-button" (click)="scrollPage()">
+        <i class='bx bx-up-arrow-alt fs-3' *ngIf="scrollButtonDirectionUp"></i>
+        <i class='bx bx-down-arrow-alt fs-3' *ngIf="!scrollButtonDirectionUp"></i>
     </button>
     <button class="overlay-button change-type-button rounded mb-2" (click)="changeDisplayType()">
         <i class='bx bx-list-ul fs-3' *ngIf="displayType === displayEnum.Grid"></i>
