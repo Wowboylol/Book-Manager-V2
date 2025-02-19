@@ -28,6 +28,56 @@
     background-color: var(--primary-color);
 }
 
+/* ===== Tag description search ===== */
+.tag-description-search button {
+    font-weight: 600;
+    border-style: none;
+    height: 2.5rem;
+    width: 100%;
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+}
+
+.tag-description-search button:hover {
+    background-color: var(--primary-color);
+}
+
+.tag-description-search input {
+    width: 100%;
+    outline: none;
+    border: none;
+    padding-left: 0;
+    padding-top: 0;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    display: none;
+}
+
+.tag-description-search textarea {
+    width: 100%;
+    outline: none;
+    border: none;
+    padding-left: 0;
+    background-color: var(--primary-color);
+    color: var(--text-color-muted);
+    display: none;
+}
+
+.tag-description-search.show input,
+.tag-description-search.show textarea {
+    display: block;
+}
+
+.tag-description-search .caret-up-icon,
+.tag-description-search.show .caret-down-icon {
+    display: none;
+}
+
+.tag-description-search.show .caret-up-icon,
+.tag-description-search .caret-down-icon {
+    display: inline;
+}
+
 /* ===== Form ===== */
 .form-container .edit-box {
     background-color: var(--primary-color);

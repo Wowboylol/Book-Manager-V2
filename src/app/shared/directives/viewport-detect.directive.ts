@@ -18,7 +18,9 @@ export class ViewportDetectDirective implements AfterViewInit, OnDestroy
 	}
 
 	ngOnDestroy(): void {
-		this.observer.disconnect();
+		if(this.observer) {
+			this.observer.disconnect();
+		}
 	}
 
 	private createObserver() {

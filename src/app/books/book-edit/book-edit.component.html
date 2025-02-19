@@ -17,6 +17,23 @@
                 Cancel
             </button>
         </div>
+        <div class="tag-description-search mt-3" #descriptionSearchContainer>
+            <button type="button" class="btn btn-secondary" [appDropdown]="descriptionSearchContainer">
+                Search Tag Description 
+                <i class='bx bx-caret-down caret-down-icon'></i>
+                <i class='bx bx-caret-up caret-up-icon'></i>
+            </button>
+            <input 
+                type="text" 
+                class="mt-2 py-2 px-3 rounded" 
+                placeholder="Enter tag name" 
+                list="tag-search-list" 
+                (input)="onSearchTagDescription($event.target.value)">
+            <datalist id="tag-search-list">
+                <option *ngFor="let tag of allTags" [value]="tag.name"></option>
+            </datalist>
+            <textarea class="mt-2 px-3 py-2 rounded" type="text" rows="4" disabled>{{ tagSearchDescription ? tagSearchDescription : 'No description available.' }}</textarea>
+        </div>
     </section>
 
     <section class="col-sm-8 col-lg-9 col-xxl-10 form-container">

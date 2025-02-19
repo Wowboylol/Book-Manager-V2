@@ -9,11 +9,12 @@ import { TagService } from '../../shared/services/tag.service';
 import { Tag } from 'src/app/shared/models/tag.model';
 import { CollectionService } from 'src/app/shared/services/collection.service';
 import { Collection } from 'src/app/shared/models/collection.model';
+import { DropdownDirective } from 'src/app/shared/directives/dropdown.directive';
 
 @Component({
 	selector: 'app-book-edit',
 	standalone: true,
-	imports: [CommonModule, ReactiveFormsModule, RouterModule],
+	imports: [CommonModule, ReactiveFormsModule, RouterModule, DropdownDirective],
 	templateUrl: './book-edit.component.html',
 	styleUrls: ['./book-edit.component.css']
 })
@@ -30,6 +31,7 @@ export class BookEditComponent implements OnInit, AfterContentInit
 	book: Book;
 	bookForm: FormGroup
 	imagePreview: string = 'assets/images/book-placeholder.png';
+	tagSearchDescription: string = null;
 
 	constructor(
 		private route: ActivatedRoute, 
@@ -163,5 +165,14 @@ export class BookEditComponent implements OnInit, AfterContentInit
 			),
 			'tags': tagFormArray
 		});
+	}
+
+	onSearchTagDescription(name: string): void {
+		if(name) {
+			this.tagSearchDescription = this.tagService.getTagByName(name)?.description
+		}
+		else {
+			this.tagSearchDescription = null;
+		}
 	}
 }
