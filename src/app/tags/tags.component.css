@@ -53,12 +53,12 @@ section .button-box button {
     margin-top: 1rem;
 }
 
-section .button-box #clear-button {
+section .button-box #deselect-button {
     background-color: var(--sidebar-color);
     color: var(--text-color);
 }
 
-section .button-box #clear-button:hover {
+section .button-box #deselect-button:hover {
     background-color: var(--primary-color);
 }
 

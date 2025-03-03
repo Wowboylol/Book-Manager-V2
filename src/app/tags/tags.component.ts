@@ -76,11 +76,11 @@ export class TagsComponent implements OnInit, OnDestroy
 		this.tagService.updateTagName(this.selectedTagName, newTagName);
 		this.bookService.updateTagInBooks(this.selectedTagName, newTagName);
 		this.tagService.updateTagDescription(newTagName, newTagDescription);
-		this.onClear();
+		this.onDeselect();
 	}
 
-	// Ran when the clear button is clicked to reset the form and selected tag
-	onClear(): void {
+	// Ran when the deselect button is clicked to reset the form and selected tag
+	onDeselect(): void {
 		this.tagForm.reset();
 		this.selectedTagName = null;
 	}
@@ -89,7 +89,7 @@ export class TagsComponent implements OnInit, OnDestroy
 	onDelete(): void {
 		this.tagService.deleteTag(this.selectedTagName);
 		this.bookService.deleteTagFromBooks(this.selectedTagName);
-		this.onClear();
+		this.onDeselect();
 		this.showConfirmDelete = false;
 	}
 

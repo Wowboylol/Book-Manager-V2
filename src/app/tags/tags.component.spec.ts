@@ -72,9 +72,9 @@ describe('TagsComponent', () => {
 		expect(mockTagService.updateTagDescription).toHaveBeenCalledWith("new name", "new description");
 	});
 
-	it('should reset form and selected tag when onClear is called', () => {
+	it('should reset form and selected tag when onDeselect is called', () => {
 		component.onSelectTag(testTags[0]);
-		component.onClear();
+		component.onDeselect();
 		expect(component.selectedTagName).toBeNull();
 		expect(component.tagForm.value.name).toBeNull();
 		expect(component.tagForm.value.description).toBeNull();
