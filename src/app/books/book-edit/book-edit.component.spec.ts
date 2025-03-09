@@ -33,7 +33,14 @@ describe('BookEditComponent', () => {
 				'addBook': undefined
 			}
 		);
-		mockTagService = jasmine.createSpyObj('TagService', ['getAllTags', 'removeTag', 'addTag']);
+		mockTagService = jasmine.createSpyObj(
+			'TagService', {
+				'getAllTags': testData.tags,
+				'removeTag': undefined,
+				'addTag': undefined,
+				'getTagByName': testData.tags.find(tag => tag.name === 'textbook')
+			}
+		);
 		mockCollectionService = jasmine.createSpyObj('CollectionService', ['getAllCollections', 'addCollection', 'removeCollection']);
 		
 		await TestBed.configureTestingModule({
@@ -159,5 +166,23 @@ describe('BookEditComponent', () => {
 		let insertTagButton = fixture.nativeElement.querySelector('.insert-tag-button');
 		insertTagButton.click();
 		expect(tags.length).toEqual(tagCount + 1);
+	});
+
+	it('should show tag description on tag description search when tag is found', () => {
+		let tagSearch = fixture.nativeElement.querySelector('.tag-description-search input');
+		tagSearch.value = 'textbook';
+		tagSearch.dispatchEvent(new Event('input'));
+		fixture.detectChanges();
+		let tagDescription = fixture.nativeElement.querySelector('.tag-description-search textarea');
+		expect(tagDescription.value).toEqual('This book is a textbook.');
+	})
+
+	it('should show default tag description on tag description search when tag is not found', () => {
+		let tagSearch = fixture.nativeElement.querySelector('.tag-description-search input');
+		tagSearch.value = '';
+		tagSearch.dispatchEvent(new Event('input'));
+		fixture.detectChanges();
+		let tagDescription = fixture.nativeElement.querySelector('.tag-description-search textarea');
+		expect(tagDescription.value).toEqual('No description available.');
 	});
 });
