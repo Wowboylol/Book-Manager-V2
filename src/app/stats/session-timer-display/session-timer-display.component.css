@@ -1,0 +1,18 @@
+section {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+article {
+    background-color: var(--primary-color);
+    transition: var(--tran-05);
+    transition-property: background-color;
+}
+
+h5 {
+    margin-bottom: 0.25rem;
+}
+
+h5 strong {
+    color: var(--secondary-color);
+}
