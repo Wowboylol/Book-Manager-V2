@@ -47,7 +47,6 @@ export class SessionTimerDisplayComponent implements OnInit, OnDestroy
 	// Update session time display
 	private updateSessionTimeDisplay(): void {
 		if(!this.expirationTimestamp) { return; }
-
 		this.remainingSessionTime = this.expirationTimestamp - Date.now();
 	}
 }
