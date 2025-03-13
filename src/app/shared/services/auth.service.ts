@@ -17,6 +17,16 @@ export interface AuthResponseData
     registered?: boolean;
 }
 
+export interface TokenResponseData
+{
+    expires_in: string;
+    token_type: string;
+    refresh_token: string;
+    id_token: string;
+    user_id: string;
+    project_id: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService 
 {
@@ -40,7 +50,7 @@ export class AuthService
 		).pipe(
             catchError(this.handleError), 
             tap(res => {
-                this.handleAuthentication(res.email, res.localId, res.idToken, +res.expiresIn);
+                this.handleAuthentication(res.email, res.localId, res.idToken, +res.expiresIn, res.refreshToken);
             })
         );
 	}
@@ -57,7 +67,23 @@ export class AuthService
         ).pipe(
             catchError(this.handleError),
             tap(res => {
-                this.handleAuthentication(res.email, res.localId, res.idToken, +res.expiresIn);
+                this.handleAuthentication(res.email, res.localId, res.idToken, +res.expiresIn, res.refreshToken);
+            })
+        );
+    }
+
+    // Refresh user session by getting new token with refresh token
+    refreshSession(refreshToken: string): Observable<TokenResponseData> {
+        return this.http.post<TokenResponseData>(
+            `https://securetoken.googleapis.com/v1/token?key=${environment.firebaseApiKey}`,
+            {
+                grant_type: "refresh_token",
+                refresh_token: refreshToken
+            }
+        ).pipe(
+            catchError(this.handleError),
+            tap(res => {
+                this.handleAuthentication(null, res.user_id, res.id_token, +res.expires_in, res.refresh_token);
             })
         );
     }
@@ -82,13 +108,14 @@ export class AuthService
             id: string;
             _token: string;
             _tokenExpirationDate: string;
+            _refreshToken: string;
         } = JSON.parse(localStorage.getItem('user-data'));
 
         if(!userData) { 
             return; 
         }
 
-        const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
+        const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate), userData._refreshToken);
         if(loadedUser.token) {
             const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
             this.user.next(loadedUser);
@@ -121,14 +148,23 @@ export class AuthService
             case "TOO_MANY_ATTEMPTS_TRY_LATER":
                 errorMessage = new Error("Too many attempts, try again later!");
                 break;
+            case "INVALID_REFRESH_TOKEN":
+                errorMessage = new Error("Invalid refresh token, please login again!");
+                break;
         }
         return throwError(() => errorMessage);
     }
 
     // Handle user authentication and save user data to local storage
-    private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
+    private handleAuthentication(email: string, userId: string, token: string, expiresIn: number, refreshToken: string) 
+    {
+        // If email is null (when refreshing token), use email from local storage
+        if(!email) {
+            email = JSON.parse(localStorage.getItem('user-data')).email;
+        }
+
         const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-        const user = new User(email, userId, token, expirationDate);
+        const user = new User(email, userId, token, expirationDate, refreshToken);
         this.user.next(user);
         this.autoLogout(expiresIn * 1000);
         localStorage.setItem('user-data', JSON.stringify(user));

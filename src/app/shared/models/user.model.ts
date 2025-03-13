@@ -4,7 +4,8 @@ export class User
         public email: string,
         public id: string,
         private _token: string,
-        private _tokenExpirationDate: Date
+        private _tokenExpirationDate: Date,
+        private _refreshToken
     ) {}
 
     get token() {
@@ -12,5 +13,9 @@ export class User
             return null;
         }
         return this._token;
+    }
+
+    get refreshToken() {
+        return this._refreshToken;
     }
 }
