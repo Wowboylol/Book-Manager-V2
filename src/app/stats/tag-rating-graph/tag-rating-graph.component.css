@@ -60,7 +60,7 @@ form button {
     background: var(--secondary-button);
     border: none;
     outline: none;
-    color: var(--text-color);
+    color: #ffffff;
     font-weight: 600;
     transition: var(--tran-05);
 }
