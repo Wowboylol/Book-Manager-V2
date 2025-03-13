@@ -162,6 +162,12 @@ export class AuthService
         if(!email) {
             email = JSON.parse(localStorage.getItem('user-data')).email;
         }
+        
+        // If token expiration timer exists, clear it
+        if(this.tokenExpirationTimer) {
+            clearTimeout(this.tokenExpirationTimer);
+            this.tokenExpirationTimer = null;
+        }
 
         const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
         const user = new User(email, userId, token, expirationDate, refreshToken);

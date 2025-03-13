@@ -1,4 +1,4 @@
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -237,4 +237,13 @@ describe('AuthService', () => {
 		expect(service.user.value.refreshToken).toBe('def');
 		expect(autoLogoutSpy).toHaveBeenCalledWith(3600 * 1000);
 	});
+
+	it('should clear token expiration timer after handling authentication', fakeAsync(() => {
+		const logoutSpy = spyOn(service, 'logout');
+		service.autoLogout(10000);
+		service['handleAuthentication']('test@test.com', '123', 'abc', 3600, 'def');
+		tick(20000);
+		expect(logoutSpy).not.toHaveBeenCalled();
+		flush();
+	}));
 });
