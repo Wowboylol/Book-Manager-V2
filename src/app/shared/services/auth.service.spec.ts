@@ -54,14 +54,15 @@ describe('AuthService', () => {
 			}
 		);
 		const request = controller.expectOne(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseApiKey}`);
-		request.flush({ email: 'test@test.com', localId: '123', idToken: 'abc', expiresIn: '3600' });
+		request.flush({ email: 'test@test.com', localId: '123', idToken: 'abc', expiresIn: '3600', refreshToken: 'def' });
 		controller.verify();
 
 		expect(actualResponse.email).toBe('test@test.com');
 		expect(actualResponse.localId).toBe('123');
 		expect(actualResponse.idToken).toBe('abc');
 		expect(actualResponse.expiresIn).toBe('3600');
-		expect(handleAuthenticationSpy).toHaveBeenCalledWith('test@test.com', '123', 'abc', 3600);
+		expect(actualResponse.refreshToken).toBe('def');
+		expect(handleAuthenticationSpy).toHaveBeenCalledWith('test@test.com', '123', 'abc', 3600, 'def');
 	});
 
 	it('should display error message when signup fails', () => {
@@ -94,14 +95,15 @@ describe('AuthService', () => {
 		);
 
 		const request = controller.expectOne(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseApiKey}`);
-		request.flush({ email: 'test@test.com', localId: '123', idToken: 'abc', expiresIn: '3600' });
+		request.flush({ email: 'test@test.com', localId: '123', idToken: 'abc', expiresIn: '3600', refreshToken: 'def' });
 		controller.verify();
 
 		expect(actualResponse.email).toBe('test@test.com');
 		expect(actualResponse.localId).toBe('123');
 		expect(actualResponse.idToken).toBe('abc');
 		expect(actualResponse.expiresIn).toBe('3600');
-		expect(handleAuthenticationSpy).toHaveBeenCalledWith('test@test.com', '123', 'abc', 3600);
+		expect(actualResponse.refreshToken).toBe('def');
+		expect(handleAuthenticationSpy).toHaveBeenCalledWith('test@test.com', '123', 'abc', 3600, 'def');
 	});
 
 	it('should display error message when login fails', () => {
@@ -139,7 +141,8 @@ describe('AuthService', () => {
 			email: 'test@test.com',
 			id: '123',
 			_token: 'abc',
-			_tokenExpirationDate: tomorrowDate.toISOString()
+			_tokenExpirationDate: tomorrowDate.toISOString(),
+			_refreshToken: 'def'
 		};
 		localStorage.setItem('user-data', JSON.stringify(userData));
 
@@ -167,10 +170,11 @@ describe('AuthService', () => {
 
 	it('should handle authentication', () => {
 		const autoLogoutSpy = spyOn(service, 'autoLogout');
-		service['handleAuthentication']('test@test.com', '123', 'abc', 3600);
+		service['handleAuthentication']('test@test.com', '123', 'abc', 3600, 'def');
 		expect(service.user.value.email).toBe('test@test.com');
 		expect(service.user.value.id).toBe('123');
 		expect(service.user.value.token).toBe('abc');
+		expect(service.user.value.refreshToken).toBe('def');
 		expect(autoLogoutSpy).toHaveBeenCalledWith(3600 * 1000);
 	});
 });

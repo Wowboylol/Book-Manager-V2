@@ -31,7 +31,7 @@ describe('DataStorageService', () => {
 		});
 		service = TestBed.inject(DataStorageService);
 		controller = TestBed.inject(HttpTestingController);
-		service['authService'].user.next(new User('test@test.com', '123', null, new Date()));
+		service['authService'].user.next(new User('test@test.com', '123', null, new Date(), 'hij'));
 	});
 
 	it('stores data to database', () => {

@@ -33,7 +33,7 @@ describe('AuthGuard', () => {
 	});
 
 	it('should return true for a user that is authenticated', () => {
-		mockAuthService.user = new BehaviorSubject<User>(new User('test@test.com', 'abc', 'def', new Date()));
+		mockAuthService.user = new BehaviorSubject<User>(new User('test@test.com', 'abc', 'def', new Date(), 'efg'));
 		const userObservable: Observable<boolean> = guard.canActivate(null, null) as Observable<boolean>;
 		userObservable.subscribe(isAuth => {
 			expect(isAuth).toBeTrue();
