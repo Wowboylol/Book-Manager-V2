@@ -2,7 +2,7 @@ import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { AuthResponseData, AuthService } from './auth.service';
+import { AuthResponseData, AuthService, TokenResponseData } from './auth.service';
 import { environment } from 'src/environments/environment';
 
 describe('AuthService', () => {
@@ -125,6 +125,55 @@ describe('AuthService', () => {
 		expect(actualError).toBeTruthy();
 	});
 
+	it('should refresh session', () => {
+		let actualResponse: TokenResponseData | undefined;
+		const handleAuthenticationSpy = spyOn<any>(service, 'handleAuthentication');
+
+		service.refreshSession('def').subscribe(
+			res => {
+				actualResponse = res;
+			}
+		);
+
+		const request = controller.expectOne(`https://securetoken.googleapis.com/v1/token?key=${environment.firebaseApiKey}`);
+		request.flush({ 
+			expires_in: '3600', 
+			token_type: 'Bearer', 
+			refresh_token: 'def', 
+			id_token: 'abc', 
+			user_id: '123', 
+			project_id: 'test' 
+		});
+		controller.verify();
+
+		expect(actualResponse.expires_in).toBe('3600');
+		expect(actualResponse.token_type).toBe('Bearer');
+		expect(actualResponse.refresh_token).toBe('def');
+		expect(actualResponse.id_token).toBe('abc');
+		expect(actualResponse.user_id).toBe('123');
+		expect(actualResponse.project_id).toBe('test');
+		expect(handleAuthenticationSpy).toHaveBeenCalledWith(null, '123', 'abc', 3600, 'def');
+	});
+
+	it('should display error message when refresh session fails', () => {
+		let actualError: HttpErrorResponse | undefined;
+		service.refreshSession('def').subscribe({
+			next: () => { 
+				fail('Refresh session should have failed!'); 
+			},
+			error: error => { 
+				actualError = error; 
+			}
+		});
+
+		const expectedUrl = `https://securetoken.googleapis.com/v1/token?key=${environment.firebaseApiKey}`;
+		controller.expectOne(expectedUrl).error(
+			new ErrorEvent('An unknown error occurred!'),
+			{ status: 500, statusText: 'Internal Server Error' }
+		);
+		expect(actualError).toBeTruthy();
+	});
+
 	it('should logout user', () => {
 		const navigateSpy = spyOn(service['router'], 'navigate');
 		service.logout();
@@ -172,6 +221,17 @@ describe('AuthService', () => {
 		const autoLogoutSpy = spyOn(service, 'autoLogout');
 		service['handleAuthentication']('test@test.com', '123', 'abc', 3600, 'def');
 		expect(service.user.value.email).toBe('test@test.com');
+		expect(service.user.value.id).toBe('123');
+		expect(service.user.value.token).toBe('abc');
+		expect(service.user.value.refreshToken).toBe('def');
+		expect(autoLogoutSpy).toHaveBeenCalledWith(3600 * 1000);
+	});
+
+	it('should handle authentication when email is null', () => {
+		const autoLogoutSpy = spyOn(service, 'autoLogout')
+		localStorage.setItem('user-data', JSON.stringify({ email: 'test-email@test.com' }));
+		service['handleAuthentication'](null, '123', 'abc', 3600, 'def');
+		expect(service.user.value.email).toBe('test-email@test.com');
 		expect(service.user.value.id).toBe('123');
 		expect(service.user.value.token).toBe('abc');
 		expect(service.user.value.refreshToken).toBe('def');
