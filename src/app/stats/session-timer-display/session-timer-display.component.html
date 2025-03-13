@@ -1,5 +1,12 @@
 <section class="row mb-3">
     <article class="col-12 rounded p-3">
         <h5>Remaining Session Time: <strong>{{ remainingSessionTime | date:'mm:ss' }}</strong></h5>
+        <button type="button" class="btn btn-warning mt-2" *ngIf="canRefreshSession" (click)="refreshSession()">Refresh Session</button>
     </article>
 </section>
+
+<app-alert 
+    [message]="alertMessage" 
+    [toggle]="alertToggle" 
+    [type]="alertType">
+</app-alert>

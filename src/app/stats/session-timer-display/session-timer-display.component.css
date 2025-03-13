@@ -16,3 +16,17 @@ h5 {
 h5 strong {
     color: var(--secondary-color);
 }
+
+article button {
+    background: var(--secondary-button);
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-weight: 600;
+    transition: var(--tran-05);
+}
+
+article button:hover {
+    background: var(--secondary-button-hover);
+    cursor: pointer;
+}
