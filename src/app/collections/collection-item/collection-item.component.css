@@ -25,6 +25,7 @@
     padding: 0;
     cursor: pointer;
     margin-right: 1.25rem;
+    flex-shrink: 0;
 }
 
 .collection-name,

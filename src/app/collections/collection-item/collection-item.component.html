@@ -6,7 +6,7 @@
         [value]="getCollectionColor()" 
         (blur)="onUpdateColor($event)"
     >
-    <div>
+    <div style="min-width: 0;">
         <h3 *ngIf="!editMode" class="collection-name">{{ collection.name }}</h3>
         <input 
             *ngIf="editMode" 
