@@ -127,12 +127,40 @@ export class BookSearchPipe implements PipeTransform
 
 	private filterById(value: Book[], searchString: string): Book[]
 	{
-		const ids: number[] = 
-			searchString
-				.split(",")
-				.map(id => parseInt(id.trim()))
-				.filter(id => !isNaN(id) && id >= 0);
-		value = value.filter(book => ids.includes(book.id));
+		const conditions = searchString.split(",").map(cond => cond.trim());
+
+		let minId: number | null = null;
+		let maxId: number | null = null;
+		let specificIds: number[] = [];
+
+		conditions.forEach(cond => {
+			if(cond.startsWith("<")) {
+				const id = parseInt(cond.slice(1).trim());
+				if(!isNaN(id) && id >= 0) {
+					maxId = maxId === null ? id : Math.min(maxId, id);
+				}
+			}
+			else if(cond.startsWith(">")) {
+				const id = parseInt(cond.slice(1).trim());
+				if(!isNaN(id) && id >= 0) {
+					minId = minId === null ? id : Math.max(minId, id);
+				}
+			}
+			else {
+				const id = parseInt(cond.trim());
+				if(!isNaN(id) && id >= 0) {
+					specificIds.push(id);
+				}
+			}
+		});
+
+		value = value.filter(book => {
+			if(specificIds.length > 0 && specificIds.includes(book.id)) { return true; }
+			if(minId === null && maxId === null) { return false; }
+			if(minId !== null && book.id < minId) { return false; }
+			if(maxId !== null && book.id > maxId) { return false; }
+			return true;
+		});
 		return value;
 	}
 }
